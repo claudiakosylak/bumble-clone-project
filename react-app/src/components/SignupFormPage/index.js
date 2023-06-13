@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
@@ -18,12 +18,30 @@ function SignupFormPage() {
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [errors, setErrors] = useState([]);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [backendErrors, setBackendErrors] = useState([])
+
+  useEffect(() => {
+    const newErrors = {};
+    const integers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+    let phoneVal = false;
+    for (let char of phone) {
+      if (!integers.includes(char)) {
+        phoneVal = true;
+      }
+    }
+    if (phone.length < 10 || phoneVal) newErrors.phone = "Please enter a valid 10 digit phone number with no special characters, starting with the area code."
+    if (password !== confirmPassword) newErrors.password = "Confirm Password field must be the same as the Password field."
+    setErrors(newErrors)
+  }, [firstName, phone, email, dateOfBirth, password, confirmPassword, lookingForGender, gender, state, city])
 
   if (sessionUser) return <Redirect to="/app" />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
+    setHasSubmitted(true)
+    const errorsArr = Object.values(errors)
+    if (errorsArr.length === 0) {
       const newUser = {
         first_name: firstName,
         phone,
@@ -37,19 +55,19 @@ function SignupFormPage() {
       }
       const data = await dispatch(signUp(newUser));
       if (data) {
-        setErrors(data)
+        setBackendErrors(data)
       }
-    } else {
-      setErrors(['Confirm Password field must be the same as the Password field']);
+
     }
+
   };
 
   return (
-    <>
+    <div className="signup-wrapper">
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="signup-form-container">
         <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+          {backendErrors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
         <label>
           Phone Number
@@ -60,6 +78,9 @@ function SignupFormPage() {
             required
           />
         </label>
+        {(hasSubmitted && errors.phone) && (
+          <p>{errors.phone}</p>
+        )}
         <label>
           Email
           <input
@@ -146,9 +167,12 @@ function SignupFormPage() {
             required
           />
         </label>
+        {(hasSubmitted && errors.password) && (
+          <p>{errors.password}</p>
+        )}
         <button type="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 
