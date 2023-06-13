@@ -7,11 +7,11 @@ dob1 = datetime.strptime('1990-11-11', '%Y-%m-%d')
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        first_name='Demo', email='demo@aa.io', password='password', date_of_birth=dob1.date(), phone=5555555555, looking_for_gender="Women", state="California", city="Los Angeles", gender="Man")
+        first_name='Demo', email='demo@aa.io', password='password', date_of_birth=dob1.date(), phone=1111111111, looking_for_gender="Women", state="California", city="Los Angeles", gender="Man")
     marnie = User(
-        first_name='marnie', email='marnie@aa.io', password='password', date_of_birth=dob1.date(), phone=6666666666, looking_for_gender="Men", state="New York", city="New York City", gender="Woman")
+        first_name='marnie', email='marnie@aa.io', password='password', date_of_birth=dob1.date(), phone=2222222222, looking_for_gender="Men", state="New York", city="New York City", gender="Woman")
     bobbie = User(
-        first_name='bobbie', email='bobbie@aa.io', password='password', date_of_birth=dob1.date(), phone=7777777777, looking_for_gender="Women", state="New York", city="New York City", gender="Man")
+        first_name='bobbie', email='bobbie@aa.io', password='password', date_of_birth=dob1.date(), phone=3333333333, looking_for_gender="Women", state="New York", city="New York City", gender="Man")
 
     db.session.add(demo)
     db.session.add(marnie)
