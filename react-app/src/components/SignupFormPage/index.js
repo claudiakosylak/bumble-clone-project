@@ -19,7 +19,7 @@ function SignupFormPage() {
   const [city, setCity] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/" />;
+  if (sessionUser) return <Redirect to="/app" />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
