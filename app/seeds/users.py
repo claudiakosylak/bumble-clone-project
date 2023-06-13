@@ -1,15 +1,17 @@
 from app.models import db, User, environment, SCHEMA
 from sqlalchemy.sql import text
+from datetime import datetime
 
+dob1 = datetime.strptime('1990-11-11', '%Y-%m-%d')
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password')
+        first_name='Demo', email='demo@aa.io', password='password', date_of_birth=dob1.date(), phone=5555555555, looking_for_gender="Women", state="California", city="Los Angeles", gender="Man")
     marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
+        first_name='marnie', email='marnie@aa.io', password='password', date_of_birth=dob1.date(), phone=6666666666, looking_for_gender="Men", state="New York", city="New York City", gender="Woman")
     bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+        first_name='bobbie', email='bobbie@aa.io', password='password', date_of_birth=dob1.date(), phone=7777777777, looking_for_gender="Women", state="New York", city="New York City", gender="Man")
 
     db.session.add(demo)
     db.session.add(marnie)
@@ -28,5 +30,5 @@ def undo_users():
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM users"))
-        
+
     db.session.commit()
