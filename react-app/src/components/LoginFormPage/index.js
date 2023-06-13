@@ -11,7 +11,7 @@ function LoginFormPage() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/" />;
+  if (sessionUser) return <Redirect to="/app" />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,6 +20,10 @@ function LoginFormPage() {
       setErrors(data);
     }
   };
+
+  const demoLogin = async () => {
+    await dispatch(login("demo@aa.io", "password"))
+  }
 
   return (
     <>
@@ -49,6 +53,7 @@ function LoginFormPage() {
           />
         </label>
         <button type="submit">Log In</button>
+        <button onClick={demoLogin}>Demo User Login</button>
       </form>
     </>
   );

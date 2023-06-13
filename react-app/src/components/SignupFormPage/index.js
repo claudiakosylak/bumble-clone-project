@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
@@ -18,12 +18,42 @@ function SignupFormPage() {
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [errors, setErrors] = useState([]);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [backendErrors, setBackendErrors] = useState([])
+  const currentDate = new Date();
+  let compareDate = currentDate
+  compareDate.setFullYear(compareDate.getFullYear() - 18)
+  let enteredDateConverted = new Date(dateOfBirth)
 
-  if (sessionUser) return <Redirect to="/" />;
+
+  useEffect(() => {
+    const newErrors = {};
+    const integers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+    let phoneVal = false;
+    for (let char of phone) {
+      if (!integers.includes(char)) {
+        phoneVal = true;
+      }
+    }
+    if (phone.length < 10 || phoneVal) newErrors.phone = "Please enter a valid 10 digit phone number with no special characters, starting with the area code."
+    if (password !== confirmPassword) newErrors.password = "Confirm Password field must be the same as the Password field."
+    if (!email.includes("@") || (!email.includes(".com") && !email.includes(".io"))) newErrors.email = "Please enter a valid email address."
+    if (!firstName) newErrors.firstName = "Please enter your first name."
+    if (!gender) newErrors.gender = "Please select a gender option."
+    if (!lookingForGender) newErrors.lookingForGender = "Please select what gender(s) you are interested in."
+    if (!state) newErrors.state = "Please enter your state."
+    if (!city) newErrors.city = "Please enter your city."
+    if (enteredDateConverted > compareDate) newErrors.dateOfBirth = "Sorry, only users over the age of 18 are allowed to use this website."
+    setErrors(newErrors)
+  }, [firstName, phone, email, dateOfBirth, password, confirmPassword, lookingForGender, gender, state, city])
+
+  if (sessionUser) return <Redirect to="/app" />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password === confirmPassword) {
+    setHasSubmitted(true)
+    const errorsArr = Object.values(errors)
+    if (errorsArr.length === 0) {
       const newUser = {
         first_name: firstName,
         phone,
@@ -37,19 +67,19 @@ function SignupFormPage() {
       }
       const data = await dispatch(signUp(newUser));
       if (data) {
-        setErrors(data)
+        setBackendErrors(data)
       }
-    } else {
-      setErrors(['Confirm Password field must be the same as the Password field']);
+
     }
+
   };
 
   return (
-    <>
+    <div className="signup-wrapper">
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="signup-form-container">
         <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+          {backendErrors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
         <label>
           Phone Number
@@ -60,6 +90,9 @@ function SignupFormPage() {
             required
           />
         </label>
+        {(hasSubmitted && errors.phone) && (
+          <p>{errors.phone}</p>
+        )}
         <label>
           Email
           <input
@@ -69,6 +102,9 @@ function SignupFormPage() {
             required
           />
         </label>
+        {(hasSubmitted && errors.email) && (
+          <p>{errors.email}</p>
+        )}
         <label>
           First Name
           <input
@@ -78,6 +114,9 @@ function SignupFormPage() {
             required
           />
         </label>
+        {(hasSubmitted && errors.firstName) && (
+          <p>{errors.firstName}</p>
+        )}
         <select
           value={gender}
           onChange={(e) => setGender(e.target.value)}
@@ -89,6 +128,9 @@ function SignupFormPage() {
           <option value="Nonbinary">Nonbinary</option>
           <option value="Other">Other</option>
         </select>
+        {(hasSubmitted && errors.gender) && (
+          <p>{errors.gender}</p>
+        )}
         <select
           value={lookingForGender}
           onChange={(e) => setLookingForGender(e.target.value)}
@@ -101,6 +143,9 @@ function SignupFormPage() {
           <option value="Nonbinary">Nonbinary</option>
           <option value="Open">Open</option>
         </select>
+        {(hasSubmitted && errors.lookingForGender) && (
+          <p>{errors.lookingForGender}</p>
+        )}
         <label>
           City
           <input
@@ -110,6 +155,9 @@ function SignupFormPage() {
             required
           />
         </label>
+        {(hasSubmitted && errors.city) && (
+          <p>{errors.city}</p>
+        )}
         <label>
           State
           <input
@@ -119,6 +167,9 @@ function SignupFormPage() {
             required
           />
         </label>
+        {(hasSubmitted && errors.state) && (
+          <p>{errors.state}</p>
+        )}
         <label>
           Date of Birth
           <input
@@ -128,6 +179,9 @@ function SignupFormPage() {
             required
           />
         </label>
+        {(hasSubmitted && errors.dateOfBirth) && (
+          <p>{errors.dateOfBirth}</p>
+        )}
         <label>
           Password
           <input
@@ -146,9 +200,12 @@ function SignupFormPage() {
             required
           />
         </label>
+        {(hasSubmitted && errors.password) && (
+          <p>{errors.password}</p>
+        )}
         <button type="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 
