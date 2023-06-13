@@ -47,6 +47,23 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
-            'username': self.username,
-            'email': self.email
+            'first_name': self.first_name,
+            'email': self.email,
+            'phone': self.phone,
+            'date_of_birth': self.date_of_birth,
+            'about': self.about,
+            'employment_title': self.employment_title,
+            'employment_company': self.employment_company,
+            'education_school': self.education_school,
+            'picture_1': self.picture_1,
+            'picture_2': self.picture_2,
+            'picture_3': self.picture_3,
+            'picture_4': self.picture_4,
+            'picture_5': self.picture_5,
+            'picture_6': self.picture_6,
+            'looking_for_gender': self.looking_for_gender,
+            'state': self.state,
+            'city': self.city,
+            'gender': self.gender,
+            'flake_score': self.flake_score
         }
