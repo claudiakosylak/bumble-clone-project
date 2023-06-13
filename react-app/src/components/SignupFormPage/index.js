@@ -26,7 +26,7 @@ function SignupFormPage() {
     if (password === confirmPassword) {
       const newUser = {
         first_name: firstName,
-        phone: Number(phone),
+        phone,
         email,
         date_of_birth: dateOfBirth,
         password,
