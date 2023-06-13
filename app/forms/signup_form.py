@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import StringField, IntegerField, DateField, SelectField
 from wtforms.validators import DataRequired, Email, ValidationError
 from app.models import User
 
@@ -12,16 +12,22 @@ def user_exists(form, field):
         raise ValidationError('Email address is already in use.')
 
 
-def username_exists(form, field):
+def phone_exists(form, field):
     # Checking if username is already in use
-    username = field.data
-    user = User.query.filter(User.username == username).first()
+    phone = field.data
+    user = User.query.filter(User.phone == phone).first()
     if user:
-        raise ValidationError('Username is already in use.')
+        raise ValidationError('Phone number is already in use.')
 
 
 class SignUpForm(FlaskForm):
-    username = StringField(
-        'username', validators=[DataRequired(), username_exists])
+    first_name = StringField(
+        'first_name', validators=[DataRequired()])
+    phone = IntegerField('phone', validators=[DataRequired(), phone_exists])
     email = StringField('email', validators=[DataRequired(), user_exists])
+    date_of_birth = DateField('date_of_birth', validators=[DataRequired()])
     password = StringField('password', validators=[DataRequired()])
+    looking_for_gender = SelectField('looking_for_gender', default="Looking for:", choices=["Women", "Men", "Both", "Nonbinary", "Open"], validators=[DataRequired()])
+    gender = SelectField('gender', default="Gender", choices=["Woman", "Man", "Nonbinary", "Other"], validators=[DataRequired()])
+    state = StringField('state', default="State", validators=[DataRequired()])
+    city = StringField('city', default="City", validators=[DataRequired()])
