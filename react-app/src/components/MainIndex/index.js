@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { getMatchesThunk } from "../../store/match";
 import LeftMatchesBar from "../LeftMatchesBar";
 import "./MainIndex.css";
+import PotentialMatchBrowse from "../PotentialMatchBrowse";
 
 
 function MainIndex({isLoaded}) {
@@ -16,6 +16,7 @@ function MainIndex({isLoaded}) {
     return (
         <div className="main-index-wrapper">
             <LeftMatchesBar isLoaded={isLoaded}/>
+            <PotentialMatchBrowse />
         </div>
     )
 }

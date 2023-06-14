@@ -1,0 +1,28 @@
+.potential-match-browse-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.browse-header {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    margin: 20px;
+}
+
+.browse-header > h1 {
+    font-size: 25px;
+    color: #80F;
+}
+
+.browse-box-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.main-browse-box {
+    display: flex;
+}
