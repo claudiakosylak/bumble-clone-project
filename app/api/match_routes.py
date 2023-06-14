@@ -51,6 +51,16 @@ def potential_matches():
 
     return potential_match_dict
 
+@match_routes.route("/<int:id>", methods=["DELETE"])
+def delete_match(id):
+    match = Match.query.get(id)
+    matchUser = match.user1_id
+    if matchUser == current_user.id:
+        matchUser = match.user2_id
+    db.session.delete(match)
+    db.session.commit()
+    return {"userId": matchUser}
+
 @match_routes.route("")
 def all_user_matches():
 
@@ -65,13 +75,19 @@ def all_user_matches():
     for match in all_matches1:
         if match.user1_id == current_user.id:
             user = User.query.get(match.user2_id)
-            matched_users.append(user)
+            user_dict = user.to_dict()
+            user_dict["matchId"] = match.id
+            matched_users.append(user_dict)
         else:
             user = User.query.get(match.user1_id)
-            matched_users.append(user)
+            user_dict = user.to_dict()
+            user_dict["matchId"] = match.id
+            matched_users.append(user_dict)
+    print("😈matched users list: ", matched_users)
 
     matched_users_dict = {}
     for user in matched_users:
-        matched_users_dict[user.id] = user.to_dict()
+        userId = user["id"]
+        matched_users_dict[userId] = user
 
     return matched_users_dict

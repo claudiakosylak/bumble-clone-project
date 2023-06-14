@@ -36,6 +36,10 @@ function BrowseItem({ browseUsers }) {
         dispatch(getUnrejectedRequestsThunk(currentUser.id))
     }, [dispatch])
 
+    useEffect(() => {
+        dispatch(getUnrejectedRequestsThunk(currentUser.id))
+    }, [browseUsers[0]])
+
     const handleReject = async (id1, id2) => {
         await dispatch(rejectMatchThunk(id1, id2))
     }
@@ -44,7 +48,7 @@ function BrowseItem({ browseUsers }) {
         const requestExists = requestUsers.includes(id1)
         if (requestExists) {
             dispatch(createMatchThunk(id1, id2))
-            dispatch(getUnrejectedRequestsThunk(currentUser.id))
+            // dispatch(getUnrejectedRequestsThunk(currentUser.id))
         } else {
             dispatch(createMatchRequestThunk(id2, id1))
         }

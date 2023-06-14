@@ -1,6 +1,7 @@
 const GET_MATCHES = "match/GET_MATCHES";
 const POTENTIAL_MATCHES = "match/POTENTIAL_MATCHES";
-const GET_MATCH = "match/GET_MATCH"
+const GET_MATCH = "match/GET_MATCH";
+const DELETE_MATCH = "match/DELETE_MATCH";
 
 const getMatches = (matches) => ({
     type: GET_MATCHES,
@@ -15,6 +16,11 @@ const getMatch = match => ({
 const potentialMatches = matches => ({
     type: POTENTIAL_MATCHES,
     matches
+})
+
+const deleteMatch = userId => ({
+    type: DELETE_MATCH,
+    userId
 })
 
 
@@ -73,29 +79,23 @@ export const createMatchThunk = (id1, id2) => async dispatch => {
     }
 }
 
-// export const checkMatchRequestThunk = async (id1, id2) => {
-//     const res = await fetch(`/api/requested_matches/${id1}/${id2}`)
-//     if (res.ok) {
-//         const data = res.json();
-//         if (data.success) {
-//             return true;
-//         } else {
-//             return false;
-//         }
-//     } else {
-//         return ["An error occurred. Please try again."]
-//     }
-// }
-
 export const createMatchRequestThunk = (id1, id2) => async dispatch => {
     const res = await fetch(`/api/requested_matches/${id1}/${id2}`, {method: "POST"})
     if (res.ok) {
         const res2 = await fetch("/api/matches/potential-matches")
-        const matches = res2.json()
+        const matches = await res2.json()
         dispatch(potentialMatches(matches))
         return matches;
     } else {
         return ["An error occurred. Please try again."]
+    }
+}
+
+export const deleteMatchThunk = matchId => async dispatch => {
+    const res = await fetch(`/api/matches/${matchId}`, {method: "DELETE"})
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(deleteMatch(data.userId))
     }
 }
 
@@ -115,6 +115,10 @@ export default function reducer(state = initialState, action) {
             const matchState = {...state, currentMatches: {...state.currentMatches}, potentialMatches: {...state.potentialMatches}, currentMatch: {}}
             matchState.currentMatch = action.match
             return matchState;
+        case DELETE_MATCH:
+            const deleteState = {...state, currentMatches: {...state.currentMatches}, potentialMatches: {...state.potentialMatches}, currentMatch: {}}
+            delete deleteState.currentMatches[action.userId]
+            return deleteState;
         default:
             return state;
 
