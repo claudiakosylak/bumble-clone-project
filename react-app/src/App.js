@@ -7,6 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import SplashIndex from "./components/SplashIndex";
 import MainIndex from "./components/MainIndex";
+import ConversationViewIndex from "./components/ConversationViewIndex";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <SplashIndex />
+          </Route>
+          <Route path="/app/connections">
+            <ConversationViewIndex isLoaded={isLoaded} />
           </Route>
           <Route path="/app">
             <MainIndex isLoaded={isLoaded}/>

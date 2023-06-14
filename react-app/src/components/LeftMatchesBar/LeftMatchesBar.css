@@ -24,6 +24,7 @@
     width: 45px;
     height: 45px;
     border-radius: 100%;
+    object-fit: cover;
 }
 
 .scroll-match-item {

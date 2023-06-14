@@ -4,7 +4,7 @@ import "./BrowseItem.css";
 import { checkMatchRequestThunk, createMatchRequestThunk, createMatchThunk, rejectMatchThunk } from "../../store/match";
 import { getUnrejectedRequestsThunk } from "../../store/match_request";
 
-const ageChanger = (dateOfBirth) => {
+export const ageChanger = (dateOfBirth) => {
 
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear()
