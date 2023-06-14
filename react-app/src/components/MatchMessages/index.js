@@ -48,6 +48,10 @@ function MatchMessages() {
         dispatch(getMatchMessagesThunk(currentMatch.matchId))
     }, [currentMatch])
 
+    useEffect(() => {
+        dispatch(getMatchMessagesThunk(currentMatch.matchId))
+    }, [messages])
+
 
     const updateChatInput = (e) => {
         setChatInput(e.target.value)
