@@ -5,6 +5,7 @@ import LeftMatchesBar from "../LeftMatchesBar";
 import RightProfileBar from "../RightProfileBar";
 import MatchMessages from "../MatchMessages";
 import { Redirect } from "react-router-dom";
+import ConversationViewHeader from "../ConversationViewHeader";
 
 function ConversationViewIndex({ isLoaded }) {
     const user = useSelector(state => state.session.user)
@@ -17,11 +18,13 @@ function ConversationViewIndex({ isLoaded }) {
         <div className="conversation-view-index-wrapper">
             <LeftMatchesBar isLoaded={isLoaded} />
             <div className="conversation-view-right-side">
-                <div>
-                    <h3>Welcome to conversation view</h3>
-                    <MatchMessages />
+                <div className="messages-container">
 
+                    <ConversationViewHeader />
+                    <MatchMessages />
                 </div>
+
+
                 <RightProfileBar />
             </div>
         </div>
