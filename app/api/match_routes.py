@@ -24,3 +24,7 @@ def all_user_matches():
     print("🍎 all matched users: ", matched_users_dict)
 
     return matched_users_dict
+
+@match_routes.route("/potential-matches")
+def potential_matches():
+    pass
