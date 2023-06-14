@@ -68,6 +68,11 @@ function BrowseItem({ browseUsers }) {
                     </div>
                 </div>
             )}
+            {browseUsers.length === 0 && (
+                <div className="no-browse-wrapper">
+                    <h3>You've run out of potential matches to browse. Check back soon as new users sign up!</h3>
+                </div>
+            )}
         </>
     )
 }

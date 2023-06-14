@@ -21,11 +21,16 @@ function LeftMatchesBar({isLoaded}) {
     return (
         <div className="left-matches-wrapper">
             <Navigation isLoaded={isLoaded}/>
-        <ul>
+            <p className="left-headers">Unmessaged Matches ({matches.length})</p>
+        <ul className="unmessaged-matches-wrapper">
+            <div className="inner-wrapper">
             {matches.map(match => (
-                <li key={match.id}>{match.first_name}<button onClick={() => handleUnmatch(match.matchId)}>Unmatch</button></li>
+                <li key={match.id} className="scroll-match-item"><img className="mini-match-icons" src={match.picture_1}></img><button onClick={() => handleUnmatch(match.matchId)}>Unmatch</button></li>
             ))}
+
+            </div>
         </ul>
+        <p className="left-headers">Conversations</p>
     </div>
     )
 }

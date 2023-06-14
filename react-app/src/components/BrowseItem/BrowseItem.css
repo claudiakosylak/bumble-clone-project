@@ -34,3 +34,11 @@
     font-weight: 600;
     vertical-align: center;
 }
+
+.no-browse-wrapper {
+    margin: 50px;
+}
+
+.no-browse-wrapper h3 {
+    text-align: center;
+}
