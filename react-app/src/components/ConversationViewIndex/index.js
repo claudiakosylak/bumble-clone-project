@@ -4,8 +4,15 @@ import "./ConversationViewIndex.css";
 import LeftMatchesBar from "../LeftMatchesBar";
 import RightProfileBar from "../RightProfileBar";
 import MatchMessages from "../MatchMessages";
+import { Redirect } from "react-router-dom";
 
 function ConversationViewIndex({ isLoaded }) {
+    const user = useSelector(state => state.session.user)
+
+    if (!user) {
+        return <Redirect to="/" />
+    }
+
     return (
         <div className="conversation-view-index-wrapper">
             <LeftMatchesBar isLoaded={isLoaded} />

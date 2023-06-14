@@ -60,12 +60,13 @@ function MatchMessages() {
         socket.emit("chat", { match_id: currentMatch.matchId, user_id: user.id, content: chatInput });
 
         // clear the input field after the message is sent
+        dispatch(getMatchMessagesThunk(currentMatch.matchId))
         setChatInput("")
     }
 
     const deleteChat = (messageId) => {
         // emit a message
-        socket.emit("delete_message", { id : messageId  });
+        socket.emit("delete_message", { id: messageId });
 
         // clear the input field after the message is sent
         setChatInput("")
@@ -73,14 +74,24 @@ function MatchMessages() {
 
     return (
         <>
-        {(currentMatch && messageList.length > 0) && (
-        <div className="match-messages-container">
-            {messageList.map(message => (
-                <p key={message.id}>{message.content}</p>
-            ))}
-        </div>
+            {(currentMatch && messageList.length > 0) && (
+                <div className="match-messages-container">
+                    {messageList.map(message => (
+                        <p key={message.id}>{message.content}</p>
+                    ))}
+                    <form id='chat-input-form' onSubmit={sendChat}>
+                        <div>
+                            <input id='chat-input'
+                                value={chatInput}
+                                onChange={updateChatInput}
+                            />
+                            <button id='chat-send-button' disabled={chatInput.length === 0 || chatInput.length > 1000} type="submit">Send</button>
+                        </div>
+                        <div id="message-warning">{chatInput.length > 1000 ? <p>Please keep your message below 1000 characters</p> : ''}</div>
+                    </form>
+                </div>
 
-        )}
+            )}
         </>
     )
 }
