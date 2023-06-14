@@ -15,15 +15,12 @@ def create_match_request(id1, id2):
     """
     request1 = RequestedMatch.query.filter(RequestedMatch.requesting_user_id == id1, RequestedMatch.requested_user_id == id2).first()
     request2 = RequestedMatch.query.filter(RequestedMatch.requesting_user_id == id2, RequestedMatch.requested_user_id == id1).first()
-    print("🍎request1: ", request1)
-    print("🍎request2: ", request2)
     if request1 or request2:
         return {"error": "match request already exists"}
     new_request = RequestedMatch(
         requesting_user_id = id1,
         requested_user_id = id2
     )
-    print("🍎new request: ", new_request.to_dict())
     db.session.add(new_request)
     db.session.commit()
     return new_request.to_dict()
@@ -48,8 +45,6 @@ def reject_match_request(id1, id2):
 @request_match_routes.route("/<int:id>")
 def get_unrejected_requests(id):
     requests = RequestedMatch.query.filter(RequestedMatch.requested_user_id == id, RequestedMatch.rejected == False).all()
-    print("🍎REQUESTS IN BACKEND: ", requests)
-
     requests_dict = {}
     for request in requests:
         requests_dict[request.id] = request.to_dict()
