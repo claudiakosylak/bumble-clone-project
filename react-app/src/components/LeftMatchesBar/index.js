@@ -4,6 +4,7 @@ import { deleteMatchThunk, getMatch, getMatchesThunk, potentialMatchesThunk } fr
 import Navigation from "../Navigation";
 import "./LeftMatchesBar.css";
 import { NavLink, useHistory } from "react-router-dom";
+import ConversationList from "../ConversationList";
 
 function LeftMatchesBar({isLoaded}) {
     const matchesObj = useSelector(state => state.match.currentMatches)
@@ -38,6 +39,7 @@ function LeftMatchesBar({isLoaded}) {
             </div>
         </ul>
         <p className="left-headers">Conversations</p>
+        <ConversationList />
     </div>
     )
 }
