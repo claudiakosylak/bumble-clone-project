@@ -1,5 +1,7 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "./BrowseItem.css";
+import { rejectMatchThunk } from "../../store/match";
 
 const ageChanger = (dateOfBirth) => {
 
@@ -19,6 +21,12 @@ const ageChanger = (dateOfBirth) => {
 }
 
 function BrowseItem({ browseUsers }) {
+    const currentUser = useSelector(state => state.session.user)
+    const dispatch = useDispatch();
+
+    const handleReject = async (id1, id2) => {
+        await dispatch(rejectMatchThunk(id1, id2))
+    }
     return (
         <>
             {browseUsers.length > 0 && (
@@ -28,6 +36,7 @@ function BrowseItem({ browseUsers }) {
                     </div>
                     <div className="browse-item-right-side">
                         <p>{browseUsers[0].first_name}, {ageChanger(browseUsers[0].date_of_birth)}</p>
+                        <button onClick={() => handleReject(browseUsers[0].id, currentUser.id)}>Reject</button>
 
                     </div>
                 </div>

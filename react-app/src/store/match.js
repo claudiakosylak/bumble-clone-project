@@ -34,6 +34,22 @@ export const potentialMatchesThunk = () => async dispatch => {
     }
 }
 
+export const rejectMatchThunk = (id1, id2) => async dispatch => {
+    const res = await fetch(`/api/requested_matches/${id1}/${id2}`, {method: "PUT"})
+    if (res.ok) {
+        const res2 = await fetch("/api/matches/potential-matches")
+        if (res2.ok) {
+            const matches = await res2.json();
+            dispatch(potentialMatches(matches))
+            return matches;
+        } else {
+            return ["An error occurred. Please try again."]
+        }
+    } else {
+        return ["An error occurred. Please try again."]
+    }
+}
+
 const initialState = {currentMatches: {}, potentialMatches: {}, currentMatch: {}}
 
 export default function reducer(state = initialState, action) {
