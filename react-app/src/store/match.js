@@ -83,7 +83,7 @@ export const createMatchRequestThunk = (id1, id2) => async dispatch => {
     const res = await fetch(`/api/requested_matches/${id1}/${id2}`, {method: "POST"})
     if (res.ok) {
         const res2 = await fetch("/api/matches/potential-matches")
-        const matches = res2.json()
+        const matches = await res2.json()
         dispatch(potentialMatches(matches))
         return matches;
     } else {
