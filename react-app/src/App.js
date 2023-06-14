@@ -17,14 +17,14 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      {/* <Navigation isLoaded={isLoaded} /> */}
       {isLoaded && (
         <Switch>
           <Route exact path="/">
             <SplashIndex />
           </Route>
           <Route path="/app">
-            <MainIndex />
+            <MainIndex isLoaded={isLoaded}/>
           </Route>
           <Route path="/login" >
             <LoginFormPage />

@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMatchesThunk } from "../../store/match";
+import Navigation from "../Navigation";
+import "./LeftMatchesBar.css";
 
-function LeftMatchesBar() {
+function LeftMatchesBar({isLoaded}) {
     const matchesObj = useSelector(state => state.match.currentMatches)
     const matches = Object.values(matchesObj)
     const dispatch = useDispatch();
@@ -12,7 +14,8 @@ function LeftMatchesBar() {
     }, [dispatch])
 
     return (
-        <div>
+        <div className="left-matches-wrapper">
+            <Navigation isLoaded={isLoaded}/>
         <ul>
             {matches.map(match => (
                 <li key={match.id}>{match.first_name}</li>
