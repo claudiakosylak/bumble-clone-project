@@ -4,7 +4,7 @@ import "./BrowseItem.css";
 import { checkMatchRequestThunk, createMatchRequestThunk, createMatchThunk, rejectMatchThunk } from "../../store/match";
 import { getUnrejectedRequestsThunk } from "../../store/match_request";
 
-const ageChanger = (dateOfBirth) => {
+export const ageChanger = (dateOfBirth) => {
 
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear()
@@ -66,6 +66,11 @@ function BrowseItem({ browseUsers }) {
                         <button onClick={() => handleReject(browseUsers[0].id, currentUser.id)}>Reject</button>
                         <button onClick={() => handleSwipeRight(browseUsers[0].id, currentUser.id)}>Swipe Right</button>
                     </div>
+                </div>
+            )}
+            {browseUsers.length === 0 && (
+                <div className="no-browse-wrapper">
+                    <h3>You've run out of potential matches to browse. Check back soon as new users sign up!</h3>
                 </div>
             )}
         </>

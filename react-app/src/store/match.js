@@ -8,7 +8,7 @@ const getMatches = (matches) => ({
     matches
 })
 
-const getMatch = match => ({
+export const getMatch = match => ({
     type: GET_MATCH,
     match
 })
