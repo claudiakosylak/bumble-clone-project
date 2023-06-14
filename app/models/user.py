@@ -33,6 +33,9 @@ class User(db.Model, UserMixin):
     flake_score = db.Column(db.Numeric, nullable=False, default=0)
     created_at = db.Column(db.DateTime, default=datetime.now())
 
+    matches = db.relationship("Match", back_populates="user1")
+    matches2 = db.relationship("Match", back_populates="user2")
+
     @property
     def password(self):
         return self.hashed_password
