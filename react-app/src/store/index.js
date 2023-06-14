@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import session from './session';
 import match from './match';
 import matchRequest from "./match_request";
+import message from "./message";
 
 const rootReducer = combineReducers({
   session,
   match,
-  matchRequest
+  matchRequest,
+  message
 });
 
 
