@@ -6,6 +6,8 @@ from sqlalchemy import or_
 request_match_routes = Blueprint("requested_matches", __name__)
 
 
+
+
 @request_match_routes.route("/<int:id1>/<int:id2>", methods=["POST"])
 def create_match_request(id1, id2):
     """
@@ -40,3 +42,13 @@ def reject_match_request(id1, id2):
         db.session.add(new_request)
         db.session.commit()
         return new_request.to_dict()
+
+@request_match_routes.route("/<int:id>")
+def get_unrejected_requests(id):
+    requests = RequestedMatch.query.filter(RequestedMatch.requested_user_id == id, RequestedMatch.rejected == False).all()
+    print("🍎REQUESTS IN BACKEND: ", requests)
+
+    requests_dict = {}
+    for request in requests:
+        requests_dict[request.id] = request.to_dict()
+    return requests_dict

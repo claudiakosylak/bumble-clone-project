@@ -2,10 +2,12 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session';
 import match from './match';
+import matchRequest from "./match_request";
 
 const rootReducer = combineReducers({
   session,
-  match
+  match,
+  matchRequest
 });
 
 
