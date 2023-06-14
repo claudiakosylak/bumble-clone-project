@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./ConversationViewIndex.css";
 import LeftMatchesBar from "../LeftMatchesBar";
 import RightProfileBar from "../RightProfileBar";
+import MatchMessages from "../MatchMessages";
 
 function ConversationViewIndex({ isLoaded }) {
     return (
@@ -11,6 +12,7 @@ function ConversationViewIndex({ isLoaded }) {
             <div className="conversation-view-right-side">
                 <div>
                     <h3>Welcome to conversation view</h3>
+                    <MatchMessages />
 
                 </div>
                 <RightProfileBar />

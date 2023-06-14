@@ -1,7 +1,22 @@
 from flask import Blueprint, jsonify, session, request
-from flask_login import current_user
-from app.models import Match, db, User, RequestedMatch
+from flask_login import current_user, login_required
+from app.models import Match, db, User, RequestedMatch, Message
 match_routes = Blueprint("matches", __name__)
+
+@match_routes.route("/<int:id>/messages")
+@login_required
+def match_messages(id):
+
+    """Returns all the messages for a specific match"""
+
+    messages = Message.query.filter(Message.match_id == id).all()
+
+    message_dict = []
+
+    for message in messages:
+        message_dict.append(message.to_dict())
+
+    return message_dict
 
 @match_routes.route("/<int:id1>/<int:id2>", methods=["POST"])
 def create_match(id1, id2):
