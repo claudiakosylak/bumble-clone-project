@@ -1,0 +1,29 @@
+.browse-item-wrapper {
+    display: flex;
+    background-color: #80F;
+    justify-content: space-between;
+    margin: 50px;
+    height: 37rem;
+    border-radius: 23px;
+}
+
+.main-browse-picture {
+    width: 50%;
+    border-radius: 23px 0 0 23px;
+}
+
+.main-browse-picture img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 23px 0 0 23px;
+}
+
+.browse-item-right-side {
+    display: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 50%;
+    height: 100%;
+}
