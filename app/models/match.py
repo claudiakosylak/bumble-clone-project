@@ -13,9 +13,7 @@ class Match(db.Model):
     user1_id = db.Column(db.Integer, nullable=False)
     user2_id = db.Column(db.Integer, nullable=False)
 
-    # user1 = db.relationship("User", back_populates="matches", foreign_keys=[user1_id])
-    # user2 = db.relationship("User", back_populates="matches2", foreign_keys=[user2_id])
-
+    messages = db.relationship("Message", back_populates="match", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
