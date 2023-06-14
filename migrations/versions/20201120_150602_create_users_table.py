@@ -54,10 +54,10 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('scheduled_status', sa.Boolean()),
     sa.Column('created_at', sa.DateTime()),
-    sa.Column('user_1_id', sa.Integer(), nullable=False),
-    sa.Column('user_2_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['user_1_id'], ['users.id']),
-    sa.ForeignKeyConstraint(['user_2_id'], ['users.id']),
+    sa.Column('user1_id', sa.Integer(), nullable=False),
+    sa.Column('user2_id', sa.Integer(), nullable=False),
+    # sa.ForeignKeyConstraint(['user1_id'], ['users.id']),
+    # sa.ForeignKeyConstraint(['user2_id'], ['users.id']),
     sa.PrimaryKeyConstraint('id')
     )
 

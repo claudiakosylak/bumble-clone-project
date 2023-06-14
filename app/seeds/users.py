@@ -12,10 +12,16 @@ def seed_users():
         first_name='marnie', email='marnie@aa.io', password='password', date_of_birth=dob1.date(), phone="2222222222", looking_for_gender="Men", state="New York", city="New York City", gender="Woman")
     bobbie = User(
         first_name='bobbie', email='bobbie@aa.io', password='password', date_of_birth=dob1.date(), phone="3333333333", looking_for_gender="Women", state="New York", city="New York City", gender="Man")
+    dan = User(
+        first_name='dan', email='dan@aa.io', password='password', date_of_birth=dob1.date(), phone="3333333332", looking_for_gender="Women", state="New York", city="New York City", gender="Man")
+    brad = User(
+        first_name='brad', email='brad@aa.io', password='password', date_of_birth=dob1.date(), phone="3333333339", looking_for_gender="Women", state="New York", city="New York City", gender="Man")
 
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
+    db.session.add(dan)
+    db.session.add(brad)
     db.session.commit()
 
 
