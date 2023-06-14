@@ -8,7 +8,7 @@ def seed_requested_matches():
     )
     requested_matches.append(request1)
     request2 = RequestedMatch(
-        requesting_user_id = 4, requested_user_id = 1
+        requesting_user_id = 5, requested_user_id = 1
     )
     requested_matches.append(request2)
 

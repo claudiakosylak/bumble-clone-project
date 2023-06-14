@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./PotentialMatchBrowse.css";
 import { potentialMatchesThunk } from "../../store/match";
+import BrowseItem from "../BrowseItem";
 
 
 function PotentialMatchBrowse() {
@@ -20,15 +21,7 @@ function PotentialMatchBrowse() {
             <div className="browse-header">
                 <h1>noFlake</h1>
             </div>
-            <div className="browse-box-wrapper">
-                <div className="main-browse-box">
-                    {potentialMatchesArr.length > 0 && (
-                        <p>{potentialMatchesArr[0].first_name}</p>
-
-                    )}
-                </div>
-            </div>
-
+            <BrowseItem browseUsers={potentialMatchesArr} />
         </div>
     )
 }
