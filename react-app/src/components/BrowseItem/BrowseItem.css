@@ -27,3 +27,10 @@
     width: 50%;
     height: 100%;
 }
+
+.browse-item-right-side p {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+    vertical-align: center;
+}
