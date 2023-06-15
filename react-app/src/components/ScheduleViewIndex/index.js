@@ -12,16 +12,16 @@ function ScheduleViewIndex({ isLoaded }) {
     const dispatch = useDispatch();
     const currentDate = new Date();
 
-    console.log("CURRENT DATE: ", currentDate)
+
     const upcomingDates = []
     const pastDates = []
 
-
+    console.log("ALL DATES: ", allDates)
 
     for (let date of allDates) {
-        console.log("SCHEDULED DATE: ", date.scheduled_date)
+
         const dateDate = new Date(date.scheduled_date)
-        console.log("DATE DATE: ", dateDate)
+
         if (dateDate > currentDate) {
             upcomingDates.push(date)
         } else {
@@ -29,8 +29,6 @@ function ScheduleViewIndex({ isLoaded }) {
         }
     }
 
-    console.log("UPCOMING DATES: ", upcomingDates)
-    console.log("PAST DATES: ", pastDates)
 
 
     useEffect(() => {
@@ -51,21 +49,26 @@ function ScheduleViewIndex({ isLoaded }) {
                 <div className="schedule-main-content dates-items-wrapper">
                     <div className="upcoming-dates-wrapper">
                         <h3>Upcoming Dates:</h3>
-                        {upcomingDates.map(date => (
+                        {upcomingDates.length > 0 ? (upcomingDates.map(date => (
                             <div>
-                                <p>Date with </p>
+                                <p>Date with c</p>
                                 <p>{date.scheduled_date}</p>
                             </div>
-                        ))}
+                        ))) : (
+                            <p>You don't have any upcoming dates.</p>
+                        )}
                     </div>
                     <div className="past-dates-wrapper dates-items-wrapper">
                         <h3>Past Dates:</h3>
-                        {pastDates.map(date => (
+                        {pastDates.length > 0 ?(pastDates.map(date => (
+
                             <div>
-                                <p>Date with </p>
+                                <p>Date with {date.other_user.first_name}</p>
                                 <p>{date.scheduled_date}</p>
                             </div>
-                        ))}
+                        ))) : (
+                            <p>You haven't had any dates yet. </p>
+                        )}
                     </div>
                 </div>
             </div>
