@@ -75,34 +75,41 @@ function MatchMessages() {
 
     return (
         <>
-            {(currentMatch && messageList.length > 0) && (
-                <div className="bigger-messages-wrapper">
+            <div className="bigger-messages-wrapper">
+                {(currentMatch && messageList.length > 0) && (
+                    <>
+                        <div className="match-messages-container">
+                            {messageList.map(message => (
+                                <>
+                                    <p key={message.id} className={message.user_id === user.id ? "user-messages" : "other-messages"}>{message.content}</p>
+                                    {message.user_id === user.id && (
+                                        <i class="fa-regular fa-trash-can" onClick={(() => deleteChat(message.id))}></i>
+
+                                    )}
+                                </>
+                            ))}
+
+                        </div>
+                    </>
+
+                )}
+                {(currentMatch && messageList.length === 0) && (
                     <div className="match-messages-container">
-                    {messageList.map(message => (
-                        <>
-                            <p key={message.id} className={message.user_id === user.id ? "user-messages" : "other-messages"}>{message.content}</p>
-                            {message.user_id === user.id && (
-                                <i class="fa-regular fa-trash-can" onClick={(() => deleteChat(message.id))}></i>
-
-                            )}
-                        </>
-                    ))}
-
+                        <p className="make-first-move">Make the first move! Send a message to get sparks flying. </p>
+                        </div>
+                )}
+                <form id='chat-input-form' onSubmit={sendChat}>
+                    <div className="chat-input-form-field">
+                        <input id='chat-input'
+                            value={chatInput}
+                            onChange={updateChatInput}
+                            placeholder="Start chatting..."
+                        />
+                        <button id='chat-send-button' disabled={chatInput.length === 0 || chatInput.length > 1000} type="submit">Send</button>
                     </div>
-                            <form id='chat-input-form' onSubmit={sendChat}>
-                                <div className="chat-input-form-field">
-                                    <input id='chat-input'
-                                        value={chatInput}
-                                        onChange={updateChatInput}
-                                        placeholder="Start chatting..."
-                                    />
-                                    <button id='chat-send-button' disabled={chatInput.length === 0 || chatInput.length > 1000} type="submit">Send</button>
-                                </div>
-                                <div id="message-warning">{chatInput.length > 1000 ? <p>Please keep your message below 1000 characters</p> : ''}</div>
-                            </form>
-                </div>
-
-            )}
+                    <div id="message-warning">{chatInput.length > 1000 ? <p>Please keep your message below 1000 characters</p> : ''}</div>
+                </form>
+            </div>
         </>
     )
 }
