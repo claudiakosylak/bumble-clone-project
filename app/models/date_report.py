@@ -12,11 +12,12 @@ class DateReport(db.Model):
     match_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("matches.id")), nullable=False)
     date_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("dates.id")), nullable=False)
     reporting_user_id = db.Column(db.Integer, nullable=False)
-    reported_user_id = db.Column(db.Integer, nullable=False)
-    reported_activity = db.Column(db.String, nullable=False)
+    reported_user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
+    reported_activity = db.Column(db.String(50), nullable=False)
 
     match = db.relationship("Match", back_populates="date_reports")
     date = db.relationship("Date", back_populates="date_reports")
+    reported_user = db.relationship("User", back_populates="date_reports")
 
     def to_dict(self):
         return {

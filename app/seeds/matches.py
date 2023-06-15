@@ -15,6 +15,10 @@ def seed_matches():
         user1_id = 4, user2_id = 1
     )
     matches.append(match3)
+    match4 = Match(
+        user1_id = 1, user2_id = 7
+    )
+    matches.append(match4)
 
     for match in matches:
         db.session.add(match)
