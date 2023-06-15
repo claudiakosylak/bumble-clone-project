@@ -14,6 +14,7 @@ class Match(db.Model):
     user2_id = db.Column(db.Integer, nullable=False)
 
     messages = db.relationship("Message", back_populates="match", cascade="all, delete-orphan")
+    dates = db.relationship("Date", back_populates="match", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
@@ -22,6 +23,4 @@ class Match(db.Model):
             "created_at": self.created_at,
             "user1_id": self.user1_id,
             "user2_id": self.user2_id
-            # "user1": self.user1.to_dict(),
-            # "user2": self.user2.to_dict()
         }

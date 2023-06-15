@@ -24,17 +24,42 @@
 
 #chat-input-form {
     width: 100%;
-    margin: 20px;
+    padding: 20px;
 }
 
 .chat-input-form-field {
     display: flex;
     justify-content: space-between;
-    border: 1px solid #80F;
+    border: 2px solid #80F;
     height: 50px;
     border-radius: 23px;
 }
 
 #chat-input {
     border: none;
+    width: 100%;
+    border-radius: 23px;
+    height: 100%;
+    padding: 10px;
+}
+#chat-input:focus {
+    outline: none;
+}
+
+.bigger-messages-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#chat-send-button {
+    margin-right: 10px;
+    border-radius: 100%;
+    width: 50px;
+    height: 45px;
+}
+
+#chat-send-button:hover {
+    cursor: pointer;
 }

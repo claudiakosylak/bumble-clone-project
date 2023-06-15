@@ -4,12 +4,14 @@ import session from './session';
 import match from './match';
 import matchRequest from "./match_request";
 import message from "./message";
+import date from "./date";
 
 const rootReducer = combineReducers({
   session,
   match,
   matchRequest,
-  message
+  message,
+  date
 });
 
 
