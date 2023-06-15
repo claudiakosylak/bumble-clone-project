@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import current_user, login_required
-from app.models import Date, db, Match
+from app.models import Date, db, Match, User
 from sqlalchemy import or_
 
 date_routes = Blueprint("dates", __name__)
@@ -20,11 +20,21 @@ def get_dates():
 
     matches = Match.query.filter(or_(Match.user1_id == current_user.id, Match.user2_id == current_user.id)).all()
     match_ids = [match.id for match in matches]
-    print("🍎match IDs: ", match_ids)
-    dates = Date.query.filter(Date.match_id in match_ids).all()
+    dates = []
+    for match in matches:
+        date = Date.query.filter(Date.match_id == match.id).first()
+        if date:
+            date_dict = date.to_dict()
+            if match.user1_id == current_user.id:
+                other_user = match.user2_id
+            else:
+                other_user = match.user1_id
+            other = User.query.get(other_user)
+            date_dict["other_user"] = other.to_dict()
+            dates.append(date_dict)
 
     dates_dict = {}
     for date in dates:
-        dates_dict.append(date.to_dict())
+        dates_dict[date["id"]] = date
 
     return dates_dict

@@ -4,7 +4,7 @@ from sqlalchemy.sql import text
 def seed_matches():
     matches = []
     match1 = Match(
-        user1_id = 1, user2_id = 2
+        user1_id = 1, user2_id = 2, scheduled_status = True
     )
     matches.append(match1)
     match2 = Match(

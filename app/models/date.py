@@ -17,7 +17,7 @@ class Date(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'scheduled_date': self.content,
+            'scheduled_date': self.scheduled_date,
             'created_at': self.created_at,
             'match_id': self.match_id,
             'match': self.match.to_dict()

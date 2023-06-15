@@ -16,7 +16,7 @@ function ConversationViewIndex({ isLoaded }) {
         return <Redirect to="/" />
     }
 
-    if(!currentMatch) {
+    if(!currentMatch.id) {
         return <Redirect to="/app" />
     }
     return (

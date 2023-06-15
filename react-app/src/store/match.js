@@ -112,7 +112,7 @@ export default function reducer(state = initialState, action) {
             potentialState.potentialMatches = action.matches;
             return potentialState;
         case GET_MATCH:
-            const matchState = {...state, currentMatches: {...state.currentMatches}, potentialMatches: {...state.potentialMatches}, currentMatch: {}}
+            const matchState = {...state, currentMatches: {...state.currentMatches}, potentialMatches: {...state.potentialMatches}, currentMatch: {...state.currentMatch}}
             matchState.currentMatch = action.match
             return matchState;
         case DELETE_MATCH:

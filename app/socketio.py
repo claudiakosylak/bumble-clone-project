@@ -36,3 +36,10 @@ def handle_delete(data):
         db.session.commit()
 
     emit("delete_message", data, broadcast=True)
+
+@socketio.on("update")
+def handle_update(data):
+    if data != "User connected!":
+        message = Message.query.get(data["id"])
+        message.content = data["content"]
+        db.session.commit()
