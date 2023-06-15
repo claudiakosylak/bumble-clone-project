@@ -15,3 +15,18 @@
     object-fit: cover;
     border-radius: 100%;
 }
+
+.scheduled-status {
+    display: flex;
+    width: 60%;
+    align-items: center;
+    gap: 10px;
+}
+
+.scheduled-status-text {
+    font-size: 12px;
+}
+
+.fa-calendar-days {
+    font-size: 20px;
+}
