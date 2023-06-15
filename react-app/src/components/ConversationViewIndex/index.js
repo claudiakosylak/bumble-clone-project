@@ -9,11 +9,16 @@ import ConversationViewHeader from "../ConversationViewHeader";
 
 function ConversationViewIndex({ isLoaded }) {
     const user = useSelector(state => state.session.user)
+    const currentMatch = useSelector(state => state.match.currentMatch)
+
 
     if (!user) {
         return <Redirect to="/" />
     }
 
+    if(!currentMatch) {
+        return <Redirect to="/app" />
+    }
     return (
         <div className="conversation-view-index-wrapper">
             <LeftMatchesBar isLoaded={isLoaded} />

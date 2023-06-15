@@ -79,17 +79,21 @@ function MatchMessages() {
     return (
         <>
             {(currentMatch && messageList.length > 0) && (
-                <div className="match-messages-container">
+                <div className="bigger-messages-wrapper">
+                    <div className="match-messages-container">
                     {messageList.map(message => (
                         <>
                             <p key={message.id} className={message.user_id === user.id ? "user-messages" : "other-messages"}>{message.content}</p>
                         </>
                     ))}
+
+                    </div>
                             <form id='chat-input-form' onSubmit={sendChat}>
                                 <div className="chat-input-form-field">
                                     <input id='chat-input'
                                         value={chatInput}
                                         onChange={updateChatInput}
+                                        placeholder="Start chatting..."
                                     />
                                     <button id='chat-send-button' disabled={chatInput.length === 0 || chatInput.length > 1000} type="submit">Send</button>
                                 </div>
