@@ -27,3 +27,12 @@ def handle_chat(data):
         db.session.commit()
 
     emit("chat", data, broadcast=True)
+
+@socketio.on("delete_message")
+def handle_delete(data):
+    if data != "User connected!":
+        message = Message.query.get(data["id"])
+        db.session.delete(message)
+        db.session.commit()
+
+    emit("delete_message", data, broadcast=True)

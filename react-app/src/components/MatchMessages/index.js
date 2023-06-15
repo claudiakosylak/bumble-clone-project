@@ -31,12 +31,9 @@ function MatchMessages() {
             setMessages(messages => [...messages, chat])
         })
 
-        // listen for delete events
-        // socket.on("delete_message", (delete_message) => {
-        //     // when we recieve a chat, add it into our messages array in state
-        //     setMessages(messages => messages.filter(message => message.id !== delete_message.id))
-        //     console.log("DELETE message from component", delete_message)
-        // })
+        socket.on("delete_message", (delete_message) => {
+            setMessages(messages => messages.filter(message => message.id !== delete_message.id))
+        })
 
         // when component unmounts, disconnect
         return (() => {
@@ -84,6 +81,10 @@ function MatchMessages() {
                     {messageList.map(message => (
                         <>
                             <p key={message.id} className={message.user_id === user.id ? "user-messages" : "other-messages"}>{message.content}</p>
+                            {message.user_id === user.id && (
+                                <i class="fa-regular fa-trash-can" onClick={(() => deleteChat(message.id))}></i>
+
+                            )}
                         </>
                     ))}
 
