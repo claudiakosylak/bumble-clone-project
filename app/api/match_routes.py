@@ -35,7 +35,6 @@ def create_match(id1, id2):
     db.session.commit()
     return match.to_dict()
 
-
 @match_routes.route("/potential-matches")
 def potential_matches():
     """

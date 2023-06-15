@@ -12,9 +12,17 @@ def seed_matches():
     )
     matches.append(match2)
     match3 = Match(
-        user1_id = 4, user2_id = 1
+        user1_id = 4, user2_id = 1,  scheduled_status = True
     )
     matches.append(match3)
+    match4 = Match(
+        user1_id = 1, user2_id = 7,  scheduled_status = True
+    )
+    matches.append(match4)
+    match5 = Match(
+        user1_id = 1, user2_id = 8
+    )
+    matches.append(match5)
 
     for match in matches:
         db.session.add(match)

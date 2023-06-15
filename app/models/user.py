@@ -34,6 +34,8 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now())
 
     messages = db.relationship("Message", back_populates="user", cascade="all, delete-orphan")
+    date_reports = db.relationship("DateReport", back_populates="reported_user")
+    date_requests = db.relationship("DateRequest", back_populates="requesting_user")
 
     @property
     def password(self):
