@@ -18,6 +18,7 @@
   height: 50px;
   border-radius: 100%;
   border: 1px solid black;
+  object-fit: cover;
 }
 
 .current-user-image-button {
