@@ -1,5 +1,12 @@
 .profile-dropdown {
   position: absolute;
+  background-color: white;
+  border: 1px solid lightgrey;
+  list-style-type: none;
+  top: 0px;
+  left: 0px;
+  width: 350px;
+
 }
 
 .hidden {
@@ -32,4 +39,8 @@
 .display-user-name {
   font-size: 20px;
   font-weight: 600;
+}
+
+.fa-angle-left:hover {
+  cursor: pointer;
 }
