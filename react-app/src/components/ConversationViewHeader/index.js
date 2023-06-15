@@ -5,19 +5,22 @@ import { getDateThunk, getDatesThunk } from "../../store/date";
 import OpenModalButton from "../OpenModalButton";
 import RequestDateModal from "../RequestDateModal";
 
-function ConversationViewHeader({dateRequests}) {
+function ConversationViewHeader({ dateRequests }) {
     const currentMatch = useSelector(state => state.match.currentMatch)
     const currentUser = useSelector(state => state.session.user)
     const allDatesObj = useSelector(state => state.date.allDates)
     const allDates = Object.values(allDatesObj)
     const allDateMatchIds = allDates.map(date => date.match_id)
     const currentDate = allDates.find(date => date.match_id === currentMatch.matchId)
+    const todaysDate = new Date()
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
     const dateRequester = dateRequests.find(request => request.requesting_user_id === currentMatch.id)
     const dateRequested = dateRequests.find(request => (request.requesting_user_id === currentUser.id && request.match_id === currentMatch.matchId))
-    console.log("DATE REQUESTER: ", dateRequester)
-    console.log("DATE REQUESTED: ", dateRequested)
+    let dateDate
+    if (currentDate) {
+        dateDate = new Date(currentDate.scheduled_date)
+    }
 
     console.log("CURRENT DATE: ", currentDate)
 
@@ -56,9 +59,22 @@ function ConversationViewHeader({dateRequests}) {
             {(allDateMatchIds.includes(currentMatch.matchId)) && (
                 <div className="scheduled-status">
                     <i class="fa-regular fa-calendar-days"></i>
-                    <p className="scheduled-status-text">You are scheduled for a date on {currentDate.scheduled_date}</p>
+                    <p className="scheduled-status-text">You {dateDate > todaysDate ? "are" : "were"} scheduled for a date on {currentDate.scheduled_date}</p>
                 </div>
             )}
+
+            {(dateRequested && (
+                <div className="scheduled-status">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <p className="scheduled-status-text">You have requested a date for {dateRequested.suggested_date}</p>
+                </div>
+            ))}
+            {(dateRequester && (
+                <div className="scheduled-status">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <p className="scheduled-status-text">{currentMatch.first_name} has requested a date for {dateRequester.suggested_date}</p>
+                </div>
+            ))}
             <i class="fa-solid fa-ellipsis-vertical" onClick={openMenu}></i>
             <ul className={ulClassName} ref={ulRef}>
                 <div>
@@ -66,12 +82,23 @@ function ConversationViewHeader({dateRequests}) {
                         <li>
 
                             <OpenModalButton
-                                buttonText = "Schedule a date"
-                                modalComponent = {<RequestDateModal match={currentMatch}/>}
+                                buttonText="Request a date"
+                                modalComponent={<RequestDateModal match={currentMatch} />}
                             />
                         </li>
 
                     )}
+                    {dateRequester && (
+                        <>
+                        <li>Accept date</li>
+                        <li>Reject date</li>
+                        </>
+                    )}
+
+                    {(dateDate && dateDate < todaysDate) && (
+                        <li>Report on date</li>
+                    )}
+
                     <li>Report ghosted</li>
                 </div>
             </ul>
