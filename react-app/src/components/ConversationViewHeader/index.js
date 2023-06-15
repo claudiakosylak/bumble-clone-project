@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./ConversationViewHeader.css";
 import { getDateThunk, getDatesThunk } from "../../store/date";
+import OpenModalButton from "../OpenModalButton";
+import RequestDateModal from "../RequestDateModal";
 
 function ConversationViewHeader() {
     const currentMatch = useSelector(state => state.match.currentMatch)
@@ -29,7 +31,7 @@ function ConversationViewHeader() {
         if (!showMenu) return;
 
         const closeMenu = (e) => {
-            if (!ulRef.current.contains(e.target)) {
+            if (ulRef.current && !ulRef.current.contains(e.target)) {
                 setShowMenu(false);
             }
         };
@@ -56,7 +58,13 @@ function ConversationViewHeader() {
             <ul className={ulClassName} ref={ulRef}>
                 <div>
                     {!currentDate ? (
-                        <li>Schedule a date</li>
+                        <li>
+
+                            <OpenModalButton
+                                buttonText = "Schedule a date"
+                                modalComponent = {<RequestDateModal match={currentMatch}/>}
+                            />
+                        </li>
 
                     ) : (
                         <li>Report on date</li>

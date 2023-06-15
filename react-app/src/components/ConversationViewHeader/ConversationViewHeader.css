@@ -31,6 +31,10 @@
     font-size: 20px;
 }
 
+.fa-ellipsis-vertical {
+    font-size: 30px;
+}
+
 .fa-ellipsis-vertical:hover {
     cursor: pointer;
 }
@@ -43,4 +47,5 @@
     border: 1px solid lightgrey;
     list-style-type: none;
     padding: 15px;
+    border-radius: 23px;
 }
