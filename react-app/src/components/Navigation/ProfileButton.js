@@ -31,7 +31,7 @@ function ProfileButton({ user }) {
     dispatch(logout());
   };
 
-  const ulClassName = "match-settings-dropdown" + (showMenu ? "" : " hidden");
+  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
   return (

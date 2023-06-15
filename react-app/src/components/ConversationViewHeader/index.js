@@ -12,6 +12,8 @@ function ConversationViewHeader() {
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
 
+    console.log("CURRENT DATE: ", currentDate)
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -53,9 +55,13 @@ function ConversationViewHeader() {
             <i class="fa-solid fa-ellipsis-vertical" onClick={openMenu}></i>
             <ul className={ulClassName} ref={ulRef}>
                 <div>
+                    {!currentDate ? (
+                        <li>Schedule a date</li>
 
-                    <li>Schedule a date</li>
-                    <li>Report user</li>
+                    ) : (
+                        <li>Report on date</li>
+                    )}
+                    <li>Report ghosted</li>
                 </div>
             </ul>
         </div>
