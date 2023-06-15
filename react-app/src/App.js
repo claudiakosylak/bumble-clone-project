@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import SplashIndex from "./components/SplashIndex";
 import MainIndex from "./components/MainIndex";
 import ConversationViewIndex from "./components/ConversationViewIndex";
+import ScheduleViewIndex from "./components/ScheduleViewIndex";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route path="/app/connections">
             <ConversationViewIndex isLoaded={isLoaded} />
+          </Route>
+          <Route path="/app/schedule">
+            <ScheduleViewIndex isLoaded={isLoaded} />
           </Route>
           <Route path="/app">
             <MainIndex isLoaded={isLoaded}/>
