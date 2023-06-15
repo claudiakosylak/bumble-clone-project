@@ -51,7 +51,7 @@ function ScheduleViewIndex({ isLoaded }) {
                         <h3>Upcoming Dates:</h3>
                         {upcomingDates.length > 0 ? (upcomingDates.map(date => (
                             <div>
-                                <p>Date with c</p>
+                                <p>Date with {date.other_user.first_name}</p>
                                 <p>{date.scheduled_date}</p>
                             </div>
                         ))) : (

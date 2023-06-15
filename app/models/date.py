@@ -13,6 +13,7 @@ class Date(db.Model):
     match_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("matches.id")), nullable=False)
 
     match = db.relationship("Match", back_populates="dates")
+    date_reports = db.relationship("DateReport", back_populates="date")
 
     def to_dict(self):
         return {

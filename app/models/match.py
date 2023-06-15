@@ -15,6 +15,7 @@ class Match(db.Model):
 
     messages = db.relationship("Message", back_populates="match", cascade="all, delete-orphan")
     dates = db.relationship("Date", back_populates="match", cascade="all, delete-orphan")
+    date_reports = db.relationship("DateReport", back_populates="match")
 
     def to_dict(self):
         return {
