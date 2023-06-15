@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./RequestDateModal.css";
-import { createDateRequestThunk } from "../../store/date";
+import { createDateRequestThunk, getDateRequestsThunk } from "../../store/date";
 
 function RequestDateModal({match}) {
     const { closeModal } = useModal();
@@ -15,6 +15,7 @@ function RequestDateModal({match}) {
 
         e.preventDefault();
         dispatch(createDateRequestThunk(match.matchId, scheduleDay))
+        dispatch(getDateRequestsThunk())
         closeModal()
     }
 

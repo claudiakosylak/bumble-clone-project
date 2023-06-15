@@ -18,9 +18,16 @@ const getDateRequests = requests => ({
 })
 
 
-// export const getDateRequestsThunk = () => async dispatch => {
-//     const res = await fetch
-// }
+export const getDateRequestsThunk = () => async dispatch => {
+    const res = await fetch("/api/dates/date-requests")
+    if (res.ok) {
+        const requests = await res.json()
+        dispatch(getDateRequests(requests))
+        return requests
+    } else {
+        return ["An error occurred. Please try again."]
+    }
+}
 
 export const getDatesThunk = () => async dispatch => {
     const res = await fetch("/api/dates")
@@ -61,18 +68,22 @@ export const getDateThunk = (matchId) => async dispatch => {
 }
 
 
-const initialState = {allDates: {}, currentDate: {}}
+const initialState = {allDates: {}, currentDate: {}, dateRequests: {}}
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case GET_DATES:
-            const datesState = {...state, allDates: {}, currentDate: {...state.currentDate}}
+            const datesState = {...state, allDates: {}, currentDate: {...state.currentDate}, dateRequests: {...state.dateRequests}}
             datesState.allDates = action.dates;
             return datesState;
         case GET_DATE:
-            const dateState = {...state, allDates: {...state.allDates}, currentDate: {}}
+            const dateState = {...state, allDates: {...state.allDates}, currentDate: {}, dateRequests: {...state.dateRequests}}
             dateState.currentDate = action.date;
             return dateState;
+        case GET_DATE_REQUESTS:
+            const requestState = {...state, allDates: {...state.allDates}, currentDate: {...state.currentDate}, dateRequests: {}}
+            requestState.dateRequests = action.requests
+            return requestState;
         default:
             return state;
     }
