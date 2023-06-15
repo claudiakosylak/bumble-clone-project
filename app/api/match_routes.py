@@ -1,7 +1,18 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import current_user, login_required
-from app.models import Match, db, User, RequestedMatch, Message
+from app.models import Match, db, User, RequestedMatch, Message, DateRequest
+from app.forms import RequestDateForm
 match_routes = Blueprint("matches", __name__)
+
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
 
 @match_routes.route("/<int:id>/messages")
 @login_required
@@ -18,7 +29,28 @@ def match_messages(id):
 
     return message_dict
 
+@match_routes.route("/<int:id>/date-requests", methods=["POST"])
+@login_required
+def create_date_request(id):
+    """
+    Creates a date request with a proposed time for a match.
+    """
+    # form = RequestDateForm()
+    # form['csrf_token'].data = request.cookies['csrf_token']
+
+    form = RequestDateForm()
+    date_request = DateRequest(
+        match_id = id,
+        requesting_user_id = current_user.id,
+        suggested_date = form.data["suggested_date"]
+    )
+    db.session.add(date_request)
+    db.session.commit()
+    return date_request.to_dict()
+
+
 @match_routes.route("/<int:id1>/<int:id2>", methods=["POST"])
+@login_required
 def create_match(id1, id2):
     """
     Creates a new match and deletes the match request. id2 belongs to the second person accepting the match request and id1 belongs to the person who created the match request first.

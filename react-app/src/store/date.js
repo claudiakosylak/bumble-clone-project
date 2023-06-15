@@ -1,5 +1,6 @@
 const GET_DATES = "date/GET_DATES";
-const GET_DATE = "date/GET_DATE"
+const GET_DATE = "date/GET_DATE";
+const GET_DATE_REQUESTS = "date/GET_DATE_REQUESTS";
 
 const getDates = dates => ({
     type: GET_DATES,
@@ -11,6 +12,15 @@ const getDate = date => ({
     date
 })
 
+const getDateRequests = requests => ({
+    type: GET_DATE_REQUESTS,
+    requests
+})
+
+
+// export const getDateRequestsThunk = () => async dispatch => {
+//     const res = await fetch
+// }
 
 export const getDatesThunk = () => async dispatch => {
     const res = await fetch("/api/dates")
@@ -21,6 +31,21 @@ export const getDatesThunk = () => async dispatch => {
         return dates;
     } else {
         return ["An error occurred. Please try again."]
+    }
+}
+
+export const createDateRequestThunk = (matchId, suggested_date) => async dispatch => {
+    const res = await fetch(`/api/matches/${matchId}/date-requests`, {
+        method: "POST",
+        headers: { "Content-Type" : "application/json" },
+        body: JSON.stringify({
+            suggested_date
+        })
+    })
+    console.log("RES: ", res)
+    if (res.ok) {
+        const newRequest = await res.json()
+        return newRequest;
     }
 }
 
