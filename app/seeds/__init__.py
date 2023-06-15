@@ -5,6 +5,7 @@ from .requested_matches import seed_requested_matches, undo_requested_matches
 from .messages import seed_messages, undo_messages
 from .dates import seed_dates, undo_dates
 from .date_reports import seed_date_reports, undo_date_reports
+from .date_requests import seed_date_requests, undo_date_requests
 
 from app.models.db import db, environment, SCHEMA
 
@@ -21,6 +22,7 @@ def seed():
         # command, which will  truncate all tables prefixed with
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
+        undo_date_requests()
         undo_date_reports()
         undo_dates()
         undo_messages()
@@ -33,12 +35,14 @@ def seed():
     seed_messages()
     seed_dates()
     seed_date_reports()
+    seed_date_requests()
     # Add other seed functions here
 
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
+    undo_date_requests()
     undo_date_reports()
     undo_dates()
     undo_messages()
