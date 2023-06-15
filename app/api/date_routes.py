@@ -20,11 +20,16 @@ def get_dates():
 
     matches = Match.query.filter(or_(Match.user1_id == current_user.id, Match.user2_id == current_user.id)).all()
     match_ids = [match.id for match in matches]
-    print("🍎match IDs: ", match_ids)
-    dates = Date.query.filter(Date.match_id in match_ids).all()
+    dates = []
+    for match_id in match_ids:
+        date = Date.query.filter(Date.match_id == match_id).first()
+        if date:
+            dates.append(date)
+    # dates = Date.query.filter(Date.match_id in match_ids).all()
+    print("🍎dates: ", dates)
 
     dates_dict = {}
     for date in dates:
-        dates_dict.append(date.to_dict())
+        dates_dict[date.id] = date.to_dict()
 
     return dates_dict

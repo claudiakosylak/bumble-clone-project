@@ -7,13 +7,16 @@ function ConversationViewHeader() {
     const currentMatch = useSelector(state => state.match.currentMatch)
     const allDatesObj = useSelector(state => state.date.allDates)
     const allDates = Object.values(allDatesObj)
+    console.log("ALL DATES: ", allDates)
     const allDateMatchIds = allDates.map(date => date.match_id)
+
+    console.log("ALL DATE MATCH IDS", allDateMatchIds)
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getDatesThunk())
-    }, [])
+    }, [dispatch])
 
 
     return (
