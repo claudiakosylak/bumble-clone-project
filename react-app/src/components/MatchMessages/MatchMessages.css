@@ -63,3 +63,12 @@
 #chat-send-button:hover {
     cursor: pointer;
 }
+
+.message-item-container {
+    display: flex;
+}
+
+.fa-trash-can {
+    align-self: flex-end;
+    margin-right: 10px;
+}

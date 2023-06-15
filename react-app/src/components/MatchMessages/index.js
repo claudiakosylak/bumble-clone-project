@@ -84,6 +84,10 @@ function MatchMessages() {
                     {messageList.map(message => (
                         <>
                             <p key={message.id} className={message.user_id === user.id ? "user-messages" : "other-messages"}>{message.content}</p>
+                            {message.user_id === user.id && (
+                                <i class="fa-regular fa-trash-can" onClick={(() => deleteChat(message.id))}></i>
+
+                            )}
                         </>
                     ))}
 
