@@ -1,0 +1,12 @@
+.request-date-modal-container {
+    height: 100%;
+    border-radius: 23px;
+    padding: 20px 100px;
+    background-color: rgb(240, 224, 255);
+}
+
+.request-date-modal-container h3 {
+    font-weight: 600;
+    font-size: 30px;
+    text-align: center;
+}

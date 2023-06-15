@@ -2,15 +2,22 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./ConversationViewHeader.css";
 import { getDateThunk, getDatesThunk } from "../../store/date";
+import OpenModalButton from "../OpenModalButton";
+import RequestDateModal from "../RequestDateModal";
 
-function ConversationViewHeader() {
+function ConversationViewHeader({dateRequests}) {
     const currentMatch = useSelector(state => state.match.currentMatch)
+    const currentUser = useSelector(state => state.session.user)
     const allDatesObj = useSelector(state => state.date.allDates)
     const allDates = Object.values(allDatesObj)
     const allDateMatchIds = allDates.map(date => date.match_id)
     const currentDate = allDates.find(date => date.match_id === currentMatch.matchId)
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
+    const dateRequester = dateRequests.find(request => request.requesting_user_id === currentMatch.id)
+    const dateRequested = dateRequests.find(request => (request.requesting_user_id === currentUser.id && request.match_id === currentMatch.matchId))
+    console.log("DATE REQUESTER: ", dateRequester)
+    console.log("DATE REQUESTED: ", dateRequested)
 
     console.log("CURRENT DATE: ", currentDate)
 
@@ -29,7 +36,7 @@ function ConversationViewHeader() {
         if (!showMenu) return;
 
         const closeMenu = (e) => {
-            if (!ulRef.current.contains(e.target)) {
+            if (ulRef.current && !ulRef.current.contains(e.target)) {
                 setShowMenu(false);
             }
         };
@@ -55,11 +62,15 @@ function ConversationViewHeader() {
             <i class="fa-solid fa-ellipsis-vertical" onClick={openMenu}></i>
             <ul className={ulClassName} ref={ulRef}>
                 <div>
-                    {!currentDate ? (
-                        <li>Schedule a date</li>
+                    {(!currentDate && !dateRequester && !dateRequested) && (
+                        <li>
 
-                    ) : (
-                        <li>Report on date</li>
+                            <OpenModalButton
+                                buttonText = "Schedule a date"
+                                modalComponent = {<RequestDateModal match={currentMatch}/>}
+                            />
+                        </li>
+
                     )}
                     <li>Report ghosted</li>
                 </div>
