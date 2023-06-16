@@ -17,11 +17,11 @@ function ConversationList({ messagedMatches }) {
 
     console.log("MESSAGED MATCHES: ", messagedMatches)
     return (
-        <ul className="conversations-list-wrapper">
+        <ul className="conversations-list-wrapper" >
             {messagedMatches.map(match => (
-                <li key={match.id}>
+                <li key={match.id} onClick={() => handlePicClick(match)}>
                     <div className={`conversation-list-item ${(currentMatch && currentMatch.id === match.id) && "active-convo"}`}>
-                        <img onClick={() => handlePicClick(match)} className="mini-match-icons" src={match.picture_1}></img>
+                        <img  className="mini-match-icons" src={match.picture_1}></img>
                         <div className="conversation-list-item-right">
                             <div className="convo-list-header">
                                 <p className="convo-list-first-name">{match.first_name}</p>

@@ -8,7 +8,7 @@
 
 .unmessaged-matches-wrapper {
     width: 350px;
-    height: 65px;
+    height: 80px;
     overflow-x: scroll;
 }
 
@@ -25,6 +25,9 @@
     height: 45px;
     border-radius: 100%;
     object-fit: cover;
+}
+.mini-match-icons:hover {
+    cursor: pointer;
 }
 
 .scroll-match-item {
