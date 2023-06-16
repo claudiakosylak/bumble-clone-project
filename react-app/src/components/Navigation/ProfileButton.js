@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
 import { useHistory} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ function ProfileButton({ user }) {
             <li>{user.first_name}</li>
             <li>{user.flake_score}%</li>
             <li ><button onClick={goToSchedule}>Scheduled Dates</button></li>
+            <li><NavLink to="/app/edit-profile">Edit Profile</NavLink></li>
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>

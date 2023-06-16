@@ -9,6 +9,7 @@ import SplashIndex from "./components/SplashIndex";
 import MainIndex from "./components/MainIndex";
 import ConversationViewIndex from "./components/ConversationViewIndex";
 import ScheduleViewIndex from "./components/ScheduleViewIndex";
+import EditProfileIndex from "./components/EditProfileIndex";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,11 +20,13 @@ function App() {
 
   return (
     <>
-      {/* <Navigation isLoaded={isLoaded} /> */}
       {isLoaded && (
         <Switch>
           <Route exact path="/">
             <SplashIndex />
+          </Route>
+          <Route path="/app/edit-profile">
+            <EditProfileIndex isLoaded={isLoaded} />
           </Route>
           <Route path="/app/connections">
             <ConversationViewIndex isLoaded={isLoaded} />
