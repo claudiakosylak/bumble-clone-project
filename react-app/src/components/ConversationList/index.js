@@ -8,6 +8,7 @@ function ConversationList({ messagedMatches }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(state => state.session.user)
+    const currentMatch = useSelector(state => state.match.currentMatch)
 
     const handlePicClick = async (match) => {
         await dispatch(getMatch(match))
@@ -19,7 +20,7 @@ function ConversationList({ messagedMatches }) {
         <ul className="conversations-list-wrapper">
             {messagedMatches.map(match => (
                 <li key={match.id}>
-                    <div className="conversation-list-item">
+                    <div className={`conversation-list-item ${(currentMatch && currentMatch.id === match.id) && "active-convo"}`}>
                         <img onClick={() => handlePicClick(match)} className="mini-match-icons" src={match.picture_1}></img>
                         <div className="conversation-list-item-right">
                             <div className="convo-list-header">
