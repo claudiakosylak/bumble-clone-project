@@ -29,6 +29,10 @@
     height: 200px;
     object-fit: cover;
     margin: 5px;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 20px;
 }
 
 .image-boxes-top-right {
@@ -37,15 +41,48 @@
 }
 
 .empty-image {
-    background-color: #80F;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+.empty-image:hover {
+    cursor: pointer;
 }
 
 .smaller-image {
     width: 100px;
     height: 100px;
     margin: 5px;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 20px;
 }
 
 .image-boxes-bottom {
     display: flex;
+}
+
+.image-x {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: white;
+    border-radius: 10px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.image-x:hover {
+    cursor: pointer;
+}
+
+.image-mini-wrapper {
+    display: flex;
+    position: relative;
+    background-color: white;
+    border-radius: 20px;
 }

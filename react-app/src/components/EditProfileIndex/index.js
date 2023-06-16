@@ -4,6 +4,8 @@ import StaticLeftSettingsBar from "../StaticLeftSettingsBar";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import { updateAboutThunk } from "../../store/session";
+import OpenModalButton from "../OpenModalButton";
+import UploadPhotoModal from "../UploadPhotoModal";
 
 function EditProfileIndex({ isLoaded }) {
     const user = useSelector(state => state.session.user)
@@ -34,17 +36,24 @@ function EditProfileIndex({ isLoaded }) {
                     <div className="right-edit-profile-container">
                         <div className="edit-profile-images-wrapper">
                             <div className="image-boxes-top">
-                                <img src={user.picture_1} className="pic-1"></img>
+                                <div className="image-mini-wrapper">
+                                    <p className="image-x">x</p>
+                                    <img src={user.picture_1} className="pic-1"></img>
+                                </div>
                                 <div className="image-boxes-top-right">
-                                    {user.picture_2 ? (
-                                        <img src={user.picture_2} className="smaller-image"></img>
-                                    ) : (
-                                        <div className="smaller-image empty-image"></div>
-                                    )}
+                                    <div className="image-mini-wrapper">
+
+                                        {user.picture_2 ? (
+                                            <img src={user.picture_2} className="smaller-image"></img>
+
+                                        ) : (
+                                            <div className="smaller-image empty-image"><OpenModalButton buttonText="+" modalComponent={<UploadPhotoModal photoNumber={2}/>}/></div>
+                                        )}
+                                    </div>
                                     {user.picture_3 ? (
                                         <img src={user.picture_3} className="smaller-image"></img>
                                     ) : (
-                                        <div className="smaller-image empty-image"></div>
+                                        <div className="smaller-image empty-image"><OpenModalButton buttonText="+" modalComponent={<UploadPhotoModal photoNumber={3}/>}/></div>
                                     )}
                                 </div>
                             </div>
@@ -52,17 +61,17 @@ function EditProfileIndex({ isLoaded }) {
                                 {user.picture_4 ? (
                                     <img src={user.picture_4} className="smaller-image"></img>
                                 ) : (
-                                    <div className="smaller-image empty-image"></div>
+                                    <div className="smaller-image empty-image"><OpenModalButton buttonText="+" modalComponent={<UploadPhotoModal photoNumber={4}/>}/></div>
                                 )}
                                 {user.picture_5 ? (
                                     <img src={user.picture_5} className="smaller-image"></img>
                                 ) : (
-                                    <div className="smaller-image empty-image"></div>
+                                    <div className="smaller-image empty-image"><OpenModalButton buttonText="+" modalComponent={<UploadPhotoModal photoNumber={5}/>}/></div>
                                 )}
                                 {user.picture_6 ? (
                                     <img src={user.picture_6} className="smaller-image"></img>
                                 ) : (
-                                    <div className="smaller-image empty-image"></div>
+                                    <div className="smaller-image empty-image"><OpenModalButton buttonText="+" modalComponent={<UploadPhotoModal photoNumber={6}/>}/></div>
                                 )}
                             </div>
 
@@ -71,8 +80,8 @@ function EditProfileIndex({ isLoaded }) {
                             <h4>About Me</h4>
                             <form onSubmit={handleAboutSubmit}>
 
-                            <textarea value={aboutMe} onChange={(e) => setAboutMe(e.target.value)}></textarea>
-                            <button type="submit" disabled={aboutMe === beginningAbout}>Save</button>
+                                <textarea value={aboutMe} onChange={(e) => setAboutMe(e.target.value)}></textarea>
+                                <button type="submit" disabled={aboutMe === beginningAbout}>Save</button>
                             </form>
                         </div>
 

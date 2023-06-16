@@ -13,11 +13,30 @@ const removeUser = () => ({
 
 const initialState = { user: null };
 
+// thunk to update the about section for the current user
+
 export const updateAboutThunk = (about) => async dispatch => {
 	const res = await fetch(`/api/users/about`, {
 		method: "PUT",
 		headers: { "Content-Type" : "application/json"},
 		body: JSON.stringify(about)
+	})
+	if (res.ok) {
+		const newUser = await res.json();
+		dispatch(setUser(newUser))
+		return newUser;
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+}
+
+// thunk to update a photo for the current user
+
+export const updatePhotoThunk = (photoNum, picture_url) => async dispatch => {
+	const res = await fetch(`/api/users/update-photo/${photoNum}`, {
+		method: "PUT",
+		headers: { "Content-Type" : "application/json"},
+		body: JSON.stringify({picture_url})
 	})
 	if (res.ok) {
 		const newUser = await res.json();

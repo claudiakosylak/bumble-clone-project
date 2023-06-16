@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required, current_user
 from app.models import User, db
-from app.forms import UpdateAboutForm
+from app.forms import UpdateAboutForm, UploadPhotoForm
 
 user_routes = Blueprint('users', __name__)
 
@@ -23,6 +23,27 @@ def update_about():
     form = UpdateAboutForm()
     user = User.query.get(current_user.id)
     user.about = form.data["about"]
+    db.session.commit()
+    return user.to_dict()
+
+@user_routes.route("/update-photo/<int:num>", methods=["PUT"])
+@login_required
+def update_photo(num):
+    """ Updates one of a user's photos """
+    form = UploadPhotoForm()
+    user = User.query.get(current_user.id)
+    if num == 1:
+        user.picture_1 = form.data["picture_url"]
+    elif num == 2:
+        user.picture_2 = form.data["picture_url"]
+    elif num == 3:
+        user.picture_3 = form.data["picture_url"]
+    elif num == 4:
+        user.picture_4 = form.data["picture_url"]
+    elif num == 5:
+        user.picture_5 = form.data["picture_url"]
+    else:
+        user.picture_6 = form.data["picture_url"]
     db.session.commit()
     return user.to_dict()
 
