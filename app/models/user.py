@@ -30,7 +30,7 @@ class User(db.Model, UserMixin):
     state = db.Column(db.String(40), nullable=False)
     city = db.Column(db.String(40), nullable=False)
     gender = db.Column(db.String(20), nullable=False)
-    flake_score = db.Column(db.Numeric, nullable=False, default=0)
+    flake_score = db.Column(db.Integer, nullable=False, default=100)
     created_at = db.Column(db.DateTime, default=datetime.now())
 
     messages = db.relationship("Message", back_populates="user", cascade="all, delete-orphan")

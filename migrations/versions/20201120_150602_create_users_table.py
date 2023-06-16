@@ -43,7 +43,7 @@ def upgrade():
     sa.Column('state', sa.String(length=40), nullable=False),
     sa.Column('city', sa.String(length=40), nullable=False),
     sa.Column('gender', sa.String(length=20), nullable=False),
-    sa.Column('flake_score', sa.Numeric(), nullable=False),
+    sa.Column('flake_score', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
