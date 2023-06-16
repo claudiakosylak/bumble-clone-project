@@ -107,6 +107,18 @@ def delete_match(id):
     db.session.commit()
     return {"userId": matchUser}
 
+@match_routes.route("/<int:id>")
+def get_one_match(id):
+    """ Gets a single user by match id """
+    match = Match.query.get(id)
+    if match.user1_id == current_user.id:
+        user = User.query.get(match.user2_id)
+    else:
+        user = User.query.get(match.user1_id)
+    user_dict = user.to_dict()
+    user_dict["matchId"] = match.id
+    return user_dict
+
 @match_routes.route("")
 def all_user_matches():
 

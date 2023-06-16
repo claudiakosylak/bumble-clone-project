@@ -99,6 +99,18 @@ export const deleteMatchThunk = matchId => async dispatch => {
     }
 }
 
+// Get a single matched user by match id
+export const getOneMatchThunk = matchId => async dispatch => {
+    const res = await fetch(`/api/matches/${matchId}`)
+    if (res.ok) {
+        const match = await res.json()
+        dispatch(getMatch(match))
+        return match;
+    } else {
+        return ["An error occurred. Please try again."]
+    }
+}
+
 const initialState = {currentMatches: {}, potentialMatches: {}, currentMatch: {}}
 
 export default function reducer(state = initialState, action) {

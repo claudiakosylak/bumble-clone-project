@@ -1,8 +1,9 @@
 import React from "react";
 import "./ReportGhostModal.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { getMadeDateReportsThunk, makeGhostReportThunk } from "../../store/date_report";
+import { getMatch, getMatchesThunk, getOneMatchThunk } from "../../store/match";
 
 function ReportGhostModal({match}) {
     const { closeModal } = useModal();
@@ -11,7 +12,10 @@ function ReportGhostModal({match}) {
     // helper function to create the date report for ghosting and update the store with user's created reports
     const handleSubmit = async (e) => {
         await dispatch(makeGhostReportThunk(match.id))
-        dispatch(getMadeDateReportsThunk())
+        await dispatch(getMadeDateReportsThunk())
+        // update current match to display new score
+        await dispatch(getMatchesThunk())
+        await dispatch(getOneMatchThunk(match.matchId))
         // close modal
         closeModal()
     }

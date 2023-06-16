@@ -6,27 +6,12 @@ import { useHistory} from "react-router-dom";
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  // const ulRef = useRef();
   const history = useHistory();
 
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
   };
-
-  // useEffect(() => {
-  //   if (!showMenu) return;
-
-  //   const closeMenu = (e) => {
-  //     if (!ulRef.current.contains(e.target)) {
-  //       setShowMenu(false);
-  //     }
-  //   };
-
-  //   document.addEventListener("click", closeMenu);
-
-  //   return () => document.removeEventListener("click", closeMenu);
-  // }, [showMenu]);
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -56,6 +41,7 @@ function ProfileButton({ user }) {
           <div>
 
             <li>{user.first_name}</li>
+            <li>{user.flake_score}%</li>
             <li ><button onClick={goToSchedule}>Scheduled Dates</button></li>
             <li>
               <button onClick={handleLogout}>Log Out</button>

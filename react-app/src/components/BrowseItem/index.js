@@ -63,6 +63,7 @@ function BrowseItem({ browseUsers }) {
                     </div>
                     <div className="browse-item-right-side">
                         <p>{browseUsers[0].first_name}, {ageChanger(browseUsers[0].date_of_birth)}</p>
+                        <p>{browseUsers[0].flake_score}%</p>
                         <button onClick={() => handleReject(browseUsers[0].id, currentUser.id)}>Reject</button>
                         <button onClick={() => handleSwipeRight(browseUsers[0].id, currentUser.id)}>Swipe Right</button>
                     </div>

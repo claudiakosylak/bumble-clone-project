@@ -20,6 +20,7 @@ function RightProfileBar() {
                     <div className="right-profile-about">
                         <p>About {currentMatch.first_name}</p>
                         <p>{currentMatch.about}</p>
+                        <p>{currentMatch.flake_score}</p>
                     </div>
                 </div>
             )}
