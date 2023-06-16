@@ -28,6 +28,11 @@ def get_date(id):
     date = Date.query.filter(Date.match_id == id).first()
     return date.to_dict()
 
+@date_routes.route("/<int:id>", methods=["POST"])
+@login_required
+def create_date(id):
+    pass
+
 @date_routes.route("")
 @login_required
 def get_dates():

@@ -14,6 +14,7 @@ from .api.auth_routes import auth_routes
 from .api.match_routes import match_routes
 from .api.request_match_routes import request_match_routes
 from .api.date_routes import date_routes
+from .api.date_report_routes import date_report_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -38,6 +39,7 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(match_routes, url_prefix="/api/matches")
 app.register_blueprint(request_match_routes, url_prefix="/api/requested_matches")
 app.register_blueprint(date_routes, url_prefix="/api/dates")
+app.register_blueprint(date_report_routes, url_prefix="/api/date_reports")
 db.init_app(app)
 Migrate(app, db)
 
