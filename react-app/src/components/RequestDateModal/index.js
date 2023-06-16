@@ -9,7 +9,6 @@ function RequestDateModal({match}) {
     const [scheduleDay, setScheduleDay] = useState("")
     const [scheduleTime, setScheduleTime] = useState("")
     const dispatch = useDispatch();
-    console.log("MATCH: ", match)
 
     const handleSubmit = async (e) => {
 

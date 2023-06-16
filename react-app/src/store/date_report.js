@@ -54,6 +54,32 @@ export const createDateReportThunk = (reportedUserId, report) => async dispatch 
     }
 }
 
+// Get all date reports the current user has made
+
+export const getMadeDateReportsThunk = () => async dispatch => {
+    const res = await fetch("/api/date_reports/made")
+    if (res.ok) {
+        const reports = await res.json();
+        dispatch(getMadeDateReports(reports))
+        return reports;
+    } else {
+        return ["An error occurred. Please try again."]
+    }
+}
+
+// Create a date report about ghosting where no date was scheduled
+
+export const makeGhostReportThunk = userId => async dispatch => {
+    const res = await fetch(`/api/date_reports/ghosts/${userId}`, {method: "POST"})
+    if (res.ok) {
+        const report = await res.json();
+        dispatch(getDateReport(report))
+        return report;
+    } else {
+        return ["An error occurred. Please try again."]
+    }
+}
+
 //Date reports reducer here with initial state
 
 const initialState = {dateReports: {}, currentDateReport: {}, madeDateReports: {}}
