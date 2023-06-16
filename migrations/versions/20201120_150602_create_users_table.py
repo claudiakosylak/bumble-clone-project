@@ -91,13 +91,9 @@ def upgrade():
     op.create_table('date_reports',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime()),
-    sa.Column('match_id', sa.Integer(), nullable=False),
-    sa.Column('date_id', sa.Integer(), nullable=False),
     sa.Column('reporting_user_id', sa.Integer(), nullable=False),
     sa.Column('reported_user_id', sa.Integer(), nullable=False),
     sa.Column('reported_activity', sa.String(length=50), nullable=False),
-    sa.ForeignKeyConstraint(['match_id'], ['matches.id']),
-    sa.ForeignKeyConstraint(['date_id'], ['dates.id']),
     sa.ForeignKeyConstraint(['reported_user_id'], ['users.id']),
     sa.PrimaryKeyConstraint('id')
     )

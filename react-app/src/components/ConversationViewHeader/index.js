@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./ConversationViewHeader.css";
-import { getDateThunk, getDatesThunk } from "../../store/date";
+import { createNewDateThunk, getDateRequestsThunk, getDateThunk, getDatesThunk } from "../../store/date";
 import OpenModalButton from "../OpenModalButton";
 import RequestDateModal from "../RequestDateModal";
 
@@ -52,6 +52,18 @@ function ConversationViewHeader({ dateRequests }) {
     const ulClassName = "match-settings-dropdown" + (showMenu ? "" : " hidden");
     const closeMenu = () => setShowMenu(false);
 
+    //helper function to handle clicking accept date
+    const handleAcceptDate = async (e) => {
+        // create a new date in the db and delete the date request
+        await dispatch(createNewDateThunk(dateRequester.id))
+        // refresh the user's dates in store
+        dispatch(getDatesThunk())
+        // refresh the user's date requests in store
+        dispatch(getDateRequestsThunk())
+        //close dropdown
+        closeMenu()
+    }
+
     return (
         <div className='conversation-view-header-wrapper'>
             <img src={currentMatch.picture_1}></img>
@@ -90,7 +102,7 @@ function ConversationViewHeader({ dateRequests }) {
                     )}
                     {dateRequester && (
                         <>
-                        <li>Accept date</li>
+                        <button onClick={handleAcceptDate}>Accept date</button>
                         <li>Reject date</li>
                         </>
                     )}

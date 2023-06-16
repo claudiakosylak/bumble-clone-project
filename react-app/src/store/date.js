@@ -2,6 +2,8 @@ const GET_DATES = "date/GET_DATES";
 const GET_DATE = "date/GET_DATE";
 const GET_DATE_REQUESTS = "date/GET_DATE_REQUESTS";
 
+//date related actions here
+
 const getDates = dates => ({
     type: GET_DATES,
     dates
@@ -17,6 +19,9 @@ const getDateRequests = requests => ({
     requests
 })
 
+//date related thunks here
+
+//get all of a user's date requests (both made by user and requested of user)
 
 export const getDateRequestsThunk = () => async dispatch => {
     const res = await fetch("/api/dates/date-requests")
@@ -28,6 +33,8 @@ export const getDateRequestsThunk = () => async dispatch => {
         return ["An error occurred. Please try again."]
     }
 }
+
+// get all of a user's scheduled dates
 
 export const getDatesThunk = () => async dispatch => {
     const res = await fetch("/api/dates")
@@ -41,6 +48,8 @@ export const getDatesThunk = () => async dispatch => {
     }
 }
 
+//makes a new date request by the current user
+
 export const createDateRequestThunk = (matchId, suggested_date) => async dispatch => {
     const res = await fetch(`/api/matches/${matchId}/date-requests`, {
         method: "POST",
@@ -49,12 +58,28 @@ export const createDateRequestThunk = (matchId, suggested_date) => async dispatc
             suggested_date
         })
     })
-    console.log("RES: ", res)
     if (res.ok) {
         const newRequest = await res.json()
         return newRequest;
     }
 }
+
+// creates a new date based off of an accepted date request and deletes the associated date request
+
+export const createNewDateThunk = (dateRequestId) => async dispatch => {
+    const res = await fetch(`/api/dates/${dateRequestId}`, {
+        method: "POST"
+    })
+    if (res.ok) {
+        const newDate = await res.json();
+        dispatch(getDate(newDate));
+        return newDate;
+    } else {
+        return ["An error occurred. Please try again."]
+    }
+}
+
+// get details of a single date by match id
 
 export const getDateThunk = (matchId) => async dispatch => {
     const res = await fetch(`/api/dates/${matchId}`)
@@ -67,6 +92,7 @@ export const getDateThunk = (matchId) => async dispatch => {
     }
 }
 
+// date reducer with inital state here
 
 const initialState = {allDates: {}, currentDate: {}, dateRequests: {}}
 

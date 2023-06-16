@@ -25,7 +25,27 @@ def get_all_date_requests():
 @date_routes.route("/<int:id>")
 @login_required
 def get_date(id):
+    """
+    Gets details of a single date by date id .
+    """
     date = Date.query.filter(Date.match_id == id).first()
+    return date.to_dict()
+
+@date_routes.route("/<int:id>", methods=["POST"])
+@login_required
+def create_date(id):
+    """
+    Creates a date based off of a date request id and deletes the date request.
+    """
+    date_request = DateRequest.query.get(id)
+    date = Date(
+        scheduled_date = date_request.suggested_date,
+        match_id = date_request.match_id
+    )
+    db.session.add(date)
+    db.session.commit()
+    db.session.delete(date_request)
+    db.session.commit()
     return date.to_dict()
 
 @date_routes.route("")
