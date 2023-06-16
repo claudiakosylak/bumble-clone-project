@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import { updateAboutThunk } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import UploadPhotoModal from "../UploadPhotoModal";
+import DeletePhotoModal from "../DeletePhotoModal";
 
 function EditProfileIndex({ isLoaded }) {
     const user = useSelector(state => state.session.user)
@@ -37,7 +38,7 @@ function EditProfileIndex({ isLoaded }) {
                         <div className="edit-profile-images-wrapper">
                             <div className="image-boxes-top">
                                 <div className="image-mini-wrapper">
-                                    <p className="image-x">x</p>
+                                    <OpenModalButton buttonText="x" modalComponent={<DeletePhotoModal photoNumber={1}/>} className="image-x"/>
                                     <img src={user.picture_1} className="pic-1"></img>
                                 </div>
                                 <div className="image-boxes-top-right">
