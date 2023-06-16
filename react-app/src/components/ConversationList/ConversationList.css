@@ -1,0 +1,35 @@
+.conversations-list-wrapper {
+    list-style-type: none;
+}
+
+.conversation-list-item {
+    display: flex;
+    align-items: center;
+}
+
+.conversation-list-item img {
+    margin: 15px;
+}
+
+.convo-list-first-name {
+    font-weight: 600;
+}
+
+.conversation-list-item-right {
+    width: 100%;
+}
+
+.convo-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#your-move {
+    margin: 10px;
+    background-color: #80f;
+    color: white;
+    border-radius: 10px;
+    font-size: 10px;
+    padding: 1px 5px;
+}

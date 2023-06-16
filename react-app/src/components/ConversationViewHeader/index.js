@@ -7,6 +7,7 @@ import RequestDateModal from "../RequestDateModal";
 import { getMadeDateReportsThunk } from "../../store/date_report";
 import ReportGhostModal from "../ReportGhostModal";
 import ReportDateModal from "../ReportDateModal";
+import { deleteMatchThunk, getMatch, getMatchesThunk, potentialMatchesThunk } from "../../store/match";
 
 function ConversationViewHeader({ dateRequests }) {
     // gets all of the date reports the current user has made to others and turns it into an array
@@ -91,6 +92,11 @@ function ConversationViewHeader({ dateRequests }) {
         closeMenu()
     }
 
+    const handleUnmatch = async (matchId) => {
+        await dispatch(deleteMatchThunk(matchId))
+        await dispatch(potentialMatchesThunk())
+    }
+
     return (
         <div className='conversation-view-header-wrapper'>
             <img src={currentMatch.picture_1}></img>
@@ -155,6 +161,7 @@ function ConversationViewHeader({ dateRequests }) {
                             />
                         </li>
                     )}
+                    <li><button onClick={() => handleUnmatch(currentMatch.matchId)}>Unmatch</button></li>
 
                 </div>
             </ul>
