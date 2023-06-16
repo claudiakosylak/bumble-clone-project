@@ -1,9 +1,9 @@
 import React from "react";
 import "./ReportGhostModal.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { getMadeDateReportsThunk, makeGhostReportThunk } from "../../store/date_report";
-import { getMatch, getMatchesThunk, getOneMatchThunk } from "../../store/match";
+import { getMatchesThunk, getOneMatchThunk } from "../../store/match";
 
 function ReportGhostModal({match}) {
     const { closeModal } = useModal();
