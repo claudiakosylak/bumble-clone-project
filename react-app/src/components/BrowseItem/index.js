@@ -60,8 +60,24 @@ function BrowseItem({ browseUsers }) {
                             <img src={browseUsers[0].picture_1}></img>
                         </div>
                         <div className="browse-item-right-side">
-                            <p>{browseUsers[0].first_name}, {ageChanger(browseUsers[0].date_of_birth)}</p>
-                            <p>{browseUsers[0].flake_score}%</p>
+                            <p className="name-and-age">{browseUsers[0].first_name}, {ageChanger(browseUsers[0].date_of_birth)}</p>
+                            <p id="main-about">{browseUsers[0].about}</p>
+                            <div className="flake-explanation-container">
+
+                            <p className="main-flake-score"><i class="fa-regular fa-snowflake"></i>{browseUsers[0].flake_score}%</p>
+                            {browseUsers[0].flake_score === 100 && (
+                                <p id="flake-explanation">Wow, you've found a NoFlake!!! {browseUsers[0].first_name} hasn't flaked or ghosted on anyone.</p>
+                            )}
+                            {(browseUsers[0].flake_score < 100 && browseUsers[0].flake_score > 80)&& (
+                                <p id="flake-explanation">{browseUsers[0].first_name} is mostly reliable. We can't all be a perfect NoFlake!</p>
+                            )}
+                            {(browseUsers[0].flake_score < 80 && browseUsers[0].flake_score > 50) && (
+                                <p id="flake-explanation">{browseUsers[0].first_name} is somewhat reliable, but may be more likely than average to flake.</p>
+                            )}
+                            {(browseUsers[0].flake_score < 50) && (
+                                <p id="flake-explanation">{browseUsers[0].first_name} is pretty unreliable - might be pretty hard to catch this YesFlake...</p>
+                            )}
+                            </div>
                         </div>
                     </div>
                     <div className="swipe-button-container">

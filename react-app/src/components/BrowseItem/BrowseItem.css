@@ -21,13 +21,19 @@
 }
 
 .browse-item-right-side {
-    display: column;
-    justify-content: center;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 50%;
     height: 100%;
     background-color: rgb(240, 224, 255);
     border-radius: 0 23px 23px 0;
+    padding: 30px 30px 80px 30px;
+}
+
+.name-and-age {
+    align-self: flex-start;
+    color: rgb(71, 71, 71);
 }
 
 .browse-item-right-side p {
@@ -91,10 +97,36 @@
     font-size: 30px;
 }
 
-.fa-check {
+.fa-check, .fa-snowflake {
     color: #80F;
 }
 
 .fa-xmark {
     color: grey;
+}
+
+#main-about {
+    font-size: 15px;
+}
+
+.main-flake-score {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.fa-snowflake {
+    font-size: 40px;
+}
+
+#flake-explanation {
+    font-size: 15px;
+}
+
+.flake-explanation-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
 }
