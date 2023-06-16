@@ -21,17 +21,9 @@ function LeftMatchesBar({isLoaded}) {
         }
     }
 
-    console.log("MESSAGED MATCHES: ", messagedMatches)
-    console.log("UNMESSAGED MATCHES: ", unMessagedMatches)
-
     useEffect(() => {
         dispatch(getMatchesThunk())
     }, [dispatch])
-
-    const handleUnmatch = async (matchId) => {
-        await dispatch(deleteMatchThunk(matchId))
-        await dispatch(potentialMatchesThunk())
-    }
 
     const handlePicClick = async (match) => {
         await dispatch(getMatch(match))
@@ -41,11 +33,11 @@ function LeftMatchesBar({isLoaded}) {
     return (
         <div className="left-matches-wrapper">
             <Navigation isLoaded={isLoaded}/>
-            <p className="left-headers">Unmessaged Matches ({matches.length})</p>
+            <p className="left-headers">Unmessaged Matches ({unMessagedMatches.length})</p>
         <ul className="unmessaged-matches-wrapper">
             <div className="inner-wrapper">
             {unMessagedMatches.map(match => (
-                <li key={match.id} className="scroll-match-item"><img onClick={() => handlePicClick(match)} className="mini-match-icons" src={match.picture_1}></img><button onClick={() => handleUnmatch(match.matchId)}>Unmatch</button></li>
+                <li key={match.id} className="scroll-match-item"><img onClick={() => handlePicClick(match)} className="mini-match-icons" src={match.picture_1}></img></li>
             ))}
 
             </div>
