@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./ReportDateModal.css";
 import { createDateReportThunk, getMadeDateReportsThunk } from "../../store/date_report";
+import { getOneMatchThunk } from "../../store/match";
 
 function ReportDateModal({ match, date }) {
     const { closeModal } = useModal();
@@ -17,6 +18,7 @@ function ReportDateModal({ match, date }) {
         }
         await dispatch(createDateReportThunk(match.id, newReport))
         dispatch(getMadeDateReportsThunk())
+        await dispatch(getOneMatchThunk(match.matchId))
         closeModal()
     }
 

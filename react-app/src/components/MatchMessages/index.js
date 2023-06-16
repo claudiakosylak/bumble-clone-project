@@ -3,6 +3,7 @@ import { io } from 'socket.io-client';
 import { useDispatch, useSelector } from "react-redux";
 import "./MatchMessages.css";
 import { getMatchMessagesThunk } from '../../store/message';
+import { getMatchesThunk } from '../../store/match';
 
 let socket;
 
@@ -14,8 +15,6 @@ function MatchMessages() {
     const messageList = Object.values(matchMessages)
     const [messages, setMessages] = useState([]);
     const [chatInput, setChatInput] = useState("");
-
-    console.log("CURRENT MATCH : ", currentMatch)
 
     useEffect(() => {
         // open socket connection
@@ -47,6 +46,7 @@ function MatchMessages() {
 
     useEffect(() => {
         dispatch(getMatchMessagesThunk(currentMatch.matchId))
+        dispatch(getMatchesThunk())
     }, [messages])
 
 

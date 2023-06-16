@@ -11,6 +11,18 @@ function LeftMatchesBar({isLoaded}) {
     const matches = Object.values(matchesObj)
     const dispatch = useDispatch();
     const history = useHistory();
+    const messagedMatches = []
+    const unMessagedMatches = []
+    for (let match of matches) {
+        if (match.last_message) {
+            messagedMatches.push(match)
+        } else {
+            unMessagedMatches.push(match)
+        }
+    }
+
+    console.log("MESSAGED MATCHES: ", messagedMatches)
+    console.log("UNMESSAGED MATCHES: ", unMessagedMatches)
 
     useEffect(() => {
         dispatch(getMatchesThunk())
@@ -32,14 +44,14 @@ function LeftMatchesBar({isLoaded}) {
             <p className="left-headers">Unmessaged Matches ({matches.length})</p>
         <ul className="unmessaged-matches-wrapper">
             <div className="inner-wrapper">
-            {matches.map(match => (
+            {unMessagedMatches.map(match => (
                 <li key={match.id} className="scroll-match-item"><img onClick={() => handlePicClick(match)} className="mini-match-icons" src={match.picture_1}></img><button onClick={() => handleUnmatch(match.matchId)}>Unmatch</button></li>
             ))}
 
             </div>
         </ul>
         <p className="left-headers">Conversations</p>
-        <ConversationList />
+        <ConversationList messagedMatches={messagedMatches}/>
     </div>
     )
 }

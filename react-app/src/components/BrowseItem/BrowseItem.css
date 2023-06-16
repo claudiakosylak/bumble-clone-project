@@ -1,10 +1,11 @@
 .browse-item-wrapper {
     display: flex;
-    background-color: #80F;
+
     justify-content: space-between;
-    margin: 50px;
-    height: 37rem;
+    margin: 20px 50px 50px 50px;
+    height: 30rem;
     border-radius: 23px;
+    padding-bottom: 20px;
 }
 
 .main-browse-picture {
@@ -20,17 +21,24 @@
 }
 
 .browse-item-right-side {
-    display: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 50%;
     height: 100%;
+    background-color: rgb(240, 224, 255);
+    border-radius: 0 23px 23px 0;
+    padding: 30px 30px 80px 30px;
+}
+
+.name-and-age {
+    align-self: flex-start;
+    color: rgb(71, 71, 71);
 }
 
 .browse-item-right-side p {
     text-align: center;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 600;
     vertical-align: center;
 }
@@ -41,4 +49,84 @@
 
 .no-browse-wrapper h3 {
     text-align: center;
+}
+
+.browse-item-outer-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.swipe-button {
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    background-color: white;
+    border: 1px solid rgb(193, 193, 193);
+}
+
+.swipe-button:hover {
+    cursor: pointer;
+}
+
+.swipe-yay:hover {
+    width: 75px;
+    height: 75px;
+    filter: drop-shadow(1px 3px 5px lightgrey)
+}
+
+.swipe-nay:hover {
+    width: 75px;
+    height: 75px;
+    filter: drop-shadow(1px 3px 5px lightgrey)
+}
+
+.swipe-button-container {
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    align-items: center;
+    height: 90px;
+    width: 190px;
+    justify-content: space-between;
+}
+
+.fa-solid {
+    font-size: 30px;
+}
+
+.fa-check, .fa-snowflake {
+    color: #80F;
+}
+
+.fa-xmark {
+    color: grey;
+}
+
+#main-about {
+    font-size: 15px;
+}
+
+.main-flake-score {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.fa-snowflake {
+    font-size: 40px;
+}
+
+#flake-explanation {
+    font-size: 15px;
+}
+
+.flake-explanation-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
 }

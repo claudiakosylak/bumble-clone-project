@@ -146,6 +146,9 @@ def all_user_matches():
     matched_users_dict = {}
     for user in matched_users:
         userId = user["id"]
+        last_message = Message.query.filter(Message.match_id == user["matchId"]).order_by(Message.id.desc()).first()
+        if last_message:
+            user["last_message"] = last_message.to_dict()
         matched_users_dict[userId] = user
 
     return matched_users_dict
