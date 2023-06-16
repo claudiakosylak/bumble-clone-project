@@ -47,6 +47,14 @@ def update_photo(num):
     db.session.commit()
     return user.to_dict()
 
+# @user_routes.route("/delete-photo/<int:num>", methods=["DELETE"])
+# @login_required
+# def delete_photo(num):
+#     """ Deletes a user photo """
+#     user = User.query.get(current_user.id)
+#     if num == 2:
+#         user.picture_2 = null
+
 
 @user_routes.route('/<int:id>')
 @login_required

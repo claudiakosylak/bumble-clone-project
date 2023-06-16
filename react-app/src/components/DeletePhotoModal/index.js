@@ -10,7 +10,12 @@ function DeletePhotoModal({photoNumber}) {
 
     return (
         <div className="delete-photo-modal-container">
-            <h2>Are you sure you want to delete your photo?</h2>
+            {photoNumber === 1 ? (
+                <h2>You cannot delete your main photo. Would you like to update it with a new picture?</h2>
+            ): (
+                <h2>Are you sure you want to delete your photo?</h2>
+
+            )}
             <OpenModalButton
                 buttonText="Upload a new picture"
                 modalComponent={<UploadPhotoModal photoNumber={photoNumber} />}
