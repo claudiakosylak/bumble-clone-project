@@ -25,6 +25,9 @@ def get_all_date_requests():
 @date_routes.route("/<int:id>")
 @login_required
 def get_date(id):
+    """
+    Gets details of a single date by date id .
+    """
     date = Date.query.filter(Date.match_id == id).first()
     return date.to_dict()
 
