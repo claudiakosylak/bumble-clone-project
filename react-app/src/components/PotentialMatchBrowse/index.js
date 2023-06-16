@@ -10,8 +10,6 @@ function PotentialMatchBrowse() {
     const potentialMatchesArr = Object.values(potentialMatchesObj)
     const dispatch = useDispatch();
 
-    console.log("POTENTIAL MATCHES OBJ: ", potentialMatchesObj)
-
     useEffect(() => {
         dispatch(potentialMatchesThunk())
     }, [dispatch])

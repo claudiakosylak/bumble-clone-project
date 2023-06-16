@@ -24,13 +24,10 @@ function BrowseItem({ browseUsers }) {
     const dispatch = useDispatch();
     const unrejectedRequestsObj = useSelector(state => state.matchRequest.unrejectedRequests)
     const requestArray = Object.values(unrejectedRequestsObj)
-    console.log("THE Array: ", requestArray)
     const requestUsers = []
     for (let request of requestArray) {
         requestUsers.push(request.requesting_user_id)
     }
-
-    console.log("REQUEST USERS, ", requestUsers)
 
     useEffect(() => {
         dispatch(getUnrejectedRequestsThunk(currentUser.id))
@@ -57,15 +54,20 @@ function BrowseItem({ browseUsers }) {
     return (
         <>
             {browseUsers.length > 0 && (
-                <div className="browse-item-wrapper">
-                    <div className="main-browse-picture">
-                        <img src={browseUsers[0].picture_1}></img>
+                <div className="browse-item-outer-wrapper">
+                    <div className="browse-item-wrapper">
+                        <div className="main-browse-picture">
+                            <img src={browseUsers[0].picture_1}></img>
+                        </div>
+                        <div className="browse-item-right-side">
+                            <p>{browseUsers[0].first_name}, {ageChanger(browseUsers[0].date_of_birth)}</p>
+                            <p>{browseUsers[0].flake_score}%</p>
+                        </div>
                     </div>
-                    <div className="browse-item-right-side">
-                        <p>{browseUsers[0].first_name}, {ageChanger(browseUsers[0].date_of_birth)}</p>
-                        <p>{browseUsers[0].flake_score}%</p>
-                        <button onClick={() => handleReject(browseUsers[0].id, currentUser.id)}>Reject</button>
-                        <button onClick={() => handleSwipeRight(browseUsers[0].id, currentUser.id)}>Swipe Right</button>
+                    <div className="swipe-button-container">
+                        <button className="swipe-button swipe-nay" onClick={() => handleReject(browseUsers[0].id, currentUser.id)}><i class="fa-solid fa-xmark"></i></button>
+                        <button className="swipe-button swipe-yay" onClick={() => handleSwipeRight(browseUsers[0].id, currentUser.id)}><i class="fa-solid fa-check"></i></button>
+
                     </div>
                 </div>
             )}
