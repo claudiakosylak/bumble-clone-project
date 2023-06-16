@@ -21,6 +21,17 @@ def get_all_date_requests():
             requests_dict[request.id] = request.to_dict()
     return requests_dict
 
+@date_routes.route("/date-requests/<int:id>", methods=["DELETE"])
+@login_required
+def delete_date_request(id):
+    """
+    Deletes a date request based off date request id.
+    """
+    date_request = DateRequest.query.get(id)
+    db.session.delete(date_request)
+    db.session.commit()
+    return {"message" : "Success! Date request has been deleted."}
+
 
 @date_routes.route("/<int:id>")
 @login_required

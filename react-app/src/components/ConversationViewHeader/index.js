@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./ConversationViewHeader.css";
-import { createNewDateThunk, getDateRequestsThunk, getDateThunk, getDatesThunk } from "../../store/date";
+import { createNewDateThunk, deleteDateRequestThunk, getDateRequestsThunk, getDateThunk, getDatesThunk } from "../../store/date";
 import OpenModalButton from "../OpenModalButton";
 import RequestDateModal from "../RequestDateModal";
 
@@ -64,6 +64,14 @@ function ConversationViewHeader({ dateRequests }) {
         closeMenu()
     }
 
+    //helper function to handle clicking reject date
+    const handleRejectDate = async (e) => {
+        // deletes the date request and updates the store of date requests for the user
+        await dispatch(deleteDateRequestThunk(dateRequester.id))
+        // close dropdown
+        closeMenu()
+    }
+
     return (
         <div className='conversation-view-header-wrapper'>
             <img src={currentMatch.picture_1}></img>
@@ -87,6 +95,11 @@ function ConversationViewHeader({ dateRequests }) {
                     <p className="scheduled-status-text">{currentMatch.first_name} has requested a date for {dateRequester.suggested_date}</p>
                 </div>
             ))}
+            {(!currentDate && !dateRequester && !dateRequested) && (
+                <div className="scheduled-status">
+                    <p className="scheduled-status-text">You don't have any dates scheduled with {currentMatch.first_name}</p>
+                </div>
+            )}
             <i class="fa-solid fa-ellipsis-vertical" onClick={openMenu}></i>
             <ul className={ulClassName} ref={ulRef}>
                 <div>
@@ -102,8 +115,8 @@ function ConversationViewHeader({ dateRequests }) {
                     )}
                     {dateRequester && (
                         <>
-                        <button onClick={handleAcceptDate}>Accept date</button>
-                        <li>Reject date</li>
+                            <button onClick={handleAcceptDate}>Accept date</button>
+                            <button onClick={handleRejectDate}>Reject date</button>
                         </>
                     )}
 

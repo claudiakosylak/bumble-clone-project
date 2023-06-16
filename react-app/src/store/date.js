@@ -1,6 +1,7 @@
 const GET_DATES = "date/GET_DATES";
 const GET_DATE = "date/GET_DATE";
 const GET_DATE_REQUESTS = "date/GET_DATE_REQUESTS";
+const DELETE_DATE_REQUEST = "date/DELETE_DATE_REQUEST";
 
 //date related actions here
 
@@ -17,6 +18,11 @@ const getDate = date => ({
 const getDateRequests = requests => ({
     type: GET_DATE_REQUESTS,
     requests
+})
+
+const deleteDateRequest = requestId => ({
+    type: DELETE_DATE_REQUEST,
+    requestId
 })
 
 //date related thunks here
@@ -92,6 +98,19 @@ export const getDateThunk = (matchId) => async dispatch => {
     }
 }
 
+// deletes a date request by request id
+
+export const deleteDateRequestThunk = requestId => async dispatch => {
+    const res = await fetch(`/api/dates/date-requests/${requestId}`, {method: "DELETE"})
+    if (res.ok) {
+        const message = await res.json()
+        dispatch(deleteDateRequest(requestId))
+        return message;
+    } else {
+        return ["An error occurred. Please try again."]
+    }
+}
+
 // date reducer with inital state here
 
 const initialState = {allDates: {}, currentDate: {}, dateRequests: {}}
@@ -110,6 +129,10 @@ export default function reducer(state = initialState, action) {
             const requestState = {...state, allDates: {...state.allDates}, currentDate: {...state.currentDate}, dateRequests: {}}
             requestState.dateRequests = action.requests
             return requestState;
+        case DELETE_DATE_REQUEST:
+            const deleteState = {...state, allDates: {...state.allDates}, currentDate: {...state.currentDate}, dateRequests: {...state.dateRequests}}
+            delete deleteState.dateRequests[action.requestId]
+            return deleteState;
         default:
             return state;
     }
