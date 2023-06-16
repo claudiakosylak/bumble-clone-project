@@ -4,32 +4,50 @@ import "./ConversationViewHeader.css";
 import { createNewDateThunk, deleteDateRequestThunk, getDateRequestsThunk, getDateThunk, getDatesThunk } from "../../store/date";
 import OpenModalButton from "../OpenModalButton";
 import RequestDateModal from "../RequestDateModal";
+import { getMadeDateReportsThunk } from "../../store/date_report";
+import ReportGhostModal from "../ReportGhostModal";
 
 function ConversationViewHeader({ dateRequests }) {
+    // gets all of the date reports the current user has made to others and turns it into an array
+    const madeReportsObj = useSelector(state => state.dateReport.madeDateReports)
+    const madeReports = Object.values(madeReportsObj)
+    // gets the user profile of the current match from the store
     const currentMatch = useSelector(state => state.match.currentMatch)
+    // gets the information of the current user from the store
     const currentUser = useSelector(state => state.session.user)
+    // gets the report current user has made on the current match, if it exists
+    const currentMatchReport = madeReports.find(report => report.reported_user_id === currentMatch.id)
+    // gets all of the current user's dates from the store and turns them into an array
     const allDatesObj = useSelector(state => state.date.allDates)
     const allDates = Object.values(allDatesObj)
+    // finds information on the date scheduled or pending for the current match by match id from the alldates array
     const allDateMatchIds = allDates.map(date => date.match_id)
     const currentDate = allDates.find(date => date.match_id === currentMatch.matchId)
+    // establish the current date to compare if dates have happened in the past or are coming up
     const todaysDate = new Date()
+    // logic to establish if the match settings menu is showing or not
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
+    // get information on the date request if it was requested by the other user in the match
     const dateRequester = dateRequests.find(request => request.requesting_user_id === currentMatch.id)
+    // get information on the date request if it was requested by the current user
     const dateRequested = dateRequests.find(request => (request.requesting_user_id === currentUser.id && request.match_id === currentMatch.matchId))
+    // change date format on current match date information for better comparison against today's date
     let dateDate
     if (currentDate) {
         dateDate = new Date(currentDate.scheduled_date)
     }
-
-    console.log("CURRENT DATE: ", currentDate)
-
     const dispatch = useDispatch();
 
+    console.log("MADE REPORTS: ", madeReports)
+
+    // update store with freshest list of all user's dates on mount, as well as all the user's created date reports
     useEffect(() => {
         dispatch(getDatesThunk())
+        dispatch(getMadeDateReportsThunk())
     }, [dispatch])
 
+    // logic and helper functions regarding opening the match settings dropdown
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);
@@ -123,8 +141,15 @@ function ConversationViewHeader({ dateRequests }) {
                     {(dateDate && dateDate < todaysDate) && (
                         <li>Report on date</li>
                     )}
+                    {!currentMatchReport && (
+                        <li>
+                            <OpenModalButton
+                            buttonText="Report ghosting"
+                            modalComponent={<ReportGhostModal match={currentMatch} />}
+                            />
+                        </li>
+                    )}
 
-                    <li>Report ghosted</li>
                 </div>
             </ul>
         </div>

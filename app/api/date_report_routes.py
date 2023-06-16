@@ -17,6 +17,21 @@ def get_made_reports():
         date_report_dict[report.id] = report.to_dict()
     return date_report_dict
 
+@date_report_routes.route("/ghosts/<int:id>", methods=["POST"])
+@login_required
+def create_ghost_report(id):
+    """
+    Creates a new date report specifically on ghosts with no date scheduled.
+    """
+    date_report = DateReport(
+        reporting_user_id = current_user.id,
+        reported_user_id = id,
+        reported_activity = "ghost_no_date"
+    )
+    db.session.add(date_report)
+    db.session.commit()
+    return date_report.to_dict()
+
 @date_report_routes.route("/<int:reported_user_id>", methods=["POST"])
 @login_required
 def create_date_report(reported_user_id):
