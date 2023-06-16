@@ -6,6 +6,7 @@ import OpenModalButton from "../OpenModalButton";
 import RequestDateModal from "../RequestDateModal";
 import { getMadeDateReportsThunk } from "../../store/date_report";
 import ReportGhostModal from "../ReportGhostModal";
+import ReportDateModal from "../ReportDateModal";
 
 function ConversationViewHeader({ dateRequests }) {
     // gets all of the date reports the current user has made to others and turns it into an array
@@ -138,8 +139,13 @@ function ConversationViewHeader({ dateRequests }) {
                         </>
                     )}
 
-                    {(dateDate && dateDate < todaysDate) && (
-                        <li>Report on date</li>
+                    {(!currentMatchReport && dateDate && dateDate < todaysDate) && (
+                        <li>
+                            <OpenModalButton
+                                buttonText="Report on date"
+                                modalComponent={<ReportDateModal match={currentMatch} date={currentDate}/>}
+                            />
+                        </li>
                     )}
                     {!currentMatchReport && (
                         <li>

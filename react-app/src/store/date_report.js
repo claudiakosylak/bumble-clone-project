@@ -41,9 +41,7 @@ export const createDateReportThunk = (reportedUserId, report) => async dispatch 
     const res = await fetch(`/api/date_reports/${reportedUserId}`, {
         method: "POST",
         headers: { "Content-Type" : "application/json" },
-        body: JSON.stringify({
-            report
-        })
+        body: JSON.stringify(report)
     })
     if (res.ok) {
         const newReport = await res.json();
