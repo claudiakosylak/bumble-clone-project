@@ -13,6 +13,21 @@ const removeUser = () => ({
 
 const initialState = { user: null };
 
+export const updateAboutThunk = (about) => async dispatch => {
+	const res = await fetch(`/api/users/about`, {
+		method: "PUT",
+		headers: { "Content-Type" : "application/json"},
+		body: JSON.stringify(about)
+	})
+	if (res.ok) {
+		const newUser = await res.json();
+		dispatch(setUser(newUser))
+		return newUser;
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+}
+
 export const authenticate = () => async (dispatch) => {
 	const response = await fetch("/api/auth/", {
 		headers: {

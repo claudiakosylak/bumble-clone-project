@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required, current_user
-from app.models import User
+from app.models import User, db
+from app.forms import UpdateAboutForm
 
 user_routes = Blueprint('users', __name__)
 
@@ -19,8 +20,11 @@ def users():
 @login_required
 def update_about():
     """ Updates the current user's about information """
+    form = UpdateAboutForm()
     user = User.query.get(current_user.id)
-    user.about = 
+    user.about = form.data["about"]
+    db.session.commit()
+    return user.to_dict()
 
 
 @user_routes.route('/<int:id>')

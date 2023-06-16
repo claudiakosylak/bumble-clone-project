@@ -1,11 +1,24 @@
 import React, { useState } from "react";
 import "./EditProfileIndex.css";
 import StaticLeftSettingsBar from "../StaticLeftSettingsBar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import { updateAboutThunk } from "../../store/session";
 
 function EditProfileIndex({ isLoaded }) {
     const user = useSelector(state => state.session.user)
+    const beginningAbout = user.about
     const [aboutMe, setAboutMe] = useState(user.about)
+    const dispatch = useDispatch();
+
+    // helper function to handle an edit to the user's about section
+    const handleAboutSubmit = async (e) => {
+        e.preventDefault()
+        const about = {
+            about: aboutMe
+        }
+        await dispatch(updateAboutThunk(about))
+    }
 
     return (
         <div className="edit-profile-index-wrapper">
@@ -56,7 +69,11 @@ function EditProfileIndex({ isLoaded }) {
                         </div>
                         <div className="about-me edit-profile-text-inputs">
                             <h4>About Me</h4>
+                            <form onSubmit={handleAboutSubmit}>
+
                             <textarea value={aboutMe} onChange={(e) => setAboutMe(e.target.value)}></textarea>
+                            <button type="submit" disabled={aboutMe === beginningAbout}>Save</button>
+                            </form>
                         </div>
 
                     </div>
