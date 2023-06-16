@@ -24,4 +24,14 @@ def create_date_report(match_id, user_id):
     db.session.commit()
     return date_report.to_dict()
 
-
+@date_report_routes.route("")
+@login_required
+def get_all_date_reports():
+    """
+    Fetch all of a user's date reports
+    """
+    date_reports = DateReport.query.filter(DateReport.reported_user_id == current_user.id).all()
+    date_report_dict = {}
+    for report in date_reports:
+        date_report_dict[report.id] = report.to_dict()
+    return date_report_dict

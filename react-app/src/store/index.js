@@ -5,13 +5,15 @@ import match from './match';
 import matchRequest from "./match_request";
 import message from "./message";
 import date from "./date";
+import dateReport from "./date_report";
 
 const rootReducer = combineReducers({
   session,
   match,
   matchRequest,
   message,
-  date
+  date,
+  dateReport
 });
 
 
