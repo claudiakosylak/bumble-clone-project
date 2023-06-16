@@ -4,6 +4,7 @@ import "./ScheduleViewIndex.css";
 import LeftMatchesBar from "../LeftMatchesBar";
 import { Redirect } from "react-router-dom";
 import { getDatesThunk } from "../../store/date";
+import StaticLeftSettingsBar from "../StaticLeftSettingsBar";
 
 function ScheduleViewIndex({ isLoaded }) {
     const user = useSelector(state => state.session.user);
@@ -17,6 +18,8 @@ function ScheduleViewIndex({ isLoaded }) {
     const pastDates = []
 
     console.log("ALL DATES: ", allDates)
+    console.log("UPCOMING DATES: ", upcomingDates)
+    console.log("PAST DATES: ", pastDates)
 
     for (let date of allDates) {
 
@@ -41,7 +44,7 @@ function ScheduleViewIndex({ isLoaded }) {
 
     return (
         <div className="schedule-view-wrapper">
-            <LeftMatchesBar isLoaded={isLoaded} />
+            <StaticLeftSettingsBar user={user} />
             <div className="schedule-view-right-side">
                 <div className="schedule-view-header">
                     <h2>Date Calendar</h2>

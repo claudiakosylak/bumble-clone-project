@@ -1,0 +1,11 @@
+.static-left-settings-wrapper {
+    background-color: white;
+    border: 1px solid lightgrey;
+    list-style-type: none;
+    width: 350px;
+    height: 100%;
+}
+
+.static-left-inside {
+    width: 350px;
+}
