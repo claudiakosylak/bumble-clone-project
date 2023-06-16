@@ -4,3 +4,48 @@
     display: flex;
     justify-content: space-between;
 }
+
+.edit-profile-main-content {
+    display: flex;
+}
+
+
+.right-edit-profile-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-profile-images-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-boxes-top {
+    display: flex;
+}
+
+.pic-1 {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin: 5px;
+}
+
+.image-boxes-top-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.empty-image {
+    background-color: #80F;
+}
+
+.smaller-image {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+}
+
+.image-boxes-bottom {
+    display: flex;
+}
