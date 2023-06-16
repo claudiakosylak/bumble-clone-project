@@ -10,6 +10,7 @@ dob5 = datetime.strptime('1994-11-11', '%Y-%m-%d')
 dob6 = datetime.strptime('1995-11-11', '%Y-%m-%d')
 dob7 = datetime.strptime('1989-11-11', '%Y-%m-%d')
 dob8 = datetime.strptime('1989-10-11', '%Y-%m-%d')
+dob9 = datetime.strptime('1988-10-11', '%Y-%m-%d')
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
@@ -29,7 +30,8 @@ def seed_users():
         first_name='genevieve', email='genevieve@aa.io', password='password', date_of_birth=dob7.date(), phone="3333436339", looking_for_gender="Men", state="New York", city="New York City", gender="Woman", picture_1="https://plus.unsplash.com/premium_photo-1679993884184-70033581920b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80")
     jared = User(
         first_name='jared', email='jared@aa.io', password='password', date_of_birth=dob8.date(), phone="3333436239", looking_for_gender="Both", state="New York", city="New York City", gender="Nonbinary", picture_1="https://images.unsplash.com/photo-1583864697784-a0efc8379f70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=776&q=80")
-
+    bonnie = User(
+            first_name='bonnie', email='bonnie@aa.io', password='password', date_of_birth=dob9.date(), phone="3433436239", looking_for_gender="Both", state="New York", city="New York City", gender="Woman")
 
 
     db.session.add(demo)
