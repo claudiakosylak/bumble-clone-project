@@ -66,6 +66,11 @@ function BrowseItem({ browseUsers }) {
         }
     }
 
+    const keepBrowsing = () => {
+        setMatched(false)
+        setMatchedUser("")
+    }
+
     return (
         <>
             {browseUsers.length > 0 && (
@@ -122,6 +127,7 @@ function BrowseItem({ browseUsers }) {
                         <button type="submit">Send</button>
                     </div>
                 </form> */}
+                <p onClick={keepBrowsing}>Keep Browsing</p>
             </div>
             )}
         </>
