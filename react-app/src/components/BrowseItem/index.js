@@ -117,8 +117,8 @@ function BrowseItem({ browseUsers }) {
             <div className={matched ? "matched-box" : "hidden-matched-box"}>
                 <h2>Boom!</h2>
                 <div className="overlap-pics-container">
-                    <img className="overlap-pic" src={currentUser.picture_1}></img>
-                    <img className="overlap-pic" src={matchedUser.picture_1}></img>
+                    <img className="overlap-pic ov1" src={currentUser.picture_1}></img>
+                    <img className="overlap-pic ov2" src={matchedUser.picture_1}></img>
                 </div>
                 <p>They like you too! Don't let this match get too cold and send them a message.</p>
                 {/* <form onSubmit={sendMatchMessage}>

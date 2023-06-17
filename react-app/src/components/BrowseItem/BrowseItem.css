@@ -152,6 +152,7 @@
 
 .matched-box h2 {
     font-size: 60px;
+    margin-bottom: 15px;
 }
 
 .overlap-pic {
@@ -164,4 +165,23 @@
 .matched-box p {
     width: 50%;
     text-align: center;
+}
+
+.overlap-pics-container {
+    position: relative;
+    width: 300px;
+    height: 200px;
+}
+
+.overlap-pic {
+    position: absolute;
+    border: 7px solid white;
+}
+
+.ov1 {
+    left: 20px;
+}
+
+.ov2 {
+    right: 20px;;
 }
