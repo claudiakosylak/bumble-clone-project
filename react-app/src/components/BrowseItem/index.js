@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./BrowseItem.css";
 import { checkMatchRequestThunk, createMatchRequestThunk, createMatchThunk, rejectMatchThunk } from "../../store/match";
 import { getUnrejectedRequestsThunk } from "../../store/match_request";
+import { createFirstMessageThunk } from "../../store/message";
 
 export const ageChanger = (dateOfBirth) => {
 
@@ -21,9 +22,14 @@ export const ageChanger = (dateOfBirth) => {
 
 function BrowseItem({ browseUsers }) {
     const currentUser = useSelector(state => state.session.user)
+    const allMatchesObj = useSelector(state => state.match.currentMatches)
+    const allMatches = Object.values(allMatchesObj)
     const dispatch = useDispatch();
     const unrejectedRequestsObj = useSelector(state => state.matchRequest.unrejectedRequests)
     const requestArray = Object.values(unrejectedRequestsObj)
+    const [matched, setMatched] = useState(false);
+    const [matchedUser, setMatchedUser] = useState("");
+    const [message, setMessage] = useState("");
     const requestUsers = []
     for (let request of requestArray) {
         requestUsers.push(request.requesting_user_id)
@@ -37,6 +43,13 @@ function BrowseItem({ browseUsers }) {
         dispatch(getUnrejectedRequestsThunk(currentUser.id))
     }, [browseUsers[0]])
 
+    const sendMatchMessage = async (e) => {
+        e.preventDefault()
+        console.log("ALL MATCHES LAST", allMatches[allMatches.length - 1])
+        await dispatch(createFirstMessageThunk(allMatches[allMatches.length - 1].matchId, message))
+        setMatched(false)
+        setMatchedUser("")
+    }
     const handleReject = async (id1, id2) => {
         await dispatch(rejectMatchThunk(id1, id2))
     }
@@ -44,6 +57,8 @@ function BrowseItem({ browseUsers }) {
     const handleSwipeRight = async (id1, id2) => {
         const requestExists = requestUsers.includes(id1)
         if (requestExists) {
+            setMatched(true)
+            setMatchedUser(browseUsers[0])
             dispatch(createMatchThunk(id1, id2))
             // dispatch(getUnrejectedRequestsThunk(currentUser.id))
         } else {
@@ -91,6 +106,23 @@ function BrowseItem({ browseUsers }) {
                 <div className="no-browse-wrapper">
                     <h3>You've run out of potential matches to browse. Check back soon as new users sign up!</h3>
                 </div>
+            )}
+            {browseUsers.length > 0 && (
+
+            <div className={matched ? "matched-box" : "hidden-matched-box"}>
+                <h2>Boom!</h2>
+                <div className="overlap-pics-container">
+                    <img className="overlap-pic" src={currentUser.picture_1}></img>
+                    <img className="overlap-pic" src={matchedUser.picture_1}></img>
+                </div>
+                <p>They like you too! Don't let this match get too cold and send them a message.</p>
+                {/* <form onSubmit={sendMatchMessage}>
+                    <div className="initiate-message-input">
+                        <input type="text" value={message} onChange={(e) => setMessage(e.target.value)}></input>
+                        <button type="submit">Send</button>
+                    </div>
+                </form> */}
+            </div>
             )}
         </>
     )
