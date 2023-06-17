@@ -30,7 +30,11 @@ function ConversationList({ messagedMatches }) {
                                 )}
 
                             </div>
-                            <p>{match.last_message.content}</p>
+                            <p className="message-content-preview">{match.last_message.content.length < 38 ? (
+                                match.last_message.content
+                            ): (
+                                match.last_message.content.slice(0, 39) + "..."
+                            )}</p>
 
                         </div>
 
