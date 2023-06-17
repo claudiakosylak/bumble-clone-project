@@ -1,5 +1,6 @@
 const GET_ALL_MESSAGES = "messages/GET_ALL_MESSAGES"
 
+
 const getAllMessagesAction = (messages) => ({
     type: GET_ALL_MESSAGES,
     messages
@@ -16,6 +17,19 @@ export const getMatchMessagesThunk = matchId => async dispatch => {
     }
 }
 
+export const createFirstMessageThunk = (matchId, message) => async dispatch => {
+    const res = await fetch(`/api/matches/${matchId}/messages`, {
+        method: "POST",
+        headers: { "Content-Type" : "application/json"},
+		body: JSON.stringify({message})
+    })
+    if (res.ok) {
+        const message = await res.json();
+        return message;
+    } else {
+        return ["There was an error."]
+    }
+}
 
 const initialState = {allMatchMessages: {}};
 

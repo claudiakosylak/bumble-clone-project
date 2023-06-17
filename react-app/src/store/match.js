@@ -2,6 +2,7 @@ const GET_MATCHES = "match/GET_MATCHES";
 const POTENTIAL_MATCHES = "match/POTENTIAL_MATCHES";
 const GET_MATCH = "match/GET_MATCH";
 const DELETE_MATCH = "match/DELETE_MATCH";
+const CLEAR_CURRENT_MATCH = "match/CLEAR_CURRENT_MATCH";
 
 const getMatches = (matches) => ({
     type: GET_MATCHES,
@@ -21,6 +22,10 @@ const potentialMatches = matches => ({
 const deleteMatch = userId => ({
     type: DELETE_MATCH,
     userId
+})
+
+export const clearCurrentMatch = () => ({
+    type: CLEAR_CURRENT_MATCH
 })
 
 
@@ -131,6 +136,8 @@ export default function reducer(state = initialState, action) {
             const deleteState = {...state, currentMatches: {...state.currentMatches}, potentialMatches: {...state.potentialMatches}, currentMatch: {}}
             delete deleteState.currentMatches[action.userId]
             return deleteState;
+        case CLEAR_CURRENT_MATCH:
+            return {...state, currentMatches: {...state.currentMatches}, potentialMatches: {...state.potentialMatches}, currentMatch: {}}
         default:
             return state;
 

@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import current_user, login_required
 from app.models import Match, db, User, RequestedMatch, Message, DateRequest
-from app.forms import RequestDateForm
+from app.forms import RequestDateForm, InitialMessageForm
 match_routes = Blueprint("matches", __name__)
 
 def validation_errors_to_error_messages(validation_errors):
@@ -28,6 +28,21 @@ def match_messages(id):
         message_dict.append(message.to_dict())
 
     return message_dict
+
+@match_routes.route("/<int:id>/messages", methods=["POST"])
+@login_required
+def make_first_message(id):
+    """ Creates an initial message for a match """
+    form = InitialMessageForm()
+    message = Message(
+        content = form.data["message"],
+        match_id = id,
+        user_id = current_user.id
+    )
+    db.session.add(message)
+    db.session.commit()
+    return message.to_dict()
+
 
 @match_routes.route("/<int:id>/date-requests", methods=["POST"])
 @login_required

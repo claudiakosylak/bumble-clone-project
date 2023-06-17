@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
-import { useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 function ProfileButton({ user }) {
@@ -36,19 +36,19 @@ function ProfileButton({ user }) {
       <ul className={ulClassName}>
         {user && (
           <>
-          <div>
-          <i class="fa-solid fa-angle-left" onClick={closeMenu}></i>
-          </div>
-          <div>
-
-            <li>{user.first_name}</li>
-            <li>{user.flake_score}%</li>
-            <li ><button onClick={goToSchedule}>Scheduled Dates</button></li>
-            <li><NavLink to="/app/edit-profile">Edit Profile</NavLink></li>
-            <li>
-              <button onClick={handleLogout}>Log Out</button>
-            </li>
-          </div>
+            <div className="left-bar-top">
+              <i class="fa-solid fa-angle-left" onClick={closeMenu}></i>
+              <img className="current-user-image" src={user.picture_1}></img>
+              <div></div>
+            </div>
+            <div classname="left-menu-items">
+              <li><i class="fa-regular fa-snowflake"></i>{user.flake_score}%</li>
+              <li ><button onClick={goToSchedule}>Scheduled Dates</button></li>
+              <li><NavLink to="/app/edit-profile">Edit Profile</NavLink></li>
+              <li>
+                <button onClick={handleLogout}>Log Out</button>
+              </li>
+            </div>
           </>
         )}
       </ul>
