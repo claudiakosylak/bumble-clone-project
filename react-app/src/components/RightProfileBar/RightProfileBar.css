@@ -1,5 +1,5 @@
 .right-profile-bar-wrapper {
-    width: 250px;
+    width: 350px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -15,15 +15,16 @@
 
 .right-profile-name {
     position: absolute;
-    top: 320px;
-    right: 20px;
+    bottom: 10px;
+    left: 10px;
     color: white;
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 600;
 }
 
 .right-profile-top {
     width: 100%;
+    position: relative;
 }
 
 .exit-match-x {
@@ -35,6 +36,10 @@
     font-weight: 600;
 }
 
+#this-x {
+    color: white;
+}
+
 .right-profile-about {
     background-color: rgb(240, 224, 255);
     height: 300px;
@@ -42,4 +47,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.current-match-flake {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.current-match-flake span {
+    font-size: 30px;
 }
