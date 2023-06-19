@@ -21,7 +21,8 @@ function ConversationList({ messagedMatches }) {
             {messagedMatches.map(match => (
                 <li key={match.id} onClick={() => handlePicClick(match)}>
                     <div className={`conversation-list-item ${(currentMatch && currentMatch.id === match.id) && "active-convo"}`}>
-                        <img  className="mini-match-icons" src={match.picture_1}></img>
+                        <img className="mini-match-icons" src={match.picture_1}
+                            onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
                         <div className="conversation-list-item-right">
                             <div className="convo-list-header">
                                 <p className="convo-list-first-name">{match.first_name}</p>
@@ -32,7 +33,7 @@ function ConversationList({ messagedMatches }) {
                             </div>
                             <p className="message-content-preview">{match.last_message.content.length < 38 ? (
                                 match.last_message.content
-                            ): (
+                            ) : (
                                 match.last_message.content.slice(0, 39) + "..."
                             )}</p>
 

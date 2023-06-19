@@ -99,7 +99,8 @@ function ConversationViewHeader({ dateRequests }) {
 
     return (
         <div className='conversation-view-header-wrapper'>
-            <img src={currentMatch.picture_1}></img>
+            <img src={currentMatch.picture_1}
+                onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
             <h2>{currentMatch.first_name}</h2>
             {(allDateMatchIds.includes(currentMatch.matchId)) && (
                 <div className="scheduled-status">
@@ -149,15 +150,15 @@ function ConversationViewHeader({ dateRequests }) {
                         <li>
                             <OpenModalButton
                                 buttonText="Report on date"
-                                modalComponent={<ReportDateModal match={currentMatch} date={currentDate}/>}
+                                modalComponent={<ReportDateModal match={currentMatch} date={currentDate} />}
                             />
                         </li>
                     )}
                     {!currentMatchReport && (
                         <li>
                             <OpenModalButton
-                            buttonText="Report ghosting"
-                            modalComponent={<ReportGhostModal match={currentMatch} />}
+                                buttonText="Report ghosting"
+                                modalComponent={<ReportGhostModal match={currentMatch} />}
                             />
                         </li>
                     )}
