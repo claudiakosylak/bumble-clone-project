@@ -11,6 +11,22 @@ female_names = [
     "Leah", "Hazel", "Violet", "Aurora", "Savannah", "Audrey", "Brooklyn", "Bella", "Claire", "Skylar"
 ]
 
+male_names = [
+    "Liam", "Noah", "William", "James", "Oliver", "Benjamin", "Elijah", "Lucas", "Mason", "Logan",
+    "Alexander", "Ethan", "Jacob", "Michael", "Daniel", "Henry", "Jackson", "Sebastian", "Aiden", "Matthew",
+    "Samuel", "David", "Joseph", "Carter", "Owen", "Wyatt", "John", "Jack", "Luke", "Jayden",
+    "Dylan", "Grayson", "Levi", "Isaac", "Gabriel", "Julian", "Mateo", "Anthony", "Jaxon", "Lincoln",
+    "Joshua", "Christopher", "Andrew", "Theodore", "Caleb", "Ryan", "Asher", "Nathan", "Thomas", "Leo"
+]
+
+gender_neutral_names = [
+    "Alex", "Taylor", "Jordan", "Casey", "Riley", "Sam", "Charlie", "Jamie", "Peyton", "Reese",
+    "Dakota", "Avery", "Bailey", "Parker", "Quinn", "Emerson", "Finley", "Harley", "Kai", "Rowan",
+    "Sawyer", "Skyler", "Blake", "Hayden", "Morgan", "Phoenix", "River", "Arden", "Elliot", "Frankie",
+    "Micah", "Tatum", "Emery", "Remy", "Sage", "Remington", "Marley", "Ashton", "Shay", "Cameron",
+    "Kendall", "Drew", "Jesse"
+]
+
 states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
 
 looking_for_gender_choices = ["Women", "Men", "Both", "Nonbinary", "Open"]
@@ -35,7 +51,43 @@ for name in female_names:
     }
     women.append(woman)
 
-print("🍎 WOMEN: ", women)
+men = []
+for male_name in male_names:
+    dob_man = datetime.strptime(f"{random.randint(1970, 2004)}-10-11", '%Y-%m-%d')
+    random_phone += 1
+    phone_man = str(random_phone)
+    man = {
+        "flake_score": random.randint(1, 100),
+        "first_name": male_name,
+        "email": f"{male_name.lower()}@email.com",
+        "password": "password",
+        "date_of_birth": dob_man.date(),
+        "phone": phone_man,
+        "looking_for_gender": random.choice(looking_for_gender_choices),
+        "state": random.choice(states),
+        "city": f"{random.choice(states)} City",
+        "gender": "Man"
+    }
+    men.append(man)
+
+people = []
+for neutral_name in gender_neutral_names:
+    dob_neutral = datetime.strptime(f"{random.randint(1970, 2004)}-10-11", '%Y-%m-%d')
+    random_phone += 1
+    phone_neutral = str(random_phone)
+    person = {
+        "flake_score": random.randint(1, 100),
+        "first_name": neutral_name,
+        "email": f"{neutral_name.lower()}@aa.io",
+        "password": "password",
+        "date_of_birth": dob_neutral.date(),
+        "phone": phone_neutral,
+        "looking_for_gender": random.choice(looking_for_gender_choices),
+        "state": random.choice(states),
+        "city": f"{random.choice(states)} City",
+        "gender": "Nonbinary"
+    }
+    people.append(person)
 
 dob1 = datetime.strptime('1990-11-11', '%Y-%m-%d')
 dob2 = datetime.strptime('1991-11-11', '%Y-%m-%d')
@@ -85,6 +137,22 @@ def seed_users():
             flake_score = woman["flake_score"], first_name = woman["first_name"], email = woman["email"], password = woman["password"], date_of_birth = woman["date_of_birth"], phone = woman["phone"], looking_for_gender = woman["looking_for_gender"], state = woman["state"], city = woman["city"], gender = woman["gender"]
         )
         db.session.add(newUser)
+
+    db.session.commit()
+
+    for man in men:
+        newMaleUser = User(
+            flake_score = man["flake_score"], first_name = man["first_name"], email = man["email"], password = man["password"], date_of_birth = man["date_of_birth"], phone = man["phone"], looking_for_gender = man["looking_for_gender"], state = man["state"], city = man["city"], gender = man["gender"]
+        )
+        db.session.add(newMaleUser)
+
+    db.session.commit()
+
+    for person in people:
+        neutralUser = User(
+            flake_score = person["flake_score"], first_name = person["first_name"], email = person["email"], password = person["password"], date_of_birth = person["date_of_birth"], phone = person["phone"], looking_for_gender = person["looking_for_gender"], state = person["state"], city = person["city"], gender = person["gender"]
+        )
+        db.session.add(neutralUser)
 
     db.session.commit()
 
