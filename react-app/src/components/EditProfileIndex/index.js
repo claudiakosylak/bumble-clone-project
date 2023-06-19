@@ -17,7 +17,7 @@ function EditProfileIndex({ isLoaded }) {
 
     useEffect(() => {
         const newErrors = {}
-        if (aboutMe.length > 300) newErrors.about = "About me can be 300 characters long maximum. "
+        if (aboutMe && aboutMe.length > 300) newErrors.about = "About me can be 300 characters long maximum. "
         setErrors(newErrors)
     }, [aboutMe])
 
@@ -97,9 +97,10 @@ function EditProfileIndex({ isLoaded }) {
 
                                 <textarea value={aboutMe} onChange={(e) => setAboutMe(e.target.value)}></textarea>
                                 <button type="submit" disabled={(aboutMe === beginningAbout || errors.about)}>Save</button>
-                                {errors.about ? (
+                                {errors.about && (
                                     <p>{errors.about}</p>
-                                ) : (
+                                ) }
+                                {aboutMe && aboutMe.length > 0 && (
                                     <p>{300 - aboutMe.length} characters left</p>
                                 )}
 

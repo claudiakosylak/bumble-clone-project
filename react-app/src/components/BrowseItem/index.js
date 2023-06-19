@@ -131,7 +131,7 @@ function BrowseItem({ browseUsers }) {
                         <button type="submit">Send</button>
                     </div>
                 </form> */}
-                    <p onClick={keepBrowsing}>Keep Browsing</p>
+                    <p onClick={keepBrowsing} className="keep-browsing">Keep Browsing</p>
                 </div>
             )}
         </>

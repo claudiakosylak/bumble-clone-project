@@ -36,14 +36,21 @@ function LeftMatchesBar({isLoaded}) {
             <p className="left-headers">Unmessaged Matches ({unMessagedMatches.length})</p>
         <ul className="unmessaged-matches-wrapper">
             <div className="inner-wrapper">
-            {unMessagedMatches.map(match => (
+            {unMessagedMatches.length > 0 ? unMessagedMatches.map(match => (
                 <li key={match.id} className="scroll-match-item"><img onClick={() => handlePicClick(match)} className="mini-match-icons" src={match.picture_1}></img></li>
-            ))}
+            )) : (
+                <p>You don't have any matches yet!</p>
+            )}
 
             </div>
         </ul>
         <p className="left-headers">Conversations</p>
-        <ConversationList messagedMatches={messagedMatches}/>
+        {messagedMatches.length > 0 ? (
+            <ConversationList messagedMatches={messagedMatches}/>
+
+        ): (
+            <p>You haven't started any conversations yet</p>
+        )}
     </div>
     )
 }
