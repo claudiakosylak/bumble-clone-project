@@ -20,6 +20,10 @@ export const ageChanger = (dateOfBirth) => {
     }
 }
 
+const getRandomIndex = (max) => {
+    return Math.floor(Math.random() * max)
+}
+
 function BrowseItem({ browseUsers }) {
     const currentUser = useSelector(state => state.session.user)
     const allMatchesObj = useSelector(state => state.match.currentMatches)
@@ -34,6 +38,9 @@ function BrowseItem({ browseUsers }) {
     for (let request of requestArray) {
         requestUsers.push(request.requesting_user_id)
     }
+
+    const browseUsersLength = browseUsers.length;
+
 
     useEffect(() => {
         dispatch(getUnrejectedRequestsThunk(currentUser.id))

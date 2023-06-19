@@ -8,6 +8,7 @@ import ConversationList from "../ConversationList";
 
 function LeftMatchesBar({isLoaded}) {
     const matchesObj = useSelector(state => state.match.currentMatches)
+    const currentMatch = useSelector(state => state.match.currentMatch)
     const matches = Object.values(matchesObj)
     const dispatch = useDispatch();
     const history = useHistory();
@@ -44,6 +45,11 @@ function LeftMatchesBar({isLoaded}) {
 
             </div>
         </ul>
+        <div>
+            {currentMatch.id && (
+                <NavLink to="/app">Get back to swiping</NavLink>
+            )}
+        </div>
         <p className="left-headers">Conversations</p>
         {messagedMatches.length > 0 ? (
             <ConversationList messagedMatches={messagedMatches}/>
