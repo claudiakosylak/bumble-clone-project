@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./EditProfileIndex.css";
 import StaticLeftSettingsBar from "../StaticLeftSettingsBar";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,8 +10,16 @@ import DeletePhotoModal from "../DeletePhotoModal";
 
 function EditProfileIndex({ isLoaded }) {
     const user = useSelector(state => state.session.user)
-    const [aboutMe, setAboutMe] = useState(user.about)
+    const [aboutMe, setAboutMe] = useState(user ? user.about : "")
+    // const [aboutChars, setAboutChars] = useState(user ? (300 - user.about.length) : "")
+    const [errors, setErrors] = useState({})
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        const newErrors = {}
+        if (aboutMe.length > 300) newErrors.about = "About me can be 300 characters long maximum. "
+        setErrors(newErrors)
+    }, [aboutMe])
 
     // helper function to handle an edit to the user's about section
     const handleAboutSubmit = async (e) => {
@@ -81,7 +89,13 @@ function EditProfileIndex({ isLoaded }) {
                             <form onSubmit={handleAboutSubmit}>
 
                                 <textarea value={aboutMe} onChange={(e) => setAboutMe(e.target.value)}></textarea>
-                                <button type="submit" disabled={aboutMe === beginningAbout}>Save</button>
+                                <button type="submit" disabled={(aboutMe === beginningAbout || errors.about)}>Save</button>
+                                {errors.about ? (
+                                    <p>{errors.about}</p>
+                                ) : (
+                                    <p>{300 - aboutMe.length} characters left</p>
+                                )}
+
                             </form>
                         </div>
 
