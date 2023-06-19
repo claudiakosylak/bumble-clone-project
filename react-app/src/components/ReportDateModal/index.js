@@ -10,6 +10,7 @@ function ReportDateModal({ match, date }) {
     const dispatch = useDispatch();
     const [reportActivity, setReportActivity] = useState("")
 
+
     // helper function to create the date report and update the store with user's created reports
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -28,10 +29,10 @@ function ReportDateModal({ match, date }) {
             <p>What happened with your date with {match.first_name} on {date.scheduled_date}?</p>
             <div className="date-report-button-container">
 
-                <button onClick={() => setReportActivity("showed_up")}>We had the date!</button>
-                <button onClick={() => setReportActivity("arrived_late")}>My date showed up late.</button>
-                <button onClick={() => setReportActivity("flake_with_message")}>They flaked, but let me know.</button>
-                <button onClick={() => setReportActivity("flake_and_ghost")}>They completely ghosted on the date.</button>
+                <button onClick={() => setReportActivity("showed_up")} className={`date-report-button ${reportActivity === "showed_up" ? "active-date-report-button" : ""}`}>We had the date!</button>
+                <button onClick={() => setReportActivity("arrived_late")} className={`date-report-button ${reportActivity === "arrived_late" ? "active-date-report-button" : ""}`}>My date showed up late.</button>
+                <button onClick={() => setReportActivity("flake_with_message")} className={`date-report-button ${reportActivity === "flake_with_message" ? "active-date-report-button" : ""}`}>They flaked, but let me know.</button>
+                <button onClick={() => setReportActivity("flake_and_ghost")} className={`date-report-button ${reportActivity === "flake_and_ghost" ? "active-date-report-button" : ""}`}>They completely ghosted on the date.</button>
             </div>
             <form onSubmit={handleSubmit}>
                 <select className="hidden-report-form"
