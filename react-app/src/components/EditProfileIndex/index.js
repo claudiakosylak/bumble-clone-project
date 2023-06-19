@@ -11,6 +11,7 @@ import DeletePhotoModal from "../DeletePhotoModal";
 function EditProfileIndex({ isLoaded }) {
     const user = useSelector(state => state.session.user)
     const [aboutMe, setAboutMe] = useState(user ? user.about : "")
+    const [activeEdit, setActiveEdit] = useState(false)
     // const [aboutChars, setAboutChars] = useState(user ? (300 - user.about.length) : "")
     const [errors, setErrors] = useState({})
     const dispatch = useDispatch();
@@ -28,6 +29,7 @@ function EditProfileIndex({ isLoaded }) {
             about: aboutMe
         }
         await dispatch(updateAboutThunk(about))
+        setActiveEdit(false)
     }
     if (!user) return <Redirect to="/" />
     const beginningAbout = user.about
@@ -93,7 +95,9 @@ function EditProfileIndex({ isLoaded }) {
                         </div>
                         <div className="about-me edit-profile-text-inputs">
                             <h4>About Me</h4>
-                            <form onSubmit={handleAboutSubmit}>
+                            <p>{user && user.about}</p>
+                            <button onClick={() => setActiveEdit(true)}>Edit</button>
+                            <form onSubmit={handleAboutSubmit} className={`about-me-form ${!activeEdit && "non-active-about"}`}>
 
                                 <textarea value={aboutMe} onChange={(e) => setAboutMe(e.target.value)}></textarea>
                                 <button type="submit" disabled={(aboutMe === beginningAbout || errors.about)}>Save</button>
