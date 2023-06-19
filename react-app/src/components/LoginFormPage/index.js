@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import './LoginForm.css';
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 function LoginFormPage() {
   const dispatch = useDispatch();
@@ -11,15 +12,31 @@ function LoginFormPage() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/app" />;
+
+  useEffect(() => {
+    const newErrors = {}
+    if (password.length > 20) newErrors.password = "Password must be less than 20 characters"
+    if (email.length > 50) newErrors.password = "Email must be less than 50 characters long"
+    setErrors(newErrors)
+  }, [password, email])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
+    console.log("DATA: ", data)
     if (data) {
-      setErrors(data);
+      const newErrors = {}
+      if (data.email[0]) {
+        newErrors.email = data.email[0]
+      }
+      if (data.password[0]) {
+        newErrors.password = data.password[0]
+      }
+      setErrors(newErrors);
     }
   };
+
+  if (sessionUser) return <Redirect to="/app" />;
 
   const demoLogin = async () => {
     await dispatch(login("demo@aa.io", "password"))
@@ -29,11 +46,6 @@ function LoginFormPage() {
     <>
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
         <label>
           Email
           <input
@@ -43,7 +55,11 @@ function LoginFormPage() {
             required
           />
         </label>
+        {errors.email && (
+          <p>{errors.email}</p>
+        )}
         <label>
+
           Password
           <input
             type="password"
@@ -52,8 +68,12 @@ function LoginFormPage() {
             required
           />
         </label>
+        {errors.password && (
+          <p>{errors.password}</p>
+        )}
         <button type="submit">Log In</button>
         <button onClick={demoLogin}>Demo User Login</button>
+        <p>Don't have an account? <NavLink to="/signup">Register here</NavLink></p>
       </form>
     </>
   );

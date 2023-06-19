@@ -185,3 +185,7 @@
 .ov2 {
     right: 20px;;
 }
+
+.keep-browsing:hover {
+    cursor: pointer;
+}

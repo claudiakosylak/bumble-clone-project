@@ -20,6 +20,10 @@ export const ageChanger = (dateOfBirth) => {
     }
 }
 
+const getRandomIndex = (max) => {
+    return Math.floor(Math.random() * max)
+}
+
 function BrowseItem({ browseUsers }) {
     const currentUser = useSelector(state => state.session.user)
     const allMatchesObj = useSelector(state => state.match.currentMatches)
@@ -34,6 +38,9 @@ function BrowseItem({ browseUsers }) {
     for (let request of requestArray) {
         requestUsers.push(request.requesting_user_id)
     }
+
+    const browseUsersLength = browseUsers.length;
+
 
     useEffect(() => {
         dispatch(getUnrejectedRequestsThunk(currentUser.id))
@@ -77,26 +84,28 @@ function BrowseItem({ browseUsers }) {
                 <div className="browse-item-outer-wrapper">
                     <div className="browse-item-wrapper">
                         <div className="main-browse-picture">
-                            <img src={browseUsers[0].picture_1}></img>
+                            <img src={browseUsers[0].picture_1}
+                                onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }}
+                            ></img>
                         </div>
                         <div className="browse-item-right-side">
                             <p className="name-and-age">{browseUsers[0].first_name}, {ageChanger(browseUsers[0].date_of_birth)}</p>
                             <p id="main-about">{browseUsers[0].about}</p>
                             <div className="flake-explanation-container">
 
-                            <p className="main-flake-score"><i class="fa-regular fa-snowflake"></i>{browseUsers[0].flake_score}%</p>
-                            {browseUsers[0].flake_score === 100 && (
-                                <p id="flake-explanation">Wow, you've found a NoFlake!!! {browseUsers[0].first_name} hasn't flaked or ghosted on anyone.</p>
-                            )}
-                            {(browseUsers[0].flake_score < 100 && browseUsers[0].flake_score > 80)&& (
-                                <p id="flake-explanation">{browseUsers[0].first_name} is mostly reliable. We can't all be a perfect NoFlake!</p>
-                            )}
-                            {(browseUsers[0].flake_score < 80 && browseUsers[0].flake_score > 50) && (
-                                <p id="flake-explanation">{browseUsers[0].first_name} is somewhat reliable, but may be more likely than average to flake.</p>
-                            )}
-                            {(browseUsers[0].flake_score < 50) && (
-                                <p id="flake-explanation">{browseUsers[0].first_name} is pretty unreliable - might be pretty hard to catch this YesFlake...</p>
-                            )}
+                                <p className="main-flake-score"><i class="fa-regular fa-snowflake"></i>{browseUsers[0].flake_score}%</p>
+                                {browseUsers[0].flake_score === 100 && (
+                                    <p id="flake-explanation">Wow, you've found a NoFlake!!! {browseUsers[0].first_name} hasn't flaked or ghosted on anyone.</p>
+                                )}
+                                {(browseUsers[0].flake_score < 100 && browseUsers[0].flake_score > 80) && (
+                                    <p id="flake-explanation">{browseUsers[0].first_name} is mostly reliable. We can't all be a perfect NoFlake!</p>
+                                )}
+                                {(browseUsers[0].flake_score < 80 && browseUsers[0].flake_score > 50) && (
+                                    <p id="flake-explanation">{browseUsers[0].first_name} is somewhat reliable, but may be more likely than average to flake.</p>
+                                )}
+                                {(browseUsers[0].flake_score < 50) && (
+                                    <p id="flake-explanation">{browseUsers[0].first_name} is pretty unreliable - might be pretty hard to catch this YesFlake...</p>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -114,21 +123,23 @@ function BrowseItem({ browseUsers }) {
             )}
             {browseUsers.length > 0 && (
 
-            <div className={matched ? "matched-box" : "hidden-matched-box"}>
-                <h2>Boom!</h2>
-                <div className="overlap-pics-container">
-                    <img className="overlap-pic ov1" src={currentUser.picture_1}></img>
-                    <img className="overlap-pic ov2" src={matchedUser.picture_1}></img>
-                </div>
-                <p>They like you too! Don't let this match get too cold and send them a message.</p>
-                {/* <form onSubmit={sendMatchMessage}>
+                <div className={matched ? "matched-box" : "hidden-matched-box"}>
+                    <h2>Boom!</h2>
+                    <div className="overlap-pics-container">
+                        <img className="overlap-pic ov1" src={currentUser.picture_1}
+                            onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
+                        <img className="overlap-pic ov2" src={matchedUser.picture_1}
+                            onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
+                    </div>
+                    <p>They like you too! Don't let this match get too cold and send them a message.</p>
+                    {/* <form onSubmit={sendMatchMessage}>
                     <div className="initiate-message-input">
                         <input type="text" value={message} onChange={(e) => setMessage(e.target.value)}></input>
                         <button type="submit">Send</button>
                     </div>
                 </form> */}
-                <p onClick={keepBrowsing}>Keep Browsing</p>
-            </div>
+                    <p onClick={keepBrowsing} className="keep-browsing">Keep Browsing</p>
+                </div>
             )}
         </>
     )

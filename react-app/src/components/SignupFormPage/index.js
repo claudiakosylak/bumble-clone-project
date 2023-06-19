@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
 import './SignupForm.css';
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function SignupFormPage() {
   const [gender, setGender] = useState("");
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [errors, setErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [backendErrors, setBackendErrors] = useState([])
@@ -24,6 +26,9 @@ function SignupFormPage() {
   let compareDate = currentDate
   compareDate.setFullYear(compareDate.getFullYear() - 18)
   let enteredDateConverted = new Date(dateOfBirth)
+  const todayCompare = new Date(dateOfBirth)
+
+  const states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
 
 
   useEffect(() => {
@@ -35,17 +40,32 @@ function SignupFormPage() {
         phoneVal = true;
       }
     }
+
+    let atCounter = 0;
+    for (let char of email) {
+      if (char === "@") {
+        atCounter++;
+      }
+    }
     if (phone.length < 10 || phoneVal) newErrors.phone = "Please enter a valid 10 digit phone number with no special characters, starting with the area code."
     if (password !== confirmPassword) newErrors.password = "Confirm Password field must be the same as the Password field."
-    if (!email.includes("@") || (!email.includes(".com") && !email.includes(".io"))) newErrors.email = "Please enter a valid email address."
+    if (password.length > 20) newErrors.password = "Please enter a password that is less than 20 characters long."
+    if (!email.includes("@") || !email.includes(".") || atCounter > 1 || email.length === 0 || email.length > 50) newErrors.email = "Please enter a valid email address under 50 characters containing only one '@' and at least one '.'."
     if (!firstName) newErrors.firstName = "Please enter your first name."
+    if (firstName.length > 20) newErrors.firstName = "Please enter a first name under 20 characters."
     if (!gender) newErrors.gender = "Please select a gender option."
     if (!lookingForGender) newErrors.lookingForGender = "Please select what gender(s) you are interested in."
     if (!state) newErrors.state = "Please enter your state."
     if (!city) newErrors.city = "Please enter your city."
-    if (enteredDateConverted > compareDate) newErrors.dateOfBirth = "Sorry, only users over the age of 18 are allowed to use this website."
+    if (city.length > 30) newErrors.city = "Please enter a city name under 30 characters."
+    if (enteredDateConverted > compareDate && todayCompare < currentDate) newErrors.dateOfBirth = "Sorry, only users over the age of 18 are allowed to use this website."
+    if (todayCompare > currentDate) newErrors.dateOfBirth = "Please enter a valid birth date in the past."
+    if (imageUrl.length > 255) newErrors.imageLength = "Please enter an image url under 255 characters."
+    if ((imageUrl.slice(imageUrl.length - 4) !== ".jpg" && imageUrl.slice(imageUrl.length - 4) !== ".png" && imageUrl.slice(imageUrl.length - 5) !== ".jpeg")) newErrors.imageEnding = "Please enter an image url ending in .jpg, .png or .jpeg"
+    if ((imageUrl.slice(0, 7) !== "http://" && imageUrl.slice(0, 8) !== "https://")) newErrors.imageBeginning = "Please enter an image url beginning with 'http://' or 'https://' "
+
     setErrors(newErrors)
-  }, [firstName, phone, email, dateOfBirth, password, confirmPassword, lookingForGender, gender, state, city])
+  }, [firstName, phone, email, dateOfBirth, password, confirmPassword, lookingForGender, gender, state, city, imageUrl])
 
   if (sessionUser) return <Redirect to="/app" />;
 
@@ -63,7 +83,8 @@ function SignupFormPage() {
         looking_for_gender: lookingForGender,
         gender,
         state,
-        city
+        city,
+        picture_1: imageUrl
       }
       const data = await dispatch(signUp(newUser));
       if (data) {
@@ -78,6 +99,7 @@ function SignupFormPage() {
     <div className="signup-wrapper">
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit} className="signup-form-container">
+        <p>All fields are required</p>
         <ul>
           {backendErrors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
@@ -158,15 +180,13 @@ function SignupFormPage() {
         {(hasSubmitted && errors.city) && (
           <p>{errors.city}</p>
         )}
-        <label>
+        <select value={state} onChange={(e) => setState(e.target.value)} required>
           State
-          <input
-            type="text"
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-            required
-          />
-        </label>
+          <option value="" disabled>State</option>
+          {states.map(state => (
+            <option value={state} key={state}>{state}</option>
+          ))}
+        </select>
         {(hasSubmitted && errors.state) && (
           <p>{errors.state}</p>
         )}
@@ -181,6 +201,23 @@ function SignupFormPage() {
         </label>
         {(hasSubmitted && errors.dateOfBirth) && (
           <p>{errors.dateOfBirth}</p>
+        )}
+        <label>Provide a profile picture url
+          <input
+            type="text"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+            required
+          />
+        </label>
+        {(hasSubmitted && errors.imageLength) && (
+          <p>{errors.imageLength}</p>
+        )}
+        {(hasSubmitted && errors.imageEnding) && (
+          <p>{errors.imageEnding}</p>
+        )}
+        {(hasSubmitted && errors.imageBeginning) && (
+          <p>{errors.imageBeginning}</p>
         )}
         <label>
           Password
@@ -204,6 +241,7 @@ function SignupFormPage() {
           <p>{errors.password}</p>
         )}
         <button type="submit">Sign Up</button>
+        <p>Already have an account? <NavLink to="/login">Log in here</NavLink></p>
       </form>
     </div>
   );
