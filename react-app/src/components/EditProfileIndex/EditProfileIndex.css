@@ -9,6 +9,10 @@
     display: flex;
 }
 
+.non-active-about {
+    display: none;
+}
+
 
 .right-edit-profile-container {
     display: flex;
