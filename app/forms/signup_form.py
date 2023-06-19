@@ -33,3 +33,4 @@ class SignUpForm(FlaskForm):
     gender = SelectField('gender', default="Gender", choices=["Woman", "Man", "Nonbinary", "Other"], validators=[DataRequired()])
     state = SelectField('state', default="State", choices=states, validators=[DataRequired()])
     city = StringField('city', validators=[DataRequired()])
+    picture_1 = StringField('picture_1', validators=[DataRequired()])

@@ -71,7 +71,8 @@ def sign_up():
             looking_for_gender = form.data['looking_for_gender'],
             gender = form.data['gender'],
             state = form.data['state'],
-            city = form.data['city']
+            city = form.data['city'],
+            picture_1 = form.data['picture_1']
         )
         db.session.add(user)
         db.session.commit()

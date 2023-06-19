@@ -18,6 +18,7 @@ function SignupFormPage() {
   const [gender, setGender] = useState("");
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [errors, setErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [backendErrors, setBackendErrors] = useState([])
@@ -59,8 +60,12 @@ function SignupFormPage() {
     if (city.length > 30) newErrors.city = "Please enter a city name under 30 characters."
     if (enteredDateConverted > compareDate && todayCompare < currentDate) newErrors.dateOfBirth = "Sorry, only users over the age of 18 are allowed to use this website."
     if (todayCompare > currentDate) newErrors.dateOfBirth = "Please enter a valid birth date in the past."
+    if (imageUrl.length > 255) newErrors.imageLength = "Please enter an image url under 255 characters."
+    if ((imageUrl.slice(imageUrl.length - 4) !== ".jpg" && imageUrl.slice(imageUrl.length - 4) !== ".png" && imageUrl.slice(imageUrl.length - 5) !== ".jpeg")) newErrors.imageEnding = "Please enter an image url ending in .jpg, .png or .jpeg"
+    if ((imageUrl.slice(0, 7) !== "http://" && imageUrl.slice(0, 8) !== "https://")) newErrors.imageBeginning = "Please enter an image url beginning with 'http://' or 'https://' "
+
     setErrors(newErrors)
-  }, [firstName, phone, email, dateOfBirth, password, confirmPassword, lookingForGender, gender, state, city])
+  }, [firstName, phone, email, dateOfBirth, password, confirmPassword, lookingForGender, gender, state, city, imageUrl])
 
   if (sessionUser) return <Redirect to="/app" />;
 
@@ -78,7 +83,8 @@ function SignupFormPage() {
         looking_for_gender: lookingForGender,
         gender,
         state,
-        city
+        city,
+        picture_1: imageUrl
       }
       const data = await dispatch(signUp(newUser));
       if (data) {
@@ -93,7 +99,7 @@ function SignupFormPage() {
     <div className="signup-wrapper">
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit} className="signup-form-container">
-    <p>All fields are required</p>
+        <p>All fields are required</p>
         <ul>
           {backendErrors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
@@ -176,10 +182,10 @@ function SignupFormPage() {
         )}
         <select value={state} onChange={(e) => setState(e.target.value)} required>
           State
-          <option value ="" disabled>State</option>
-            {states.map(state => (
-              <option value={state} key={state}>{state}</option>
-            ))}
+          <option value="" disabled>State</option>
+          {states.map(state => (
+            <option value={state} key={state}>{state}</option>
+          ))}
         </select>
         {(hasSubmitted && errors.state) && (
           <p>{errors.state}</p>
@@ -195,6 +201,23 @@ function SignupFormPage() {
         </label>
         {(hasSubmitted && errors.dateOfBirth) && (
           <p>{errors.dateOfBirth}</p>
+        )}
+        <label>Provide a profile picture url
+          <input
+            type="text"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+            required
+          />
+        </label>
+        {(hasSubmitted && errors.imageLength) && (
+          <p>{errors.imageLength}</p>
+        )}
+        {(hasSubmitted && errors.imageEnding) && (
+          <p>{errors.imageEnding}</p>
+        )}
+        {(hasSubmitted && errors.imageBeginning) && (
+          <p>{errors.imageBeginning}</p>
         )}
         <label>
           Password
