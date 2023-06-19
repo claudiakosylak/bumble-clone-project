@@ -1,6 +1,41 @@
 from app.models import db, User, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import datetime
+import random
+
+female_names = [
+    "Emma", "Olivia", "Ava", "Isabella", "Sophia", "Mia", "Charlotte", "Amelia", "Harper", "Evelyn",
+    "Abigail", "Emily", "Elizabeth", "Mila", "Ella", "Avery", "Sofia", "Camila", "Aria", "Scarlett",
+    "Victoria", "Madison", "Luna", "Grace", "Chloe", "Penelope", "Layla", "Riley", "Zoey", "Nora",
+    "Lily", "Eleanor", "Hannah", "Lillian", "Addison", "Aubrey", "Ellie", "Stella", "Natalie", "Zoe",
+    "Leah", "Hazel", "Violet", "Aurora", "Savannah", "Audrey", "Brooklyn", "Bella", "Claire", "Skylar"
+]
+
+states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
+
+looking_for_gender_choices = ["Women", "Men", "Both", "Nonbinary", "Open"]
+
+women = []
+random_phone = 5555555555
+for name in female_names:
+    dob = datetime.strptime(f"{random.randint(1970, 2004)}-10-11", '%Y-%m-%d')
+    random_phone += 1
+    phone = str(random_phone)
+    woman = {
+        "flake_score": random.randint(1, 100),
+        "first_name": name,
+        "email": f"{name.lower()}@email.com",
+        "password": "password",
+        "date_of_birth": dob.date(),
+        "phone": phone,
+        "looking_for_gender": random.choice(looking_for_gender_choices),
+        "state": random.choice(states),
+        "city": f"{random.choice(states)} City",
+        "gender": "Woman"
+    }
+    women.append(woman)
+
+print("🍎 WOMEN: ", women)
 
 dob1 = datetime.strptime('1990-11-11', '%Y-%m-%d')
 dob2 = datetime.strptime('1991-11-11', '%Y-%m-%d')
@@ -45,6 +80,13 @@ def seed_users():
     db.session.add(bonnie)
     db.session.commit()
 
+    for woman in women:
+        newUser = User(
+            flake_score = woman["flake_score"], first_name = woman["first_name"], email = woman["email"], password = woman["password"], date_of_birth = woman["date_of_birth"], phone = woman["phone"], looking_for_gender = woman["looking_for_gender"], state = woman["state"], city = woman["city"], gender = woman["gender"]
+        )
+        db.session.add(newUser)
+
+    db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
 # have a built in function to do this. With postgres in production TRUNCATE
