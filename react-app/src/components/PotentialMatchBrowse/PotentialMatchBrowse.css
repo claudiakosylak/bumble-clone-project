@@ -3,6 +3,7 @@
     flex-direction: column;
     width: 100%;
     height: 100vh;
+    position: relative;
 }
 
 .browse-header {
@@ -24,5 +25,33 @@
 }
 
 .main-browse-box {
+    display: flex;
+}
+
+.filter-settings-dropdown {
+    position: absolute;
+    border: 1px solid lightgrey;
+    border-radius: 23px;
+    top: 100px;
+    left: 30px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    width: 400px;
+    height: 300px;
+    background-color: white;
+    padding: 40px;
+}
+
+.hidden {
+    display: none;
+}
+
+.age-inputs {
+    display: flex;
+    justify-content: center;
+}
+
+.filter-buttons {
     display: flex;
 }
