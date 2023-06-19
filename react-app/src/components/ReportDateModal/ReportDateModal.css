@@ -1,3 +1,15 @@
-/* .hidden-report-form {
+.hidden-report-form {
     display: none;
-} */
+}
+
+.active-date-report-button {
+    background-color: #80f;
+    color: white;
+}
+
+.date-report-button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 0 20px;
+}
