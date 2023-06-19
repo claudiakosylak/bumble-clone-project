@@ -15,11 +15,33 @@ function ConversationList({ messagedMatches }) {
         history.push("/app/connections")
     }
 
+    // function compareMessageTime(a, b) {
+    //     const aDate = new Date(a.last_message.created_at)
+    //     const bDate = new Date(b.last_message.created_at)
+    //     console.log("THIS IS A: ", aDate)
+    //     console.log("THIS IS B: ", bDate)
+
+    //     if (aDate > bDate) return -1;
+    //     if (bDate > aDate) return 1;
+    //     return 0;
+    // }
+
+    const sortedMatches = messagedMatches.sort((a, b) => {
+        const aDate = new Date(a.last_message.created_at)
+        const bDate = new Date(b.last_message.created_at)
+        console.log("THIS IS A: ", aDate)
+        console.log("THIS IS B: ", bDate)
+
+        if (aDate > bDate) return -1;
+        if (bDate > aDate) return 1;
+        return 0;
+    })
     console.log("MESSAGED MATCHES: ", messagedMatches)
+    console.log("sorted MATCHES: ", sortedMatches)
     return (
         <ul className="conversations-list-wrapper" >
-            {messagedMatches.map(match => (
-                <li key={match.id} onClick={() => handlePicClick(match)}>
+            {sortedMatches.map(match => (
+                <li key={match.last_message.created_at.id} onClick={() => handlePicClick(match)}>
                     <div className={`conversation-list-item ${(currentMatch && currentMatch.id === match.id) && "active-convo"}`}>
                         <img className="mini-match-icons" src={match.picture_1}
                             onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
