@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
 import './SignupForm.css';
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -217,6 +218,7 @@ function SignupFormPage() {
           <p>{errors.password}</p>
         )}
         <button type="submit">Sign Up</button>
+        <p>Already have an account? <NavLink to="/login">Log in here</NavLink></p>
       </form>
     </div>
   );
