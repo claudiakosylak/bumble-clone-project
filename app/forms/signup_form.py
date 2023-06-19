@@ -19,6 +19,8 @@ def phone_exists(form, field):
     if user:
         raise ValidationError('Phone number is already in use.')
 
+states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
+
 
 class SignUpForm(FlaskForm):
     first_name = StringField(
@@ -29,5 +31,5 @@ class SignUpForm(FlaskForm):
     password = StringField('password', validators=[DataRequired()])
     looking_for_gender = SelectField('looking_for_gender', default="Looking for:", choices=["Women", "Men", "Both", "Nonbinary", "Open"], validators=[DataRequired()])
     gender = SelectField('gender', default="Gender", choices=["Woman", "Man", "Nonbinary", "Other"], validators=[DataRequired()])
-    state = StringField('state', default="State", validators=[DataRequired()])
-    city = StringField('city', default="City", validators=[DataRequired()])
+    state = SelectField('state', default="State", choices=states, validators=[DataRequired()])
+    city = StringField('city', validators=[DataRequired()])
