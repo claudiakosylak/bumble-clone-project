@@ -9,6 +9,75 @@ import ReportGhostModal from "../ReportGhostModal";
 import ReportDateModal from "../ReportDateModal";
 import { deleteMatchThunk, getMatch, getMatchesThunk, potentialMatchesThunk } from "../../store/match";
 
+export const dateTransformer = (date) => {
+    const dateObj = new Date(date);
+    const year = dateObj.getFullYear()
+    const dayOfWeek = dateObj.getDay()
+    const daysOfWeek = {
+        1: "Monday",
+        2: "Tuesday",
+        3: "Wednesday",
+        4: "Thursday",
+        5: "Friday",
+        6: "Saturday",
+        7: "Sunday"
+    }
+    const months = {
+        0: "January",
+        1: "February",
+        2: "March",
+        3: "April",
+        4: "May",
+        5: "June",
+        6: "July",
+        7: "August",
+        8: "September",
+        9: "October",
+        10: "November",
+        11: "December"
+    }
+    const month = dateObj.getMonth()
+    const day = dateObj.getDate()
+    let hour = dateObj.getHours()
+    let amPm
+
+    if (hour > 12) {
+        hour -= 12;
+        amPm = "PM"
+    } else if (hour < 12) {
+        amPm = "AM"
+    } else {
+        amPm = "PM"
+    }
+
+    let minutes = dateObj.getMinutes()
+    if (minutes < 10) {
+        minutes = "0" + minutes.toString()
+    }
+    console.log("orig date: ", dateObj)
+    let timeZone
+    if (dateObj.toString().includes("Central Standard Time")) {
+        timeZone = "CST"
+        console.log("CENTRAL? ", timeZone)
+    }
+
+    return {
+        dayOfWeek: daysOfWeek[dayOfWeek],
+        month: months[month],
+        day: day,
+        hour: hour,
+        minutes: minutes,
+        amPm: amPm,
+        year: year
+    }
+    // return [daysOfWeek[dayOfWeek], months[month], day, hour, minutes, amPm, year]
+}
+
+export const niceDateString = dateObj => {
+    return `${dateObj.dayOfWeek}, ${dateObj.month} ${dateObj.day} at ${dateObj.hour}:${dateObj.minutes} ${dateObj.amPm}`
+}
+
+
 function ConversationViewHeader({ dateRequests }) {
     // gets all of the date reports the current user has made to others and turns it into an array
     const madeReportsObj = useSelector(state => state.dateReport.madeDateReports)
@@ -40,8 +109,6 @@ function ConversationViewHeader({ dateRequests }) {
         dateDate = new Date(currentDate.scheduled_date)
     }
     const dispatch = useDispatch();
-
-    console.log("MADE REPORTS: ", madeReports)
 
     // update store with freshest list of all user's dates on mount, as well as all the user's created date reports
     useEffect(() => {
@@ -105,20 +172,20 @@ function ConversationViewHeader({ dateRequests }) {
             {(allDateMatchIds.includes(currentMatch.matchId)) && (
                 <div className="scheduled-status">
                     <i class="fa-regular fa-calendar-days"></i>
-                    <p className="scheduled-status-text">You {dateDate > todaysDate ? "are" : "were"} scheduled for a date on {currentDate.scheduled_date}</p>
+                    <p className="scheduled-status-text">You {dateDate > todaysDate ? "are" : "were"} scheduled for a date on {niceDateString(dateTransformer(currentDate.scheduled_date))}</p>
                 </div>
             )}
 
             {(dateRequested && (
                 <div className="scheduled-status">
                     <i class="fa-regular fa-calendar-days"></i>
-                    <p className="scheduled-status-text">You have requested a date for {dateRequested.suggested_date}</p>
+                    <p className="scheduled-status-text">You have requested a date for {niceDateString(dateTransformer(dateRequested.suggested_date))}</p>
                 </div>
             ))}
             {(dateRequester && (
                 <div className="scheduled-status">
                     <i class="fa-regular fa-calendar-days"></i>
-                    <p className="scheduled-status-text">{currentMatch.first_name} has requested a date for {dateRequester.suggested_date}</p>
+                    <p className="scheduled-status-text">{currentMatch.first_name} has requested a date for {niceDateString(dateTransformer(dateRequester.suggested_date))}</p>
                 </div>
             ))}
             {(!currentDate && !dateRequester && !dateRequested) && (

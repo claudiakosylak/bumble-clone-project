@@ -15,30 +15,14 @@ function ConversationList({ messagedMatches }) {
         history.push("/app/connections")
     }
 
-    // function compareMessageTime(a, b) {
-    //     const aDate = new Date(a.last_message.created_at)
-    //     const bDate = new Date(b.last_message.created_at)
-    //     console.log("THIS IS A: ", aDate)
-    //     console.log("THIS IS B: ", bDate)
-
-    //     if (aDate > bDate) return -1;
-    //     if (bDate > aDate) return 1;
-    //     return 0;
-    // }
-
     const sortedMatches = messagedMatches.toSorted((a, b) => {
         const aDate = new Date(a.last_message.created_at)
         const bDate = new Date(b.last_message.created_at)
-        console.log("THIS IS A: ", a.last_message.created_at)
-        console.log("THIS IS B: ", b.last_message.created_at)
 
         if (aDate > bDate) return -1;
         if (bDate > aDate) return 1;
         return 0;
-        // return a.last_message.created_at - b.last_message.created_at
     })
-    console.log("MESSAGED MATCHES: ", messagedMatches)
-    console.log("sorted MATCHES: ", sortedMatches)
     return (
         <ul className="conversations-list-wrapper" >
             {sortedMatches.map(match => (
