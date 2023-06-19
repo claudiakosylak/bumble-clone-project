@@ -7,8 +7,18 @@ import { createDateRequestThunk, getDateRequestsThunk } from "../../store/date";
 function RequestDateModal({match}) {
     const { closeModal } = useModal();
     const [scheduleDay, setScheduleDay] = useState("")
-    const [scheduleTime, setScheduleTime] = useState("")
+    const [errors, setErrors] = useState({})
+    const errorsArr = Object.values(errors)
     const dispatch = useDispatch();
+    const currentDate = new Date();
+    const scheduleDate = new Date(scheduleDay);
+
+
+    useEffect(() => {
+        const newErrors = {}
+        if (scheduleDate < currentDate) newErrors.past = "Please select a date and time in the future."
+        setErrors(newErrors)
+    }, [scheduleDay])
 
     const handleSubmit = async (e) => {
 
@@ -32,7 +42,10 @@ function RequestDateModal({match}) {
                         required
                     />
                 </label>
-                <button type="submit">Request Date</button>
+                {errors.past && (
+                    <p>{errors.past}</p>
+                )}
+                <button type="submit" disabled={errorsArr.length > 0}>Request Date</button>
             </form>
         </div>
     )
