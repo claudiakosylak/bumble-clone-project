@@ -6,7 +6,7 @@ import "./LeftMatchesBar.css";
 import { NavLink, useHistory } from "react-router-dom";
 import ConversationList from "../ConversationList";
 
-function LeftMatchesBar({isLoaded}) {
+function LeftMatchesBar({ isLoaded }) {
     const matchesObj = useSelector(state => state.match.currentMatches)
     const currentMatch = useSelector(state => state.match.currentMatch)
     const matches = Object.values(matchesObj)
@@ -31,33 +31,34 @@ function LeftMatchesBar({isLoaded}) {
         history.push("/app/connections")
     }
 
+
     return (
         <div className="left-matches-wrapper">
-            <Navigation isLoaded={isLoaded}/>
+            <Navigation isLoaded={isLoaded} />
+                    {(currentMatch.id && currentMatch.last_message) && (
+                        <NavLink to="/app" className="back-to-browse">Back to meeting new people<i class="fa-solid fa-angle-right"></i></NavLink>
+                    )}
             <p className="left-headers">Unmessaged Matches ({unMessagedMatches.length})</p>
-        <ul className="unmessaged-matches-wrapper">
-            <div className="inner-wrapper">
-            {unMessagedMatches.length > 0 ? unMessagedMatches.map(match => (
-                <li key={match.id} className="scroll-match-item"><img onClick={() => handlePicClick(match)} className="mini-match-icons" src={match.picture_1}></img></li>
-            )) : (
-                <p>You don't have any matches yet!</p>
-            )}
+            <ul className="unmessaged-matches-wrapper">
+                <div className="inner-wrapper">
+                    {unMessagedMatches.length > 0 ? unMessagedMatches.map(match => (
+                        <li key={match.id} className="scroll-match-item"><img onClick={() => handlePicClick(match)} className="mini-match-icons" src={match.picture_1}></img></li>
+                    )) : (
+                        <p>You don't have any matches yet!</p>
+                    )}
 
-            </div>
-        </ul>
-        <div>
-            {(currentMatch.id && currentMatch.last_message) && (
-                <NavLink to="/app">Get back to swiping</NavLink>
+                </div>
+            </ul>
+
+
+            <p className="left-headers">Conversations</p>
+            {messagedMatches.length > 0 ? (
+                <ConversationList messagedMatches={messagedMatches} />
+
+            ) : (
+                <p>You haven't started any conversations yet</p>
             )}
         </div>
-        <p className="left-headers">Conversations</p>
-        {messagedMatches.length > 0 ? (
-            <ConversationList messagedMatches={messagedMatches}/>
-
-        ): (
-            <p>You haven't started any conversations yet</p>
-        )}
-    </div>
     )
 }
 

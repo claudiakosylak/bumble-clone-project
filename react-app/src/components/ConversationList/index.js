@@ -16,17 +16,20 @@ function ConversationList({ messagedMatches }) {
     }
 
     const sortedMatches = messagedMatches.toSorted((a, b) => {
-        const aDate = new Date(a.last_message.created_at)
-        const bDate = new Date(b.last_message.created_at)
+        const aId = a.last_message.id
+        const bId = b.last_message.id
 
-        if (aDate > bDate) return -1;
-        if (bDate > aDate) return 1;
+        if (aId > bId) return -1;
+        if (bId > aId) return 1;
         return 0;
     })
+
+    console.log("SORTED MATCHES: ", )
     return (
         <ul className="conversations-list-wrapper" >
             {sortedMatches.map(match => (
                 <li key={match.last_message.created_at.id} onClick={() => handlePicClick(match)}>
+                    {console.log("MATCH LAST MESSAGE: ", match.last_message)}
                     <div className={`conversation-list-item ${(currentMatch && currentMatch.id === match.id) && "active-convo"}`}>
                         <img className="mini-match-icons" src={match.picture_1}
                             onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
