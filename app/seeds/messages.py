@@ -102,11 +102,32 @@ conversation7 = [
     ["Person B", "I'm a fan of red wines, especially Cabernet Sauvignon. But I'm open to trying new varieties. How about you?"],
 ]
 
+conversation8 = [
+    ["Person A", "Hi there! I came across your profile, and something about you seemed familiar. Did we happen to go to college together?"],
+    ["Person B", "Oh, wow! Now that you mention it, I think we did. It's been a while though. How have you been?"],
+    ["Person A", "I've been good, thanks! It's surprising to find someone from college on this app. What have you been up to since then?"],
+    ["Person B", "Well, I graduated and pursued a career in marketing. It's been quite a journey. How about you? What path did you take?"],
+    ["Person A", "I actually ended up in software engineering. It's funny how life takes us in different directions. Did you have any favorite memories from our college days?"],
+    ["Person B", "Oh, definitely! Late-night study sessions, spontaneous road trips, and the friendships we formed. Those were some great times."],
+    ["Person A", "Absolutely! It's nostalgic to think about all the memories we shared. It's nice to reconnect after all these years."],
+    ["Person B", "Agreed! It's a small world, and it's always nice to catch up with familiar faces. So, how has life treated you since college?"],
+]
 
 
 
 def seed_messages():
     #Below are the seed conversations for demo user
+
+    for message in conversation8:
+        if message[0] == "Person A":
+            user = 14
+        else:
+            user = 1
+        newMessage8 = Message(
+            match_id = 8, user_id = user, content = message[1]
+        )
+        db.session.add(newMessage8)
+    db.session.commit()
 
     for message in conversation4:
         if message[0] == "Person A":
