@@ -1,7 +1,15 @@
 .signup-form-container {
     display: flex;
+    /* flex-direction: column; */
     flex-direction: column;
-    width: 400px;
+    width: 60%;
+    justify-content: space-between;
+    margin-top: 30px;
+    align-items: space-between;
+}
+.signup-form-top {
+    display: flex;
+    justify-content: space-between;
 }
 
 .signup-form-container label {
@@ -13,4 +21,86 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.signup-logo-wrapper {
+    display: flex;
+    text-decoration: none;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.signup-form-container input {
+    border-radius: 30px;
+    height: 40px;
+    border: 1px solid lightgrey;
+    padding: 0 10px;
+    color: grey;
+}
+.signup-form-container select {
+    border-radius: 30px;
+    height: 40px;
+    border: 1px solid lightgrey;
+    padding: 0 10px;
+    color: grey;
+}
+
+.signup-form-container input:focus {
+    outline: 1px solid #80f;
+}
+
+.signup-form-container select:focus {
+    outline: 1px solid #80f;
+}
+
+.signup-form-container > p {
+    text-align: center;
+}
+
+.enter-info-text {
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 50px;
+}
+
+.signup-form-left {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.signup-form-right {
+    width: 45%;
+    flex-direction: column;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-form-bottom {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+
+.signup-form-container button {
+    padding: 15px;
+    background-color: #80f;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.signup-form-container button:hover {
+    cursor: pointer;
+}
+
+.login-switch {
+    text-decoration: none;
 }
