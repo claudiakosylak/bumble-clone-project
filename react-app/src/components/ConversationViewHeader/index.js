@@ -20,7 +20,7 @@ export const dateTransformer = (date) => {
         4: "Thursday",
         5: "Friday",
         6: "Saturday",
-        7: "Sunday"
+        0: "Sunday"
     }
     const months = {
         0: "January",
