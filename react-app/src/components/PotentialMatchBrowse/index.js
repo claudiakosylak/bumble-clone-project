@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./PotentialMatchBrowse.css";
 import { potentialMatchesThunk } from "../../store/match";
 import BrowseItem from "../BrowseItem";
+import { ageChanger } from "../BrowseItem";
 
 
 function PotentialMatchBrowse() {
@@ -12,24 +13,30 @@ function PotentialMatchBrowse() {
     const [showMenu, setShowMenu] = useState(false);
     const [gender, setGender] = useState(user ? user.looking_for_gender : "Both")
     const [ageMin, setAgeMin] = useState(18)
+    const [genderApplied, setGenderApplied] = useState(user ? user.looking_for_gender : "Both")
+    const [ageMinApplied, setAgeMinApplied] = useState(18)
+    const [ageMaxApplied, setAgeMaxApplied] = useState(99)
     const [ageMax, setAgeMax] = useState(99)
     const [errors, setErrors] = useState({})
     const dispatch = useDispatch();
     const filterRef = useRef();
 
     let filteredMatches = potentialMatchesArr.filter(match => {
-        if (gender === "Women") {
-            return match.gender === "Woman"
-        } else if (gender === "Men") {
-            return match.gender === "Man"
-        } else if (gender === "Both") {
-            return (match.gender === "Man" || match.gender === "Woman")
-        } else if (gender === "Nonbinary") {
-            return match.gender === "Nonbinary"
+        const age = ageChanger(match.date_of_birth)
+        if (genderApplied === "Women") {
+            return (match.gender === "Woman" && age >= ageMinApplied && age <= ageMaxApplied)
+        } else if (genderApplied === "Men") {
+            return (match.gender === "Man" && age >= ageMinApplied && age <= ageMaxApplied)
+        } else if (genderApplied === "Both") {
+            return ((match.gender === "Man" || match.gender === "Woman") && age >= ageMinApplied && age <= ageMaxApplied)
+        } else if (genderApplied === "Nonbinary") {
+            return (match.gender === "Nonbinary" && age >= ageMinApplied && age <= ageMaxApplied)
         } else {
-            return true;
+            return age >= ageMinApplied && age <= ageMaxApplied;
         }
     })
+
+
 
     useEffect(() => {
         dispatch(potentialMatchesThunk())
@@ -67,6 +74,13 @@ function PotentialMatchBrowse() {
     const ulClassName = "filter-settings-dropdown" + (showMenu ? "" : " hidden");
     const closeMenu = () => setShowMenu(false);
 
+    const applyFilters = () => {
+        setGenderApplied(gender)
+        setAgeMinApplied(ageMin)
+        setAgeMaxApplied(ageMax)
+        closeMenu()
+    }
+
     return (
         <div className="potential-match-browse-wrapper">
             <div className="browse-header">
@@ -100,8 +114,8 @@ function PotentialMatchBrowse() {
                     <p>{errors.ageMax}</p>
                 )}
                 <div className="filter-buttons">
-                    <p onClick={closeMenu}>Cancel</p>
-                    <button>Apply</button>
+                    <p onClick={closeMenu}>Close</p>
+                    <button onClick={applyFilters}>Apply</button>
                 </div>
             </div>
             <BrowseItem browseUsers={filteredMatches} />
