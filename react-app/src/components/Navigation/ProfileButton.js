@@ -25,7 +25,7 @@ function ProfileButton({ user }) {
     history.push("/app/schedule")
   }
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const ulClassName = "profile-dropdown-menu" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
   return (
@@ -44,12 +44,12 @@ function ProfileButton({ user }) {
                 onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
               <div></div>
             </div>
-            <div classname="left-menu-items">
-              <li><i class="fa-regular fa-snowflake"></i>{user.flake_score}%</li>
-              <li ><button onClick={goToSchedule}>Scheduled Dates</button></li>
-              <li><NavLink to="/app/edit-profile">Edit Profile</NavLink></li>
+            <div id="left-menu-itemss">
+              <li className="user-flake-score"><i class="fa-regular fa-snowflake"></i>{user.flake_score}%</li>
+              <li className="profile-dropdown-item" onClick={goToSchedule}>Scheduled Dates</li>
+              <NavLink className="profile-dropdown-item" to="/app/edit-profile">Edit Profile</NavLink>
               <li>
-                <button onClick={handleLogout}>Log Out</button>
+                <button className="profile-dropdown-item" onClick={handleLogout}>Log Out</button>
               </li>
             </div>
           </>
