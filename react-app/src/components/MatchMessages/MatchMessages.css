@@ -96,6 +96,10 @@
     margin-right: 10px;
 }
 
+.fa-trash-can:hover {
+    cursor: pointer;
+}
+
 .make-first-move {
     align-self: center;
     text-align: center;
