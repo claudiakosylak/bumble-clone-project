@@ -46,7 +46,7 @@ function LeftMatchesBar({isLoaded}) {
             </div>
         </ul>
         <div>
-            {currentMatch.id && (
+            {(currentMatch.id && currentMatch.last_message) && (
                 <NavLink to="/app">Get back to swiping</NavLink>
             )}
         </div>

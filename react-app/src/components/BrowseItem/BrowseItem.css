@@ -140,7 +140,9 @@
     background-color: rgba(136, 0, 255, 0.903);
     color: white;
     height: 600px;
-    left: 370px;
+    right: 20px;
+    width: 100%;
+    left: 20px;
     top: 20px;
     right: 20px;
     border-radius: 23px;
