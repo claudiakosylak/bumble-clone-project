@@ -40,6 +40,8 @@ def upgrade():
     sa.Column('picture_5', sa.String(length=255)),
     sa.Column('picture_6', sa.String(length=255)),
     sa.Column('looking_for_gender', sa.String(length=20), nullable=False),
+    sa.Column('age_min', sa.Integer()),
+    sa.Column('age_max', sa.Integer()),
     sa.Column('state', sa.String(length=40), nullable=False),
     sa.Column('city', sa.String(length=40), nullable=False),
     sa.Column('gender', sa.String(length=20), nullable=False),

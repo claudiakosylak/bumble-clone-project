@@ -30,6 +30,24 @@ export const updateAboutThunk = (about) => async dispatch => {
 	}
 }
 
+// thunk to update a user's search filter preferences
+export const updateFiltersThunk = (gender, ageMin, ageMax) => async dispatch => {
+	const res = await fetch("/api/users/filters", {
+		method: "PUT",
+		headers: { "Content-Type" : "application/json"},
+		body: JSON.stringify({
+			gender,
+			age_min: ageMin,
+			age_max: ageMax
+		})
+	})
+		if (res.ok) {
+			const newUser = await res.json()
+			dispatch(setUser(newUser))
+			return newUser;
+		}
+}
+
 // thunk to update a photo for the current user
 
 export const updatePhotoThunk = (photoNum, picture_url) => async dispatch => {

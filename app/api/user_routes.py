@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import User, db
 from app.forms import UpdateAboutForm, UploadPhotoForm
@@ -23,6 +23,18 @@ def update_about():
     form = UpdateAboutForm()
     user = User.query.get(current_user.id)
     user.about = form.data["about"]
+    db.session.commit()
+    return user.to_dict()
+
+@user_routes.route("/filters", methods=["PUT"])
+@login_required
+def update_filters():
+    """ Updates a user's search filter preferences """
+    data = request.get_json()
+    user = User.query.get(current_user.id)
+    user.looking_for_gender = data["gender"]
+    user.age_min = data["age_min"]
+    user.age_max = data["age_max"]
     db.session.commit()
     return user.to_dict()
 
