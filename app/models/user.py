@@ -27,6 +27,8 @@ class User(db.Model, UserMixin):
     picture_5 = db.Column(db.String(255))
     picture_6 = db.Column(db.String(255))
     looking_for_gender = db.Column(db.String(20), nullable=False)
+    age_min = db.Column(db.Integer, default=18)
+    age_max = db.Column(db.Integer, default=99)
     state = db.Column(db.String(40), nullable=False)
     city = db.Column(db.String(40), nullable=False)
     gender = db.Column(db.String(20), nullable=False)
@@ -66,6 +68,8 @@ class User(db.Model, UserMixin):
             'picture_5': self.picture_5,
             'picture_6': self.picture_6,
             'looking_for_gender': self.looking_for_gender,
+            'age_min': self.age_min,
+            'age_max': self.age_max,
             'state': self.state,
             'city': self.city,
             'gender': self.gender,

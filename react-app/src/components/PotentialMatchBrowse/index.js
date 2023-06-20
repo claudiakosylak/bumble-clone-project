@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./PotentialMatchBrowse.css";
 import { potentialMatchesThunk } from "../../store/match";
+import { updateFiltersThunk } from "../../store/session";
 import BrowseItem from "../BrowseItem";
 import { ageChanger } from "../BrowseItem";
 
@@ -12,14 +13,15 @@ function PotentialMatchBrowse() {
     const user = useSelector(state => state.session.user)
     const [showMenu, setShowMenu] = useState(false);
     const [gender, setGender] = useState(user ? user.looking_for_gender : "Both")
-    const [ageMin, setAgeMin] = useState(18)
+    const [ageMin, setAgeMin] = useState(user ? user.age_min : 18)
     const [genderApplied, setGenderApplied] = useState(user ? user.looking_for_gender : "Both")
-    const [ageMinApplied, setAgeMinApplied] = useState(18)
-    const [ageMaxApplied, setAgeMaxApplied] = useState(99)
-    const [ageMax, setAgeMax] = useState(99)
+    const [ageMinApplied, setAgeMinApplied] = useState(user ? user.age_min : 18)
+    const [ageMaxApplied, setAgeMaxApplied] = useState(user ? user.age_max : 99)
+    const [ageMax, setAgeMax] = useState(user ? user.age_max : 99)
     const [errors, setErrors] = useState({})
     const dispatch = useDispatch();
     const filterRef = useRef();
+
 
     let filteredMatches = potentialMatchesArr.filter(match => {
         const age = ageChanger(match.date_of_birth)
@@ -75,10 +77,17 @@ function PotentialMatchBrowse() {
     const closeMenu = () => setShowMenu(false);
 
     const applyFilters = () => {
+        dispatch(updateFiltersThunk(gender, ageMin, ageMax))
         setGenderApplied(gender)
         setAgeMinApplied(ageMin)
         setAgeMaxApplied(ageMax)
         closeMenu()
+    }
+
+    if (user) {
+        console.log("AGE MIN: ", user.age_min)
+        console.log("AGE MAX: ", user.age_max)
+        console.log("GENDER: ", user.looking_for_gender)
     }
 
     return (
