@@ -40,7 +40,7 @@ function MatchMessages() {
             setMessages(messages => messages.filter(message => message.id !== delete_message.id))
         })
 
-        bottomRef.current?.scrollIntoView();
+        bottomRef.current?.scrollIntoView({behavior: 'smooth'});
 
         // when component unmounts, disconnect
         return (() => {
@@ -53,7 +53,7 @@ function MatchMessages() {
     }, [currentMatch])
 
     useEffect(() => {
-        bottomRef.current?.scrollIntoView();
+        bottomRef.current?.scrollIntoView({behavior: 'smooth'});
     }, [matchMessageLength])
 
     useEffect(() => {
