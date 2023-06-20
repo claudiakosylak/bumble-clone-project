@@ -58,6 +58,7 @@
   justify-content: space-between;
   align-items: center;
   margin: 15px;
+  width: 100%;
 }
 
 .left-menu-items {
@@ -67,8 +68,28 @@
   width: 100%;
 }
 
-.left-menu-items li {
+.profile-dropdown-menu {
+  background-color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid lightgrey;
+  height: 100%;
+}
+
+#left-menu-itemss li {
+  list-style-type: none;
   display: flex;
   justify-content: center;
-  width: 100%;
+}
+
+.user-flake-score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }

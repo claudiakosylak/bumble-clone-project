@@ -16,6 +16,7 @@
     padding: 10px;
     border-radius: 15px;
     margin: 5px;
+    word-break: break-word;
 }
 
 .other-message {
@@ -24,6 +25,7 @@
     padding: 10px;
     border-radius:15px 15px 15px 0;
     margin: 5px;
+    word-break: break-word;
 }
 
 .other-messages {
@@ -91,4 +93,5 @@
 
 .message-item-container {
     width: 60%;
+    word-break: break-word;
 }
