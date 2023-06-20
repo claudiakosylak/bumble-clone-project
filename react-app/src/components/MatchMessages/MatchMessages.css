@@ -13,6 +13,7 @@
     /* height: 90%; */
     overflow-y: scroll;
     bottom: 0;
+    padding: 0 10px;
 }
 
 #chat-input-form {
@@ -60,14 +61,14 @@
     justify-content: space-between;
     border: 2px solid #80F;
     height: 50px;
-    border-radius: 23px;
+    border-radius: 30px;
 }
 
 #chat-input {
     border: none;
     width: 100%;
-    border-radius: 23px;
-    height: 100%;
+    border-radius: 30px;
+    height: 45px;
     padding: 10px;
 }
 #chat-input:focus {
@@ -79,8 +80,11 @@
 #chat-send-button {
     margin-right: 10px;
     border-radius: 100%;
-    width: 50px;
+    width: 45px;
     height: 45px;
+    border: none;
+    background-color: lightgrey;
+    color: white;
 }
 
 #chat-send-button:hover {
@@ -109,4 +113,8 @@
 .message-item-container {
     width: 60%;
     word-break: break-word;
+}
+
+.fa-paper-plane {
+    font-size: 20px;
 }

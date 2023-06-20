@@ -24,34 +24,37 @@ function ConversationList({ messagedMatches }) {
         return 0;
     })
 
-    console.log("SORTED MATCHES: ", )
+    console.log("SORTED MATCHES: ", sortedMatches)
     return (
-        <ul className="conversations-list-wrapper" >
-            {sortedMatches.map(match => (
-                <li key={match.last_message.created_at.id} onClick={() => handlePicClick(match)}>
-                    <div className={`conversation-list-item ${(currentMatch && currentMatch.id === match.id) && "active-convo"}`}>
-                        <img className="mini-match-icons" src={match.picture_1}
-                            onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
-                        <div className="conversation-list-item-right">
-                            <div className="convo-list-header">
-                                <p className="convo-list-first-name">{match.first_name}</p>
-                                {match.last_message.user_id !== user.id && (
-                                    <p id="your-move">Your move</p>
-                                )}
+        <div className="conversations-list-wrapper" >
+            <div className="inner-convo-list-wrapper">
+
+                {sortedMatches.map(match => (
+                    <li key={match.last_message.created_at.id} onClick={() => handlePicClick(match)}>
+                        <div className={`conversation-list-item ${(currentMatch && currentMatch.id === match.id) && "active-convo"}`}>
+                            <img className="mini-match-icons" src={match.picture_1}
+                                onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
+                            <div className="conversation-list-item-right">
+                                <div className="convo-list-header">
+                                    <p className="convo-list-first-name">{match.first_name}</p>
+                                    {match.last_message.user_id !== user.id && (
+                                        <p id="your-move">Your move</p>
+                                    )}
+
+                                </div>
+                                <p className="message-content-preview">{match.last_message.content.length < 6 ? (
+                                    match.last_message.content
+                                ) : (
+                                    match.last_message.content.slice(0, 37) + "..."
+                                )}</p>
 
                             </div>
-                            <p className="message-content-preview">{match.last_message.content.length < 38 ? (
-                                match.last_message.content
-                            ) : (
-                                match.last_message.content.slice(0, 39) + "..."
-                            )}</p>
 
                         </div>
-
-                    </div>
-                </li>
-            ))}
-        </ul>
+                    </li>
+                ))}
+            </div>
+        </div>
     )
 }
 
