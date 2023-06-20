@@ -97,151 +97,177 @@ function SignupFormPage() {
 
   return (
     <div className="signup-wrapper">
-      <h1>Sign Up</h1>
+      <NavLink className="signup-logo-wrapper" to="/">
+        <i class="fa-regular fa-snowflake"></i>
+        <h1>noFlake</h1>
+      </NavLink>
+      <p className="enter-info-text">Enter your information to get started!</p><br></br>
+      <p>All fields are required</p>
       <form onSubmit={handleSubmit} className="signup-form-container">
-        <p>All fields are required</p>
-        <ul>
+        {/* <ul>
           {backendErrors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>
-        <label>
-          Phone Number
-          <input
-            type="text"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            required
-          />
-        </label>
-        {(hasSubmitted && errors.phone) && (
-          <p>{errors.phone}</p>
-        )}
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        {(hasSubmitted && errors.email) && (
-          <p>{errors.email}</p>
-        )}
-        <label>
-          First Name
-          <input
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-        </label>
-        {(hasSubmitted && errors.firstName) && (
-          <p>{errors.firstName}</p>
-        )}
-        <select
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-          required
-        >
-          <option value="" disabled>Gender</option>
-          <option value="Woman">Woman</option>
-          <option value="Man">Man</option>
-          <option value="Nonbinary">Nonbinary</option>
-          <option value="Other">Other</option>
-        </select>
-        {(hasSubmitted && errors.gender) && (
-          <p>{errors.gender}</p>
-        )}
-        <select
-          value={lookingForGender}
-          onChange={(e) => setLookingForGender(e.target.value)}
-          required
-        >
-          <option value="" disabled>Looking for:</option>
-          <option value="Women">Women</option>
-          <option value="Men">Men</option>
-          <option value="Both">Both</option>
-          <option value="Nonbinary">Nonbinary</option>
-          <option value="Open">Open</option>
-        </select>
-        {(hasSubmitted && errors.lookingForGender) && (
-          <p>{errors.lookingForGender}</p>
-        )}
-        <label>
-          City
-          <input
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            required
-          />
-        </label>
-        {(hasSubmitted && errors.city) && (
-          <p>{errors.city}</p>
-        )}
-        <select value={state} onChange={(e) => setState(e.target.value)} required>
-          State
-          <option value="" disabled>State</option>
-          {states.map(state => (
-            <option value={state} key={state}>{state}</option>
-          ))}
-        </select>
-        {(hasSubmitted && errors.state) && (
-          <p>{errors.state}</p>
-        )}
-        <label>
-          Date of Birth
-          <input
-            type="date"
-            value={dateOfBirth}
-            onChange={(e) => setDateOfBirth(e.target.value)}
-            required
-          />
-        </label>
-        {(hasSubmitted && errors.dateOfBirth) && (
-          <p>{errors.dateOfBirth}</p>
-        )}
-        <label>Provide a profile picture url
-          <input
-            type="text"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-            required
-          />
-        </label>
-        {(hasSubmitted && errors.imageLength) && (
-          <p>{errors.imageLength}</p>
-        )}
-        {(hasSubmitted && errors.imageEnding) && (
-          <p>{errors.imageEnding}</p>
-        )}
-        {(hasSubmitted && errors.imageBeginning) && (
-          <p>{errors.imageBeginning}</p>
-        )}
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Confirm Password
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </label>
-        {(hasSubmitted && errors.password) && (
-          <p>{errors.password}</p>
-        )}
-        <button type="submit">Sign Up</button>
-        <p>Already have an account? <NavLink to="/login">Log in here</NavLink></p>
+        </ul> */}
+        <div className="signup-form-top">
+
+          <div className="signup-form-left">
+
+            <label>
+              {/* Phone Number */}
+              <input
+                type="text"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Enter your number"
+                required
+              />
+            </label>
+            {(hasSubmitted && errors.phone) && (
+              <p>{errors.phone}</p>
+            )}
+            <label>
+              {/* Email */}
+              <input
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email address"
+                required
+              />
+            </label>
+            {(hasSubmitted && errors.email) && (
+              <p>{errors.email}</p>
+            )}
+            <label>
+              {/* First Name */}
+              <input
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="What is your first name?"
+                required
+              />
+            </label>
+            {(hasSubmitted && errors.firstName) && (
+              <p>{errors.firstName}</p>
+            )}
+            <label>
+              Date of Birth
+              <input
+                type="date"
+                value={dateOfBirth}
+                onChange={(e) => setDateOfBirth(e.target.value)}
+                placeholder="Enter your date of birth"
+                required
+              />
+            </label>
+            {(hasSubmitted && errors.dateOfBirth) && (
+              <p>{errors.dateOfBirth}</p>
+            )}
+            <label>
+              {/* Password */}
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+                required
+              />
+            </label>
+            <label>
+              {/* Confirm Password */}
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Confirm password"
+                required
+              />
+            </label>
+            {(hasSubmitted && errors.password) && (
+              <p>{errors.password}</p>
+            )}
+          </div>
+          <div className="signup-form-right">
+
+            <select
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              required
+            >
+              <option value="" disabled>Gender</option>
+              <option value="Woman">Woman</option>
+              <option value="Man">Man</option>
+              <option value="Nonbinary">Nonbinary</option>
+              <option value="Other">Other</option>
+            </select>
+            {(hasSubmitted && errors.gender) && (
+              <p>{errors.gender}</p>
+            )}
+            <select
+              value={lookingForGender}
+              onChange={(e) => setLookingForGender(e.target.value)}
+              required
+            >
+              <option value="" disabled>Looking for:</option>
+              <option value="Women">Women</option>
+              <option value="Men">Men</option>
+              <option value="Both">Both</option>
+              <option value="Nonbinary">Nonbinary</option>
+              <option value="Open">Open</option>
+            </select>
+            {(hasSubmitted && errors.lookingForGender) && (
+              <p>{errors.lookingForGender}</p>
+            )}
+            <label>
+              {/* City */}
+              <input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                placeholder="Enter your city"
+                required
+              />
+            </label>
+            {(hasSubmitted && errors.city) && (
+              <p>{errors.city}</p>
+            )}
+            <select value={state} onChange={(e) => setState(e.target.value)} required>
+              {/* State */}
+              <option value="" disabled>State</option>
+              {states.map(state => (
+                <option value={state} key={state}>{state}</option>
+              ))}
+            </select>
+            {(hasSubmitted && errors.state) && (
+              <p>{errors.state}</p>
+            )}
+
+            <label>
+              <input
+                type="text"
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+                placeholder="Provide a profile picture url"
+                required
+              />
+            </label>
+            {(hasSubmitted && errors.imageLength) && (
+              <p>{errors.imageLength}</p>
+            )}
+            {(hasSubmitted && errors.imageEnding) && (
+              <p>{errors.imageEnding}</p>
+            )}
+            {(hasSubmitted && errors.imageBeginning) && (
+              <p>{errors.imageBeginning}</p>
+            )}
+
+          </div>
+        </div>
+        <div className="signup-form-bottom">
+
+          <button type="submit">Sign Up</button>
+          <p>Already have an account? <NavLink to="/login" className="login-switch">Log in here</NavLink></p>
+        </div>
       </form>
     </div>
   );
