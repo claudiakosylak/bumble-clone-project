@@ -2,6 +2,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0 25px;
+}
+
+.splash-background-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .splash-main-image {
@@ -11,36 +18,118 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    margin: 0 20px;
 }
 
 .splash-main-textarea {
     display: flex;
     flex-direction: column;
-    width: 500px;
-    height: 200px;
-    background-color: white;
-    border-radius: 20px;
+    width: 50%;
+    background-color: rgba(255, 255, 255, 0.923);
+    border-radius: 5px;
     align-items: center;
     padding: 30px;
     justify-content: space-between;
+    position: absolute;
+}
+
+.splash-main-textarea h2 {
+    font-size: 35px;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 .splash-main-textarea p {
     text-align: center;
+    font-size: 14px;
+    margin-bottom: 30px;
 }
 
 .splash-login-buttons {
     display: flex;
-    gap: 30px;
+    gap: 15px;
+    width: 300px;
+    justify-content: center;
 }
 
 .splash-login-button {
-    padding: 5px;
+    padding: 10px;
     border-radius: 3px;
     background-color: #80F;
     color: white;
     text-decoration: none;
-    width: 70px;
     display: flex;
     justify-content: center;
+    width: 100%;
+    font-weight: 600;
+}
+
+.splash-header {
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 17px;
+}
+
+.join-button:hover {
+    background-color: rgb(124, 0, 232);
+}
+
+.sign-in-button {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+
+.sign-in-button:hover {
+    background-color: #80f;
+    color: white;
+    border: 2px solid #80f;
+}
+
+.splash-logo-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    text-decoration: none;
+}
+
+h1 {
+    color: #80f;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    color: rgb(119, 117, 117);
+}
+
+footer a {
+    color: rgb(119, 117, 117);
+}
+
+.footer-icons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    font-size: 25px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+/* .footer-icons > i {
+    transition: color;
+} */
+
+
+
+.footer-icons > a:hover {
+    cursor: pointer;
+    color: rgb(59, 59, 59);
+    /* transition-delay: 0.5s; */
 }
