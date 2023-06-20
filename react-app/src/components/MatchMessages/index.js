@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { io } from 'socket.io-client';
 import { useDispatch, useSelector } from "react-redux";
 import "./MatchMessages.css";
 import { getMatchMessagesThunk } from '../../store/message';
 import { getMatchesThunk } from '../../store/match';
+import { useHistory } from 'react-router-dom';
 
 let socket;
 
@@ -12,9 +13,14 @@ function MatchMessages() {
     const currentMatch = useSelector(state => state.match.currentMatch)
     const user = useSelector(state => state.session.user)
     const matchMessages = useSelector(state => state.message.allMatchMessages)
+    const matchMessageLength = matchMessages.length
     const messageList = Object.values(matchMessages)
     const [messages, setMessages] = useState([]);
     const [chatInput, setChatInput] = useState("");
+    const bottomRef = useRef()
+    const history = useHistory()
+
+    console.log("MATCH MESSAGES ", matchMessages)
 
     useEffect(() => {
         // open socket connection
@@ -34,6 +40,8 @@ function MatchMessages() {
             setMessages(messages => messages.filter(message => message.id !== delete_message.id))
         })
 
+        bottomRef.current?.scrollIntoView();
+
         // when component unmounts, disconnect
         return (() => {
             socket.disconnect()
@@ -45,8 +53,14 @@ function MatchMessages() {
     }, [currentMatch])
 
     useEffect(() => {
+        bottomRef.current?.scrollIntoView();
+    }, [matchMessageLength])
+
+    useEffect(() => {
         dispatch(getMatchMessagesThunk(currentMatch.matchId))
         dispatch(getMatchesThunk())
+        bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+        console.log("BOTTOM REF CURRENT: ", bottomRef.current)
     }, [messages])
 
 
@@ -92,6 +106,7 @@ function MatchMessages() {
                                 </>
                             ))}
 
+                        <div ref={bottomRef} className="dummy-bottom"></div>
                         </div>
                     </>
 

@@ -5,17 +5,23 @@
     justify-content: space-between;
 }
 
+
 .match-messages-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     /* height: 90%; */
     overflow-y: scroll;
+    bottom: 0;
 }
 
 #chat-input-form {
     width: 100%;
     padding: 5px 20px 20px 20px;
+}
+
+.dummy-bottom {
+    height: 5px;
 }
 
 .user-messages {
