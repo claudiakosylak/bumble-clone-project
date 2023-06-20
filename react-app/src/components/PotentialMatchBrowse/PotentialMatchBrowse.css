@@ -36,6 +36,7 @@
     left: 30px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     z-index: 1;
     width: 400px;
     height: 300px;
@@ -50,8 +51,82 @@
 .age-inputs {
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.age-inputs input:focus {
+    outline: none;
+}
+.age-inputs input {
+    margin: 10px;
 }
 
 .filter-buttons {
     display: flex;
+    align-self: flex-end;
+    gap: 20px;
+    align-items: center;
+}
+
+.filter-buttons button {
+    border-radius: 23px;
+    border: none;
+    background-color: #80f;
+    color: white;
+    padding: 10px;
+}
+
+.filter-buttons *:hover {
+    cursor: pointer;
+}
+
+.filter-button-open {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    margin-left: 50px;
+}
+
+.filter-button-open:hover {
+    cursor: pointer;
+}
+
+
+#fa-slider {
+    font-size: 15px;
+}
+
+.gender-button {
+    border: 1px solid lightgrey;
+    background: none;
+    left: 0;
+    position: relative;
+    z-index: 1;
+    padding: 10px;
+    border-radius: 23px;
+}
+
+#active-gender {
+    background-color: white;
+    color: #80F;
+}
+
+.gender-button:hover {
+    cursor: pointer;
+}
+
+.gender-button-holder {
+    background-color: lightgrey;
+    border-radius: 23px;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    z-index: -1;
+}
+
+.white-back {
+    width: 40px;
+    background-color: white;
+    position: absolute;
 }

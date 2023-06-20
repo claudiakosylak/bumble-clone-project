@@ -45,3 +45,20 @@
 .left-headers {
     margin: 10px;
 }
+
+.back-to-browse {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: rgb(240, 224, 255);
+    text-decoration: none;
+}
+
+.back-to-browse:hover {
+    background-color: rgb(227, 210, 243);
+}
+
+.fa-angle-right {
+    font-size: 18px;
+}

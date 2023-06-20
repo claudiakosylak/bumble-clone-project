@@ -84,36 +84,31 @@ function PotentialMatchBrowse() {
         closeMenu()
     }
 
-    if (user) {
-        console.log("AGE MIN: ", user.age_min)
-        console.log("AGE MAX: ", user.age_max)
-        console.log("GENDER: ", user.looking_for_gender)
-    }
-
     return (
         <div className="potential-match-browse-wrapper">
             <div className="browse-header">
                 <h1>noFlake</h1>
             </div>
-            <p onClick={openMenu}>Filters</p>
+            <p onClick={openMenu} className="filter-button-open"><i class="fa-solid fa-sliders" id="fa-slider"></i>Filters</p>
             <div className={ulClassName} ref={filterRef}>
                 <p>I'm interested in...</p>
-                <select value={gender} onChange={(e) => setGender(e.target.value)}>
-                    <option value="Women">Women</option>
-                    <option value="Men">Men</option>
-                    <option value="Both">Both</option>
-                    <option value="Nonbinary">Nonbinary</option>
-                    <option value="Open">Open</option>
-                </select>
+                <div className="gender-button-holder">
+                    <div className="white-back"></div>
+                    <button className="gender-button" id={gender === "Women" ? "active-gender" : ""} onClick={() => setGender("Women")}>Women</button>
+                    <button className="gender-button" id={gender === "Men" ? "active-gender" : ""} onClick={() => setGender("Men")}>Men</button>
+                    <button className="gender-button" id={gender === "Both" ? "active-gender" : ""}onClick={() => setGender("Both")}>Both</button>
+                    <button className="gender-button" id={gender === "Nonbinary" ? "active-gender" : ""} onClick={() => setGender("Nonbinary")}>Nonbinary</button>
+                    <button className="gender-button" id={gender === "Open" ? "active-gender" : ""} onClick={() => setGender("Open")}>Open</button>
+                </div>
                 <p>Age</p>
                 <div className="age-inputs">
                 <label>
                 Min
-                <input value={ageMin} onChange={(e) => setAgeMin(e.target.value)} />
+                <input value={ageMin} type="number" min="18" max="98" onChange={(e) => setAgeMin(e.target.value)} />
                 </label>
                 <label>
                 Max
-                <input value={ageMax} onChange={(e) => setAgeMax(e.target.value)} />
+                <input value={ageMax} type="number" min="19" max="99" onChange={(e) => setAgeMax(e.target.value)} />
                 </label>
                 </div>
                 {errors.ageMin && (
@@ -123,7 +118,7 @@ function PotentialMatchBrowse() {
                     <p>{errors.ageMax}</p>
                 )}
                 <div className="filter-buttons">
-                    <p onClick={closeMenu}>Close</p>
+                    <p onClick={closeMenu}>Cancel</p>
                     <button onClick={applyFilters}>Apply</button>
                 </div>
             </div>
