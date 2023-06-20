@@ -1,8 +1,21 @@
+.bigger-messages-wrapper {
+    height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .match-messages-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    height: 80%;
+    /* height: 90%; */
+    overflow-y: scroll;
+}
+
+#chat-input-form {
+    width: 100%;
+    padding: 5px 20px 20px 20px;
 }
 
 .user-messages {
@@ -34,10 +47,7 @@
     justify-content: flex-start;
 }
 
-#chat-input-form {
-    width: 100%;
-    padding: 20px;
-}
+
 
 .chat-input-form-field {
     display: flex;
@@ -58,12 +68,7 @@
     outline: none;
 }
 
-.bigger-messages-wrapper {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
+
 
 #chat-send-button {
     margin-right: 10px;
