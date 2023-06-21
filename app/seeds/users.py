@@ -308,7 +308,7 @@ for name in female_names:
     random_phone += 1
     phone = str(random_phone)
     woman = {
-        "flake_score": random.randint(1, 100),
+        "flake_score": random.randint(20, 100),
         "first_name": name,
         "email": f"{name.lower()}@email.com",
         "password": "password",
@@ -434,6 +434,10 @@ def seed_users():
 
     db.session.commit()
 
+    demonia = User(
+        about = "This is where you will be able to start conversations with new matches. Don't be shy, make the first move!", flake_score = 95, first_name='Demo-nia', email='demo-nia@aa.io', password='password', date_of_birth=dob9.date(), phone="3433436639", looking_for_gender="Both", state="New York", city="New York City", gender="Woman", picture_1="https://images.unsplash.com/photo-1517677129300-07b130802f46?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80")
+    db.session.add(demonia)
+    db.session.commit()
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
 # have a built in function to do this. With postgres in production TRUNCATE
 # removes all the data from the table, and RESET IDENTITY resets the auto

@@ -43,9 +43,7 @@ function EditProfileIndex({ isLoaded }) {
                     <h2>Edit Profile</h2>
                 </div>
                 <div className="edit-profile-main-content">
-                    <div className="left-flake-score-container">
-                        <p>Your flake score is {user.flake_score}%</p>
-                    </div>
+
                     <div className="right-edit-profile-container">
                         <div className="edit-profile-images-wrapper">
                             <div className="image-boxes-top">

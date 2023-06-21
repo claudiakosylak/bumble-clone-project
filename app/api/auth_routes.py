@@ -98,6 +98,15 @@ def sign_up():
         db.session.add(message)
         db.session.commit()
 
+        """
+        Creates an unmessaged match with Demo-nia
+        """
+        match2 = Match(
+            user1_id = 153, user2_id = user.id
+        )
+        db.session.add(match2)
+        db.session.commit()
+
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 

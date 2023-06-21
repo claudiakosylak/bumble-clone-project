@@ -12,9 +12,9 @@ def flake_score_transformer(flake_score, new_report_activity):
     if new_report_activity == "ghost_no_date":
         flake_score *= 0.9
     elif new_report_activity == "flake_and_ghost":
-        flake_score *= 0.8
+        flake_score *= 0.7
     elif new_report_activity == "flake_with_message":
-        flake_score *= 0.9
+        flake_score *= 0.8
     elif new_report_activity == "arrived_late":
         flake_score *= 0.95
     else:

@@ -78,8 +78,9 @@ def create_match(id1, id2):
     db.session.commit()
 
     match_request = RequestedMatch.query.filter(RequestedMatch.requesting_user_id == id1, RequestedMatch.requested_user_id == id2).first()
-    db.session.delete(match_request)
-    db.session.commit()
+    if match_request:
+        db.session.delete(match_request)
+        db.session.commit()
     return match.to_dict()
 
 @match_routes.route("/potential-matches")

@@ -39,6 +39,16 @@ def seed_matches():
     )
     matches.append(match8)
 
+    match9 = Match(
+        user1_id = 15, user2_id = 1
+    )
+    matches.append(match9)
+
+    match10 = Match(
+        user1_id = 16, user2_id = 1
+    )
+    matches.append(match10)
+
     for match in matches:
         db.session.add(match)
     db.session.commit()
