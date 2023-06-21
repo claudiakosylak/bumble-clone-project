@@ -87,7 +87,7 @@ function PotentialMatchBrowse() {
     return (
         <div className="potential-match-browse-wrapper">
             <div className="browse-header">
-                <h1>noFlake</h1>
+                <h2 className="browse-view-logo">noFlake</h2>
             </div>
             <p onClick={openMenu} className="filter-button-open"><i class="fa-solid fa-sliders" id="fa-slider"></i>Filters</p>
             <div className={ulClassName} ref={filterRef}>
