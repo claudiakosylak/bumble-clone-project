@@ -65,7 +65,6 @@ export const dateTransformer = (date) => {
         amPm: amPm,
         year: year
     }
-    // return [daysOfWeek[dayOfWeek], months[month], day, hour, minutes, amPm, year]
 }
 
 export const niceDateString = dateObj => {

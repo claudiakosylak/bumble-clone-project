@@ -86,6 +86,7 @@
     gap: 10px;
     font-size: 15px;
     margin-left: 50px;
+    width: 80px;
 }
 
 .filter-button-open:hover {

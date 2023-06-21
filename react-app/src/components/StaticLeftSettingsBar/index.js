@@ -28,7 +28,7 @@ function StaticLeftSettingsBar({ user }) {
                 {user && (
                     <div className="static-left-inside">
                         <div className="static-left-header">
-                            <i class="fa-solid fa-angle-left" onClick={() => history.goBack()}></i>
+                            <i class="fa-solid fa-angle-left" onClick={() => history.push("/app")}></i>
                             <img src={user.picture_1} className="current-user-image"
                                 onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }}></img>
                         </div>
