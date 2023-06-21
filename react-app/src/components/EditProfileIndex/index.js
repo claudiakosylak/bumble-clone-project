@@ -16,6 +16,8 @@ function EditProfileIndex({ isLoaded }) {
     const [errors, setErrors] = useState({})
     const dispatch = useDispatch();
 
+    console.log("ACTIVE EDIT: ", activeEdit)
+
     useEffect(() => {
         const newErrors = {}
         if (aboutMe && aboutMe.length > 300) newErrors.about = "About me can be 300 characters long maximum. "
@@ -93,20 +95,24 @@ function EditProfileIndex({ isLoaded }) {
                             </div>
 
                         </div>
-                        <div className="about-me edit-profile-text-inputs">
-                            <h4>About Me</h4>
-                            <p>{user && user.about}</p>
-                            <button onClick={() => setActiveEdit(true)}>Edit</button>
-                            <form onSubmit={handleAboutSubmit} className={`about-me-form ${!activeEdit && "non-active-about"}`}>
+                        <div className={`about-me edit-profile-text-inputs ${activeEdit && "actively-editing-about"}`}>
+                            <div className="about-header" onClick={() => setActiveEdit(!activeEdit)}>
+
+                            <h4>About Me </h4><i className={`fa-solid fa-angle-down ${activeEdit && "hidden"}`} ></i><i class={`fa-solid fa-angle-up ${!activeEdit && "hidden"}`}></i>
+                            </div>
+                            <form onSubmit={handleAboutSubmit} className={`about-me-edit-form ${!activeEdit && "non-active-about"}`}>
 
                                 <textarea value={aboutMe} onChange={(e) => setAboutMe(e.target.value)}></textarea>
-                                <button type="submit" disabled={(aboutMe === beginningAbout || errors.about)}>Save</button>
                                 {errors.about && (
-                                    <p>{errors.about}</p>
-                                ) }
+                                    <p className="about-error">{errors.about}</p>
+                                    ) }
+                                <div className="about-edit-bottom">
+                                    <p className="about-edit-cancel" onClick={() => setActiveEdit(false)}>Cancel</p>
                                 {aboutMe && aboutMe.length > 0 && (
                                     <p>{300 - aboutMe.length} characters left</p>
-                                )}
+                                    )}
+                                    <button type="submit" disabled={(aboutMe === beginningAbout || errors.about)} id={(aboutMe === beginningAbout || errors.about) && "disabled-about-save"}>Save</button>
+                                    </div>
 
                             </form>
                         </div>
