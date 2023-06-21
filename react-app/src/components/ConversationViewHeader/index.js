@@ -10,9 +10,10 @@ import ReportDateModal from "../ReportDateModal";
 import { deleteMatchThunk, getMatch, getMatchesThunk, potentialMatchesThunk } from "../../store/match";
 
 export const dateTransformer = (date) => {
+    console.log("RAW DATE: ", date)
     const dateObj = new Date(date);
-    const year = dateObj.getFullYear()
-    const dayOfWeek = dateObj.getDay()
+    const year = dateObj.getUTCFullYear()
+    const dayOfWeek = dateObj.getUTCDay()
     const daysOfWeek = {
         1: "Monday",
         2: "Tuesday",
@@ -36,9 +37,9 @@ export const dateTransformer = (date) => {
         10: "November",
         11: "December"
     }
-    const month = dateObj.getMonth()
-    const day = dateObj.getDate()
-    let hour = dateObj.getHours()
+    const month = dateObj.getUTCMonth()
+    const day = dateObj.getUTCDate()
+    let hour = dateObj.getUTCHours()
     let amPm
 
     if (hour > 12) {
@@ -50,16 +51,16 @@ export const dateTransformer = (date) => {
         amPm = "PM"
     }
 
-    let minutes = dateObj.getMinutes()
+    let minutes = dateObj.getUTCMinutes()
     if (minutes < 10) {
         minutes = "0" + minutes.toString()
     }
     console.log("orig date: ", dateObj)
-    let timeZone
-    if (dateObj.toString().includes("Central Standard Time")) {
-        timeZone = "CST"
-        console.log("CENTRAL? ", timeZone)
-    }
+    // let timeZone
+    // if (dateObj.toString().includes("Central Standard Time")) {
+    //     timeZone = "CST"
+    //     console.log("CENTRAL? ", timeZone)
+    // }
 
     return {
         dayOfWeek: daysOfWeek[dayOfWeek],
@@ -74,7 +75,18 @@ export const dateTransformer = (date) => {
 }
 
 export const niceDateString = dateObj => {
-    return `${dateObj.dayOfWeek}, ${dateObj.month} ${dateObj.day} at ${dateObj.hour}:${dateObj.minutes} ${dateObj.amPm}`
+    const day = dateObj.day.toString()
+    let ending;
+    if (day[day.length - 1] === "1" && day[0] !== "1") {
+        ending = "st";
+    } else if (day[day.length-1] === "2" && day[0] !== "1") {
+        ending = "nd";
+    } else if (day[day.length - 1] === "3" && day[0] !== "1") {
+        ending = "rd";
+    } else {
+        ending = "th"
+    }
+    return `${dateObj.dayOfWeek}, ${dateObj.month} ${dateObj.day}${ending} at ${dateObj.hour}:${dateObj.minutes} ${dateObj.amPm}`
 }
 
 
@@ -109,6 +121,8 @@ function ConversationViewHeader({ dateRequests }) {
         dateDate = new Date(currentDate.scheduled_date)
     }
     const dispatch = useDispatch();
+
+    console.log("ALL DATES :", allDates)
 
     // update store with freshest list of all user's dates on mount, as well as all the user's created date reports
     useEffect(() => {

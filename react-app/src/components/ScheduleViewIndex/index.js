@@ -5,6 +5,7 @@ import LeftMatchesBar from "../LeftMatchesBar";
 import { Redirect } from "react-router-dom";
 import { getDatesThunk } from "../../store/date";
 import StaticLeftSettingsBar from "../StaticLeftSettingsBar";
+import { dateTransformer, niceDateString } from "../ConversationViewHeader";
 
 function ScheduleViewIndex({ isLoaded }) {
     const user = useSelector(state => state.session.user);
@@ -55,7 +56,7 @@ function ScheduleViewIndex({ isLoaded }) {
                         {upcomingDates.length > 0 ? (upcomingDates.map(date => (
                             <div>
                                 <p>Date with {date.other_user.first_name}</p>
-                                <p>{date.scheduled_date}</p>
+                                <p>{niceDateString(dateTransformer(date.scheduled_date))}</p>
                             </div>
                         ))) : (
                             <p>You don't have any upcoming dates.</p>
@@ -67,7 +68,7 @@ function ScheduleViewIndex({ isLoaded }) {
 
                             <div>
                                 <p>Date with {date.other_user.first_name}</p>
-                                <p>{date.scheduled_date}</p>
+                                <p>{niceDateString(dateTransformer(date.scheduled_date))}</p>
                             </div>
                         ))) : (
                             <p>You haven't had any dates yet. </p>
