@@ -107,6 +107,7 @@
 
 #main-about {
     font-size: 15px;
+    word-break: break-word;
 }
 
 .main-flake-score {
