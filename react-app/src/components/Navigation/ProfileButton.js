@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
+  const location = useLocation();
+
+  console.log("LOCATION: ", location)
 
   const openMenu = () => {
     if (showMenu) return;
@@ -25,8 +28,21 @@ function ProfileButton({ user }) {
     history.push("/app/schedule")
   }
 
+  const goToEditProfile = (e) => {
+    e.preventDefault();
+    setShowMenu(false)
+    history.push("/app/edit-profile")
+  }
+
   const ulClassName = "profile-dropdown-menu" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
+
+  let itemAddOn;
+  if (location.pathname === "/app/schedule") {
+    itemAddOn = "schedule-active"
+  } else if (location.pathname === "/app/edit-profile") {
+    itemAddOn = "edit-profile-active"
+  }
 
   return (
     <>
@@ -44,12 +60,11 @@ function ProfileButton({ user }) {
                 onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
               <div></div>
             </div>
-            <div id="left-menu-itemss">
+            <div className="left-menu-itemss">
               <li className="user-flake-score"><i class="fa-regular fa-snowflake"></i>{user.flake_score}%</li>
-              <li className="profile-dropdown-item" onClick={goToSchedule}>Scheduled Dates</li>
-              <NavLink className="profile-dropdown-item" to="/app/edit-profile">Edit Profile</NavLink>
-              <li>
-                <button className="profile-dropdown-item" onClick={handleLogout}>Log Out</button>
+              <li className="profile-dropdown-item" id={location.pathname === "/app/schedule" ? "dropdown-active" : ""} onClick={goToSchedule}>Scheduled Dates</li>
+              <li className="profile-dropdown-item" id={location.pathname === "/app/edit-profile" ? "dropdown-active" : ""} onClick={goToEditProfile}>Edit Profile</li>
+              <li className="profile-dropdown-item" onClick={handleLogout}>Log Out
               </li>
             </div>
           </>

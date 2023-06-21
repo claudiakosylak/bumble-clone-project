@@ -19,9 +19,9 @@ function RightProfileBar() {
 
                     </div>
                     <div className="right-profile-about">
-                        <p>About {currentMatch.first_name}</p>
                         <p className="current-match-flake"><i class="fa-regular fa-snowflake"></i><span>{currentMatch.flake_score}%</span></p>
-                        <p>{currentMatch.about}</p>
+                        <p className="right-about-header">About {currentMatch.first_name}</p>
+                        <p className="about-content">{currentMatch.about}</p>
                     </div>
                 </div>
             )}

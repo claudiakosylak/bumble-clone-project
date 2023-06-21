@@ -28,7 +28,7 @@ function SplashIndex() {
                 <img src={splashPic} className="splash-background-pic"></img>
                 <div className="splash-main-textarea">
                     <h2>Stop wasting time with flakes</h2>
-                    <p>Start ACTUALLY meeting with new people in your area! If you already have an account, sign up to use NoFlake on the web. </p>
+                    <p>Start ACTUALLY meeting with new people in your area! If you already have an account, sign up to use noFlake on the web. </p>
                     <div className="splash-login-buttons">
                         <NavLink to="/signup" className="splash-login-button join-button">Join</NavLink>
                         <NavLink to="/login" className="splash-login-button sign-in-button">Sign In</NavLink>
