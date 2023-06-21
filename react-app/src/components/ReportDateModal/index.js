@@ -44,8 +44,11 @@ function ReportDateModal({ match, date }) {
                     <option value="flake_with_message" onChange={(e) => setReportActivity("flake_with_message")}>Flaked but messaged</option>
                     <option value="flake_and_ghost" onChange={(e) => setReportActivity("flake_and_ghost")}>Ghost and flake</option>
                 </select>
-                <button onClick={closeModal}>Cancel</button>
-                <button type="submit">Submit Report</button>
+                <div className="date-report-bottom-buttons">
+
+                <p onClick={closeModal}>Cancel</p>
+                <button type="submit">Submit</button>
+                </div>
             </form>
         </div>
     )
