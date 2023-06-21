@@ -40,6 +40,8 @@ function BrowseItem({ browseUsers }) {
     }
 
     const browseUsersLength = browseUsers.length;
+    const newUser = allMatches.length === 2 && allMatches[0].id === 1 && allMatches[1].id === 153
+    let newUserMessage = false;
 
 
     useEffect(() => {
@@ -63,10 +65,17 @@ function BrowseItem({ browseUsers }) {
 
     const handleSwipeRight = async (id1, id2) => {
         const requestExists = requestUsers.includes(id1)
-        if (requestExists) {
+        if (requestExists || newUser) {
+            if (newUser) {
+                newUserMessage = true;
+            } else {
+                newUserMessage = false;
+            }
+            console.log("NEW USER MESSAGE? ", newUserMessage)
             setMatched(true)
             setMatchedUser(browseUsers[0])
             dispatch(createMatchThunk(id1, id2))
+
             // dispatch(getUnrejectedRequestsThunk(currentUser.id))
         } else {
             dispatch(createMatchRequestThunk(id2, id1))
@@ -131,7 +140,12 @@ function BrowseItem({ browseUsers }) {
                         <img className="overlap-pic ov2" src={matchedUser.picture_1}
                             onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
                     </div>
+                    {newUserMessage ? (
+                        <p>When you swipe right on someone that has swiped right on you already, you have a match! You'll be able to see your new unmessaged matches at the top of the left bar.</p>
+                    ) : (
+
                     <p>They like you too! Don't let this match get too cold and send them a message.</p>
+                    )}
                     {/* <form onSubmit={sendMatchMessage}>
                     <div className="initiate-message-input">
                         <input type="text" value={message} onChange={(e) => setMessage(e.target.value)}></input>
