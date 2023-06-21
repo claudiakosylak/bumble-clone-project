@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteMatchThunk, getMatch, getMatchesThunk, potentialMatchesThunk } from "../../store/match";
 import Navigation from "../Navigation";
 import "./LeftMatchesBar.css";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import ConversationList from "../ConversationList";
 
 function LeftMatchesBar({ isLoaded }) {
@@ -12,6 +12,7 @@ function LeftMatchesBar({ isLoaded }) {
     const matches = Object.values(matchesObj)
     const dispatch = useDispatch();
     const history = useHistory();
+    const location = useLocation()
     const messagedMatches = []
     const unMessagedMatches = []
     for (let match of matches) {
@@ -35,7 +36,7 @@ function LeftMatchesBar({ isLoaded }) {
     return (
         <div className="left-matches-wrapper">
             <Navigation isLoaded={isLoaded} />
-                    {(currentMatch.id && currentMatch.last_message) && (
+                    {location.pathname === "/app/connections" && (
                         <NavLink to="/app" className="back-to-browse">Back to meeting new people<i class="fa-solid fa-angle-right"></i></NavLink>
                     )}
             <p className="left-headers">Unmessaged Matches ({unMessagedMatches.length})</p>

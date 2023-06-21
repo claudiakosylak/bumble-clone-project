@@ -23,10 +23,14 @@
 .edit-profile-images-wrapper {
     display: flex;
     flex-direction: column;
+    width: 400px;
+    height: 400px;
 }
 
 .image-boxes-top {
     display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .pic-1 {
@@ -67,6 +71,7 @@
 
 .image-boxes-bottom {
     display: flex;
+    justify-content: space-between;
 }
 
 .image-x {
