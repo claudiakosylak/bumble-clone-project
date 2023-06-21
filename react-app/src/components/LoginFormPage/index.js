@@ -25,14 +25,14 @@ function LoginFormPage() {
     const data = await dispatch(login(email, password));
     console.log("DATA: ", data)
     if (data) {
-      const newErrors = {}
-      if (data.email[0]) {
-        newErrors.email = data.email[0]
-      }
-      if (data.password[0]) {
-        newErrors.password = data.password[0]
-      }
-      setErrors(newErrors);
+      // const newErrors = {}
+      // if (data.email[0]) {
+      //   newErrors.email = data.email[0]
+      // }
+      // if (data.password[0]) {
+      //   newErrors.password = data.password[0]
+      // }
+      setErrors(data);
     }
   };
 
@@ -60,9 +60,9 @@ function LoginFormPage() {
           required
         />
 
-        {errors.email && (
+        {/* {errors.email && (
           <p>{errors.email}</p>
-        )}
+        )} */}
 
 
         {/* Password */}
@@ -73,10 +73,12 @@ function LoginFormPage() {
           placeholder="Password"
           required
         />
-
-        {errors.password && (
-          <p>{errors.password}</p>
+        {Object.values(errors).length > 0 && (
+          <p>Invalid credentials</p>
         )}
+        {/* {errors.password && (
+          <p>{errors.password}</p>
+        )} */}
         <button type="submit" className="login-submit">Log In</button>
         <button onClick={demoLogin} className="demo-login">Demo User Login</button>
         <p>Don't have an account? <NavLink to="/signup" className="register-here">Register here</NavLink></p>
