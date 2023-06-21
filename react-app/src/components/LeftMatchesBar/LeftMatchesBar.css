@@ -20,12 +20,7 @@
     padding: 10px;
 }
 
-.mini-match-icons {
-    width: 45px;
-    height: 45px;
-    border-radius: 100%;
-    object-fit: cover;
-}
+
 .mini-match-icons:hover {
     cursor: pointer;
 }
@@ -61,4 +56,11 @@
 
 .fa-angle-right {
     font-size: 18px;
+}
+
+.mini-match-icons {
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    object-fit: cover;
 }
