@@ -95,10 +95,10 @@ function BrowseItem({ browseUsers }) {
 
                                 <p className="main-flake-score"><i class="fa-regular fa-snowflake"></i>{browseUsers[0].flake_score}%</p>
                                 {browseUsers[0].flake_score === 100 && (
-                                    <p id="flake-explanation">Wow, you've found a NoFlake!!! {browseUsers[0].first_name} hasn't flaked or ghosted on anyone.</p>
+                                    <p id="flake-explanation">Wow, you've found a noFlake!!! {browseUsers[0].first_name} hasn't flaked or ghosted on anyone.</p>
                                 )}
                                 {(browseUsers[0].flake_score < 100 && browseUsers[0].flake_score > 80) && (
-                                    <p id="flake-explanation">{browseUsers[0].first_name} is mostly reliable. We can't all be a perfect NoFlake!</p>
+                                    <p id="flake-explanation">{browseUsers[0].first_name} is mostly reliable. We can't all be a perfect noFlake!</p>
                                 )}
                                 {(browseUsers[0].flake_score < 80 && browseUsers[0].flake_score > 50) && (
                                     <p id="flake-explanation">{browseUsers[0].first_name} is somewhat reliable, but may be more likely than average to flake.</p>
