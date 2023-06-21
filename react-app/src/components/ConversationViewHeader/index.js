@@ -55,12 +55,6 @@ export const dateTransformer = (date) => {
     if (minutes < 10) {
         minutes = "0" + minutes.toString()
     }
-    console.log("orig date: ", dateObj)
-    // let timeZone
-    // if (dateObj.toString().includes("Central Standard Time")) {
-    //     timeZone = "CST"
-    //     console.log("CENTRAL? ", timeZone)
-    // }
 
     return {
         dayOfWeek: daysOfWeek[dayOfWeek],
@@ -79,7 +73,7 @@ export const niceDateString = dateObj => {
     let ending;
     if (day[day.length - 1] === "1" && day[0] !== "1") {
         ending = "st";
-    } else if (day[day.length-1] === "2" && day[0] !== "1") {
+    } else if (day[day.length - 1] === "2" && day[0] !== "1") {
         ending = "nd";
     } else if (day[day.length - 1] === "3" && day[0] !== "1") {
         ending = "rd";
@@ -209,16 +203,12 @@ function ConversationViewHeader({ dateRequests }) {
             )}
             <i class="fa-solid fa-ellipsis-vertical" onClick={openMenu}></i>
             <ul className={ulClassName} ref={ulRef}>
-                <div>
+                <div className="match-dropdown-inner">
                     {(!currentDate && !dateRequester && !dateRequested) && (
-                        <li>
-
-                            <OpenModalButton
-                                buttonText="Request a date"
-                                modalComponent={<RequestDateModal match={currentMatch} />}
-                            />
-                        </li>
-
+                        <OpenModalButton
+                            buttonText="Request a date"
+                            modalComponent={<RequestDateModal match={currentMatch} />}
+                        />
                     )}
                     {dateRequester && (
                         <>
@@ -228,22 +218,20 @@ function ConversationViewHeader({ dateRequests }) {
                     )}
 
                     {(!currentMatchReport && dateDate && dateDate < todaysDate) && (
-                        <li>
+
                             <OpenModalButton
                                 buttonText="Report on date"
                                 modalComponent={<ReportDateModal match={currentMatch} date={currentDate} />}
                             />
-                        </li>
+
                     )}
                     {!currentMatchReport && (
-                        <li>
                             <OpenModalButton
                                 buttonText="Report ghosting"
                                 modalComponent={<ReportGhostModal match={currentMatch} />}
                             />
-                        </li>
                     )}
-                    <li><button onClick={() => handleUnmatch(currentMatch.matchId)}>Unmatch</button></li>
+                    <button onClick={() => handleUnmatch(currentMatch.matchId)}>Unmatch</button>
 
                 </div>
             </ul>

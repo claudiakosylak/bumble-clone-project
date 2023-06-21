@@ -4,6 +4,7 @@ import { useModal } from "../../context/Modal";
 import "./ReportDateModal.css";
 import { createDateReportThunk, getMadeDateReportsThunk } from "../../store/date_report";
 import { getOneMatchThunk } from "../../store/match";
+import { dateTransformer, niceDateString } from "../ConversationViewHeader";
 
 function ReportDateModal({ match, date }) {
     const { closeModal } = useModal();
@@ -26,7 +27,7 @@ function ReportDateModal({ match, date }) {
     return (
         <div className="report-date-modal-container">
             <h3>Report on your date with {match.first_name}</h3>
-            <p>What happened with your date with {match.first_name} on {date.scheduled_date}?</p>
+            <p>What happened with your date with {match.first_name} on {niceDateString(dateTransformer(date.scheduled_date))}?</p>
             <div className="date-report-button-container">
 
                 <button onClick={() => setReportActivity("showed_up")} className={`date-report-button ${reportActivity === "showed_up" ? "active-date-report-button" : ""}`}>We had the date!</button>
@@ -43,8 +44,11 @@ function ReportDateModal({ match, date }) {
                     <option value="flake_with_message" onChange={(e) => setReportActivity("flake_with_message")}>Flaked but messaged</option>
                     <option value="flake_and_ghost" onChange={(e) => setReportActivity("flake_and_ghost")}>Ghost and flake</option>
                 </select>
-                <button onClick={closeModal}>Cancel</button>
-                <button type="submit">Submit Report</button>
+                <div className="date-report-bottom-buttons">
+
+                <p onClick={closeModal}>Cancel</p>
+                <button type="submit">Submit</button>
+                </div>
             </form>
         </div>
     )

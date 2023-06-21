@@ -130,3 +130,8 @@
     background-color: white;
     position: absolute;
 }
+
+.browse-view-logo {
+    color: #80f;
+    font-size: 30px;
+}

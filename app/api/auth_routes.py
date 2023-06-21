@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, Match, Message
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -77,6 +77,27 @@ def sign_up():
         db.session.add(user)
         db.session.commit()
         login_user(user)
+
+
+        """
+        Creates a match and first message with Demo
+        """
+        match = Match(
+            user1_id = 1,
+            user2_id = user.id
+        )
+        db.session.add(match)
+        db.session.commit()
+
+        message = Message(
+            match_id = match.id,
+            user_id = 1,
+            content = "Hi, welcome to noFlake!! This is where you can message your matches once you mutually connect. Get swiping to match with users! "
+        )
+
+        db.session.add(message)
+        db.session.commit()
+
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
