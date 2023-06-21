@@ -43,39 +43,45 @@ function LoginFormPage() {
   }
 
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
+    <div className="login-form-wrapper">
+      <NavLink className="signup-logo-wrapper" to="/">
+        <i class="fa-regular fa-snowflake"></i>
+        <h1>noFlake</h1>
+      </NavLink>
+      <p>Welcome back! Please enter your credentials below.</p>
+      <form onSubmit={handleSubmit} className="login-form">
+
+        {/* Email */}
+        <input
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email address"
+          required
+        />
+
         {errors.email && (
           <p>{errors.email}</p>
         )}
-        <label>
 
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
+
+        {/* Password */}
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          required
+        />
+
         {errors.password && (
           <p>{errors.password}</p>
         )}
-        <button type="submit">Log In</button>
-        <button onClick={demoLogin}>Demo User Login</button>
-        <p>Don't have an account? <NavLink to="/signup">Register here</NavLink></p>
+        <button type="submit" className="login-submit">Log In</button>
+        <button onClick={demoLogin} className="demo-login">Demo User Login</button>
+        <p>Don't have an account? <NavLink to="/signup" className="register-here">Register here</NavLink></p>
       </form>
-    </>
+    </div>
   );
 }
 
