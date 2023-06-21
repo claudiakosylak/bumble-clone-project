@@ -18,7 +18,15 @@ def get_all_date_requests():
     requests_dict = {}
     for request in requests:
         if request.match_id in match_ids:
-            requests_dict[request.id] = request.to_dict()
+            request_dict = request.to_dict()
+            match = Match.query.get(request.match_id)
+            if match.user1_id == current_user.id:
+                other_user_id = match.user2_id
+            else:
+                other_user_id = match.user1_id
+            other_user = User.query.get(other_user_id)
+            request_dict["other_user"] = other_user.to_dict()
+            requests_dict[request.id] = request_dict
     return requests_dict
 
 @date_routes.route("/date-requests/<int:id>", methods=["DELETE"])
