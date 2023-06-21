@@ -74,7 +74,18 @@ export const dateTransformer = (date) => {
 }
 
 export const niceDateString = dateObj => {
-    return `${dateObj.dayOfWeek}, ${dateObj.month} ${dateObj.day} at ${dateObj.hour}:${dateObj.minutes} ${dateObj.amPm}`
+    const day = dateObj.day.toString()
+    let ending;
+    if (day[day.length - 1] === "1" && day[0] !== "1") {
+        ending = "st";
+    } else if (day[day.length-1] === "2" && day[0] !== "1") {
+        ending = "nd";
+    } else if (day[day.length - 1] === "3" && day[0] !== "1") {
+        ending = "rd";
+    } else {
+        ending = "th"
+    }
+    return `${dateObj.dayOfWeek}, ${dateObj.month} ${dateObj.day}${ending} at ${dateObj.hour}:${dateObj.minutes} ${dateObj.amPm}`
 }
 
 
@@ -109,6 +120,8 @@ function ConversationViewHeader({ dateRequests }) {
         dateDate = new Date(currentDate.scheduled_date)
     }
     const dispatch = useDispatch();
+
+    console.log("ALL DATES :", allDates)
 
     // update store with freshest list of all user's dates on mount, as well as all the user's created date reports
     useEffect(() => {

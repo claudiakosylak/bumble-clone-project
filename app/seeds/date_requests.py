@@ -2,14 +2,14 @@ from app.models import db, DateRequest, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import datetime
 
-day1 = datetime.strptime('2023-07-10 03:30', '%Y-%m-%d %H:%M')
+day1 = datetime.strptime('2023-07-09 17:30', '%Y-%m-%d %H:%M')
 
 def seed_date_requests():
     date_requests = []
     request1 = DateRequest(
         requesting_user_id = 1,
         match_id = 5,
-        suggested_date = day1.date()
+        suggested_date = day1
     )
     date_requests.append(request1)
 
