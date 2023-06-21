@@ -96,9 +96,16 @@
     align-items: center;
     text-decoration: none;
 }
+#splash-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
-h1 {
+.splash-title {
     color: #80f;
+    font-weight: 600;
+    font-size: 30px;
 }
 
 footer {

@@ -14,12 +14,12 @@ function SplashIndex() {
     }
 
     return (
-        <div className="splash-index-wrapper">
+        <div className="splash-index-wrapper" >
             <div className="splash-header">
-                <NavLink className="splash-logo-wrapper" to="/">
+                <div id="splash-logo">
                 <i class="fa-regular fa-snowflake"></i>
-                <h1>noFlake</h1>
-                </NavLink>
+                <p className="splash-title">noFlake</p>
+                </div>
                 <nav className="splash-right-nav">
                     {/* <p>About</p> */}
                 </nav>
