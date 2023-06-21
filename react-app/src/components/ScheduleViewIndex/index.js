@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./ScheduleViewIndex.css";
 import LeftMatchesBar from "../LeftMatchesBar";
 import { Redirect } from "react-router-dom";
-import { getDatesThunk } from "../../store/date";
+import { getDateRequestsThunk, getDatesThunk } from "../../store/date";
 import StaticLeftSettingsBar from "../StaticLeftSettingsBar";
 import { dateTransformer, niceDateString } from "../ConversationViewHeader";
 
@@ -11,6 +11,17 @@ function ScheduleViewIndex({ isLoaded }) {
     const user = useSelector(state => state.session.user);
     const datesObj = useSelector(state => state.date.allDates);
     const allDates = Object.values(datesObj);
+    const dateRequestsObj = useSelector(state => state.date.dateRequests)
+    const dateRequests = Object.values(dateRequestsObj)
+    let userRequestingDates = [];
+    let userRequestedDates = [];
+    for (let request of dateRequests) {
+        if (request.requesting_user_id === user.id) {
+            userRequestingDates.push(request)
+        } else {
+            userRequestedDates.push(request)
+        }
+    }
     const dispatch = useDispatch();
     const currentDate = new Date();
 
@@ -37,6 +48,7 @@ function ScheduleViewIndex({ isLoaded }) {
 
     useEffect(() => {
         dispatch(getDatesThunk())
+        dispatch(getDateRequestsThunk())
     }, [dispatch])
 
     if (!user) {
@@ -72,6 +84,26 @@ function ScheduleViewIndex({ isLoaded }) {
                             </div>
                         ))) : (
                             <p>You haven't had any dates yet. </p>
+                        )}
+                    </div>
+                    <div className="requesting-dates-wrapper dates-items-wrapper">
+                        <h3>Pending Date Requests Made by You:</h3>
+                        {userRequestingDates.length > 0 ?(userRequestingDates.map(request => (
+                            <div>
+                                <p>{niceDateString(dateTransformer(request.suggested_date))}</p>
+                            </div>
+                        ))) : (
+                            <p>You don't have any pending date requests. </p>
+                        )}
+                    </div>
+                    <div className="requested-dates-wrapper dates-items-wrapper">
+                        <h3>Pending Dates Requested by Your Matches:</h3>
+                        {userRequestedDates.length > 0 ?(userRequestedDates.map(request => (
+                            <div>
+                                <p>{niceDateString(dateTransformer(request.suggested_date))}</p>
+                            </div>
+                        ))) : (
+                            <p>You don't have any pending date requests. </p>
                         )}
                     </div>
                 </div>
