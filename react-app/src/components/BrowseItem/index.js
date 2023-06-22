@@ -40,6 +40,7 @@ function BrowseItem({ browseUsers }) {
     const [matched, setMatched] = useState(false);
     const [matchedUser, setMatchedUser] = useState("");
     const [message, setMessage] = useState("");
+    // const shuffledMatches = shuffleMatches(browseUsers)
     const shuffledMatches = [...browseUsers]
     const requestUsers = []
     for (let request of requestArray) {

@@ -38,3 +38,14 @@
     border-radius: 30px;
     padding: 10px;
 }
+
+.schedule-main-content {
+    width: 100%;
+    overflow-y: scroll;
+    display: flex;
+    justify-content: center;
+}
+
+.schedule-main-inner {
+    width: 400px;
+}

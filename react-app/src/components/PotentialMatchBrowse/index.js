@@ -126,7 +126,7 @@ function PotentialMatchBrowse() {
             {potentialMatchesArr.length === 0 ? (
                 <div className="main-spinner-holder">
 
-                    <CircleSpinner size={30} color="#686769" loading={potentialMatchesArr.length === 0} />
+                    <CircleSpinner size={30} color="#80F" loading={potentialMatchesArr.length === 0} />
                 </div>
             ) : (
 
