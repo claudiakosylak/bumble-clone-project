@@ -20,9 +20,15 @@ export const ageChanger = (dateOfBirth) => {
     }
 }
 
-const getRandomIndex = (max) => {
-    return Math.floor(Math.random() * max)
-}
+const shuffleMatches = matches => {
+    for (let i = matches.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const hold = matches[i];
+      matches[i] = matches[j];
+      matches[j] = hold;
+    }
+    return matches;
+  }
 
 function BrowseItem({ browseUsers }) {
     const currentUser = useSelector(state => state.session.user)
@@ -34,12 +40,12 @@ function BrowseItem({ browseUsers }) {
     const [matched, setMatched] = useState(false);
     const [matchedUser, setMatchedUser] = useState("");
     const [message, setMessage] = useState("");
+    const shuffledMatches = [...browseUsers]
     const requestUsers = []
     for (let request of requestArray) {
         requestUsers.push(request.requesting_user_id)
     }
 
-    const browseUsersLength = browseUsers.length;
     const newUser = allMatches.length === 2 && allMatches[0].id === 1 && allMatches[1].id === 153
     let newUserMessage = false;
 
@@ -93,44 +99,44 @@ function BrowseItem({ browseUsers }) {
                 <div className="browse-item-outer-wrapper">
                     <div className="browse-item-wrapper">
                         <div className="main-browse-picture">
-                            <img src={browseUsers[0].picture_1}
+                            <img src={shuffledMatches[0].picture_1}
                                 onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }}
                             ></img>
                         </div>
                         <div className="browse-item-right-side">
-                            <p className="name-and-age">{browseUsers[0].first_name}, {ageChanger(browseUsers[0].date_of_birth)}</p>
-                            <p id="main-about">{browseUsers[0].about}</p>
+                            <p className="name-and-age">{shuffledMatches[0].first_name}, {ageChanger(shuffledMatches[0].date_of_birth)}</p>
+                            <p id="main-about">{shuffledMatches[0].about}</p>
                             <div className="flake-explanation-container">
 
-                                <p className="main-flake-score"><i class="fa-regular fa-snowflake"></i>{browseUsers[0].flake_score}%</p>
-                                {browseUsers[0].flake_score === 100 && (
-                                    <p id="flake-explanation">Wow, you've found a noFlake!!! {browseUsers[0].first_name} hasn't flaked or ghosted on anyone.</p>
+                                <p className="main-flake-score"><i class="fa-regular fa-snowflake"></i>{shuffledMatches[0].flake_score}%</p>
+                                {shuffledMatches[0].flake_score === 100 && (
+                                    <p id="flake-explanation">Wow, you've found a noFlake!!! {shuffledMatches[0].first_name} hasn't flaked or ghosted on anyone.</p>
                                 )}
-                                {(browseUsers[0].flake_score < 100 && browseUsers[0].flake_score > 80) && (
-                                    <p id="flake-explanation">{browseUsers[0].first_name} is mostly reliable. We can't all be a perfect noFlake!</p>
+                                {(shuffledMatches[0].flake_score < 100 && shuffledMatches[0].flake_score > 80) && (
+                                    <p id="flake-explanation">{shuffledMatches[0].first_name} is mostly reliable. We can't all be a perfect noFlake!</p>
                                 )}
-                                {(browseUsers[0].flake_score < 80 && browseUsers[0].flake_score > 50) && (
-                                    <p id="flake-explanation">{browseUsers[0].first_name} is somewhat reliable, but may be more likely than average to flake.</p>
+                                {(shuffledMatches[0].flake_score < 80 && shuffledMatches[0].flake_score > 50) && (
+                                    <p id="flake-explanation">{shuffledMatches[0].first_name} is somewhat reliable, but may be more likely than average to flake.</p>
                                 )}
-                                {(browseUsers[0].flake_score < 50) && (
-                                    <p id="flake-explanation">{browseUsers[0].first_name} is pretty unreliable - might be pretty hard to catch this YesFlake...</p>
+                                {(shuffledMatches[0].flake_score < 50) && (
+                                    <p id="flake-explanation">{shuffledMatches[0].first_name} is pretty unreliable - might be pretty hard to catch this YesFlake...</p>
                                 )}
                             </div>
                         </div>
                     </div>
                     <div className="swipe-button-container">
-                        <button className="swipe-button swipe-nay" onClick={() => handleReject(browseUsers[0].id, currentUser.id)}><i class="fa-solid fa-xmark"></i></button>
-                        <button className="swipe-button swipe-yay" onClick={() => handleSwipeRight(browseUsers[0].id, currentUser.id)}><i class="fa-solid fa-check"></i></button>
+                        <button className="swipe-button swipe-nay" onClick={() => handleReject(shuffledMatches[0].id, currentUser.id)}><i class="fa-solid fa-xmark"></i></button>
+                        <button className="swipe-button swipe-yay" onClick={() => handleSwipeRight(shuffledMatches[0].id, currentUser.id)}><i class="fa-solid fa-check"></i></button>
 
                     </div>
                 </div>
             )}
-            {browseUsers.length === 0 && (
+            {shuffledMatches.length === 0 && (
                 <div className="no-browse-wrapper">
                     <h3>You've run out of potential matches to browse. Check back soon as new users sign up!</h3>
                 </div>
             )}
-            {browseUsers.length > 0 && (
+            {shuffledMatches.length > 0 && (
 
                 <div className={matched ? "matched-box" : "hidden-matched-box"}>
                     <h2>Boom!</h2>
