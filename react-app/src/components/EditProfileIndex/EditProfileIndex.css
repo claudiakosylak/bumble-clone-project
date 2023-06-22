@@ -8,6 +8,9 @@
 .edit-profile-main-content {
     display: flex;
     position: relative;
+    overflow-y: scroll;
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -25,17 +28,20 @@
     flex-direction: column;
     width: 400px;
     height: 400px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .image-boxes-top {
     display: flex;
     width: 100%;
+    height: 66%;
     justify-content: space-between;
 }
 
 .pic-1 {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     margin: 5px;
     background-color: white;
@@ -47,6 +53,15 @@
 .image-boxes-top-right {
     display: flex;
     flex-direction: column;
+    width: 33%;
+    height: 100%;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.image-boxes-top-right > div {
+    width: 100%;
+    height: 50%;
 }
 
 .empty-image {
@@ -61,8 +76,8 @@
 }
 
 .smaller-image {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
     margin: 5px;
     padding: 10px;
     border: 1px solid lightgrey;
@@ -72,6 +87,15 @@
 .image-boxes-bottom {
     display: flex;
     justify-content: space-between;
+    height: 33%;
+    width: 100%;
+    padding-top: 5px;
+    gap: 10px;
+}
+
+.image-boxes-bottom > div {
+    width: 33%;
+    height: 100%;
 }
 
 .image-x {
@@ -95,6 +119,8 @@
     position: relative;
     background-color: white;
     border-radius: 20px;
+    width: 66%;
+    height: 100%;
 }
 
 .left-flake-score-container {
@@ -195,5 +221,18 @@
 }
 
 .about-me-edit-form button:hover {
+    cursor: pointer;
+}
+
+.empty-image > button {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(211, 211, 211, 0.085);
+    border: none;
+    font-size: 40px;
+    color: lightgrey;
+}
+
+.empty-image > button:hover {
     cursor: pointer;
 }

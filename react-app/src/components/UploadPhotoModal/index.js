@@ -48,7 +48,7 @@ function UploadPhotoModal({ photoNumber }) {
                 {(hasSubmitted && errors.imageBeginning) && (
                     <p>{errors.imageBeginning}</p>
                 )}
-                <button type="submit" disabled={imageUrl.length === 0}>Upload</button>
+                <button type="submit" disabled={imageUrl.length === 0} id={(imageUrl.length === 0)? "disabled-upload-photo-submit" : ""}>Upload</button>
             </form>
         </div>
     )

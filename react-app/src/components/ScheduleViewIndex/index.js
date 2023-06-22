@@ -123,6 +123,8 @@ function ScheduleViewIndex({ isLoaded }) {
                     <h2>Date Calendar</h2>
                 </div>
                 <div className="schedule-main-content">
+                    <div className="schedule-main-inner">
+
                     <div className="upcoming-dates-wrapper dates-items-wrapper">
                         <h3>Upcoming Dates</h3>
                         {upcomingDates.length > 0 ? (sortedUpcomingDates.map(date => (
@@ -132,7 +134,7 @@ function ScheduleViewIndex({ isLoaded }) {
                             </div>
                         ))) : (
                             <p>You don't have any upcoming dates.</p>
-                        )}
+                            )}
                     </div>
                     <div className="past-dates-wrapper dates-items-wrapper">
                         <h3>Past Dates</h3>
@@ -144,7 +146,7 @@ function ScheduleViewIndex({ isLoaded }) {
                             </div>
                         ))) : (
                             <p>You haven't had any dates yet. </p>
-                        )}
+                            )}
                     </div>
                     <div className="requesting-dates-wrapper dates-items-wrapper">
                         <h3>Pending Date Requests Made by You</h3>
@@ -155,10 +157,10 @@ function ScheduleViewIndex({ isLoaded }) {
                             </div>
                         ))) : (
                             <p>You don't have any pending date requests. </p>
-                        )}
+                            )}
                         {sortedRequestingDates[1].length > 0 && (
                             <h4>Expired requests:</h4>
-                        )}
+                            )}
                         {sortedRequestingDates[1].length > 0 && (sortedRequestingDates[1].map(request => (
                             <div>
                                 <p>Date Request with {request.other_user.first_name}</p>
@@ -175,10 +177,10 @@ function ScheduleViewIndex({ isLoaded }) {
                             </div>
                         ))) : (
                             <p>You don't have any pending date requests. </p>
-                        )}
+                            )}
                         {sortedRequestedDates[1].length > 0 && (
                             <h4>Expired requests:</h4>
-                        )}
+                            )}
                         {sortedRequestedDates[1].length > 0 && (sortedRequestedDates[1].map(request => (
                             <div>
                                 <p>Date Request with {request.other_user.first_name}</p>
@@ -186,6 +188,7 @@ function ScheduleViewIndex({ isLoaded }) {
                             </div>
                         )))}
                     </div>
+                        </div>
                 </div>
             </div>
         </div>

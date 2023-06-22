@@ -1,0 +1,56 @@
+.upload-photo-modal-container {
+    width: 400px;
+    height: 300px;
+    background-color: rgb(240, 224, 255);
+    border-radius: 23px;
+    padding: 20px 20px 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.upload-photo-modal-container > p {
+    text-align: center;
+}
+
+.upload-photo-modal-container > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50%;
+}
+
+
+.upload-photo-modal-container > form  input {
+    height: 30px;
+    border-radius: 30px;
+    border: 1px solid lightgrey;
+    padding: 10px;
+}
+
+.upload-photo-modal-container > form  input:focus {
+    outline: 1px solid #80f;
+}
+
+.upload-photo-modal-container > form button {
+    background-color: #80f;
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 10px;
+    border-radius: 30px;
+    width: 100px;
+    align-self: center;
+}
+
+#disabled-upload-photo-submit {
+    background-color: grey;
+}
+
+.upload-photo-modal-container > form button:hover {
+    cursor: pointer;
+}
+
+.upload-photo-modal-container > form p {
+    font-size: 12px;
+}

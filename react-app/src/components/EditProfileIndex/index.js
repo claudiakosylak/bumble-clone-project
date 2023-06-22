@@ -53,7 +53,7 @@ function EditProfileIndex({ isLoaded }) {
                                         onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
                                 </div>
                                 <div className="image-boxes-top-right">
-                                    <div className="image-mini-wrapper">
+                                    <div>
 
                                         {user.picture_2 ? (
                                             <img src={user.picture_2} className="smaller-image"
@@ -63,54 +63,66 @@ function EditProfileIndex({ isLoaded }) {
                                             <div className="smaller-image empty-image"><OpenModalButton buttonText="+" modalComponent={<UploadPhotoModal photoNumber={2} />} /></div>
                                         )}
                                     </div>
-                                    {user.picture_3 ? (
-                                        <img src={user.picture_3} className="smaller-image"
-                                            onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
-                                    ) : (
-                                        <div className="smaller-image empty-image"><OpenModalButton buttonText="+" modalComponent={<UploadPhotoModal photoNumber={3} />} /></div>
-                                    )}
+                                    <div>
+
+                                        {user.picture_3 ? (
+                                            <img src={user.picture_3} className="smaller-image"
+                                                onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
+                                        ) : (
+                                            <div className="smaller-image empty-image"><OpenModalButton buttonText="+" modalComponent={<UploadPhotoModal photoNumber={3} />} /></div>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                             <div className="image-boxes-bottom">
-                                {user.picture_4 ? (
-                                    <img src={user.picture_4} className="smaller-image"
-                                        onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
-                                ) : (
-                                    <div className="smaller-image empty-image"><OpenModalButton buttonText="+" modalComponent={<UploadPhotoModal photoNumber={4} />} /></div>
-                                )}
-                                {user.picture_5 ? (
-                                    <img src={user.picture_5} className="smaller-image"
-                                        onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
-                                ) : (
-                                    <div className="smaller-image empty-image"><OpenModalButton buttonText="+" modalComponent={<UploadPhotoModal photoNumber={5} />} /></div>
-                                )}
-                                {user.picture_6 ? (
-                                    <img src={user.picture_6} className="smaller-image"
-                                        onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
-                                ) : (
-                                    <div className="smaller-image empty-image"><OpenModalButton buttonText="+" modalComponent={<UploadPhotoModal photoNumber={6} />} /></div>
-                                )}
+                                <div>
+
+                                    {user.picture_4 ? (
+                                        <img src={user.picture_4} className="smaller-image"
+                                            onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
+                                    ) : (
+                                        <div className="smaller-image empty-image"><OpenModalButton buttonText="+" modalComponent={<UploadPhotoModal photoNumber={4} />} /></div>
+                                    )}
+                                </div>
+                                <div>
+
+                                    {user.picture_5 ? (
+                                        <img src={user.picture_5} className="smaller-image"
+                                            onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
+                                    ) : (
+                                        <div className="smaller-image empty-image"><OpenModalButton buttonText="+" modalComponent={<UploadPhotoModal photoNumber={5} />} /></div>
+                                    )}
+                                </div>
+                                <div>
+
+                                    {user.picture_6 ? (
+                                        <img src={user.picture_6} className="smaller-image"
+                                            onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
+                                    ) : (
+                                        <div className="smaller-image empty-image"><OpenModalButton buttonText="+" modalComponent={<UploadPhotoModal photoNumber={6} />} /></div>
+                                    )}
+                                </div>
                             </div>
 
                         </div>
                         <div className={`about-me edit-profile-text-inputs ${activeEdit && "actively-editing-about"}`}>
                             <div className="about-header" onClick={() => setActiveEdit(!activeEdit)}>
 
-                            <h4>About Me </h4><i className={`fa-solid fa-angle-down ${activeEdit && "hidden"}`} ></i><i class={`fa-solid fa-angle-up ${!activeEdit && "hidden"}`}></i>
+                                <h4>About Me </h4><i className={`fa-solid fa-angle-down ${activeEdit && "hidden"}`} ></i><i class={`fa-solid fa-angle-up ${!activeEdit && "hidden"}`}></i>
                             </div>
                             <form onSubmit={handleAboutSubmit} className={`about-me-edit-form ${!activeEdit && "non-active-about"}`}>
 
                                 <textarea value={aboutMe} onChange={(e) => setAboutMe(e.target.value)}></textarea>
                                 {errors.about && (
                                     <p className="about-error">{errors.about}</p>
-                                    ) }
+                                )}
                                 <div className="about-edit-bottom">
                                     <p className="about-edit-cancel" onClick={() => setActiveEdit(false)}>Cancel</p>
-                                {aboutMe && aboutMe.length > 0 && (
-                                    <p>{300 - aboutMe.length} characters left</p>
+                                    {aboutMe && aboutMe.length > 0 && (
+                                        <p>{300 - aboutMe.length} characters left</p>
                                     )}
                                     <button type="submit" disabled={(aboutMe === beginningAbout || errors.about)} id={(aboutMe === beginningAbout || errors.about) && "disabled-about-save"}>Save</button>
-                                    </div>
+                                </div>
 
                             </form>
                         </div>

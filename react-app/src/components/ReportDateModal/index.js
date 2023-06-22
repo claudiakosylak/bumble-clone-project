@@ -24,6 +24,11 @@ function ReportDateModal({ match, date }) {
         closeModal()
     }
 
+    const closeAndClear = () => {
+        closeModal()
+        setReportActivity("")
+    }
+
     return (
         <div className="report-date-modal-container">
             <h3>Report on your date with {match.first_name}</h3>
@@ -46,8 +51,8 @@ function ReportDateModal({ match, date }) {
                 </select>
                 <div className="date-report-bottom-buttons">
 
-                <p onClick={closeModal}>Cancel</p>
-                <button type="submit">Submit</button>
+                <p onClick={closeAndClear} id="report-date-cancel">Cancel</p>
+                <button type="submit" disabled={reportActivity === ""} id={reportActivity === "" ? "disabled-date-report-submit" : ""}>Submit</button>
                 </div>
             </form>
         </div>
