@@ -57,7 +57,7 @@ function ConversationList({ messagedMatches }) {
                                 onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} ></img>
                             <div className="conversation-list-item-right">
                                 <div className="convo-list-header">
-                                    <p className="convo-list-first-name">{match.first_name}   {allDateMatchIds.includes(match.matchId) &&  <i class="fa-regular fa-calendar-days left-calendar-icon"></i>}   {dateRequestMatchIds.includes(match.matchId) && <span><i class="fa-regular fa-calendar-days left-calendar-icon"></i><span className="left-calendar-icon">   ??</span></span>}</p>
+                                    <p className="convo-list-first-name">{match.first_name}   {allDateMatchIds.includes(match.matchId) &&  <i class="fa-regular fa-calendar-days" id="left-calendar-icon"></i>}   {dateRequestMatchIds.includes(match.matchId) && <span><i class="fa-regular fa-calendar-days" id="left-calendar-icon"></i><span id="left-calendar-icon">   ??</span></span>}</p>
                                     {match.last_message.user_id !== user.id && (
                                         <p id="your-move">Your move</p>
                                     )}
