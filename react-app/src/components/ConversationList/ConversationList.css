@@ -23,8 +23,16 @@
 
 .convo-list-first-name {
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
+.convo-list-first-name > span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
 .convo-list-header {
     display: flex;
@@ -54,4 +62,8 @@
 .message-content-preview {
     font-size: 14px;
     color: rgb(114, 114, 114);
+}
+
+#left-calendar-icon {
+    font-size: 14px;
 }

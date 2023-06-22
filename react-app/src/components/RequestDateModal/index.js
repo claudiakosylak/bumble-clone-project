@@ -4,7 +4,7 @@ import { useModal } from "../../context/Modal";
 import "./RequestDateModal.css";
 import { createDateRequestThunk, getDateRequestsThunk } from "../../store/date";
 
-function RequestDateModal({match}) {
+function RequestDateModal({ match }) {
     const { closeModal } = useModal();
     const [scheduleDay, setScheduleDay] = useState("")
     const [errors, setErrors] = useState({})
@@ -16,7 +16,7 @@ function RequestDateModal({match}) {
 
     useEffect(() => {
         const newErrors = {}
-        if (scheduleDate < currentDate) newErrors.past = "Please select a date and time in the future."
+        if (scheduleDate < currentDate) newErrors.past = "Please select a date in the future."
         setErrors(newErrors)
     }, [scheduleDay])
 
@@ -30,9 +30,8 @@ function RequestDateModal({match}) {
 
     return (
         <div className="request-date-modal-container">
-            <p onClick={closeModal}>x</p>
-            <h3>Request a date with {match.first_name}! We'll add it to your calendar once he confirms.</h3>
-            <form onSubmit={handleSubmit}>
+            <h3>Request a date with {match.first_name}! We'll add it to your calendar once they confirm.</h3>
+            <form onSubmit={handleSubmit} className="request-date-form">
                 <label>
                     Select a date:
                     <input
@@ -45,7 +44,11 @@ function RequestDateModal({match}) {
                 {errors.past && (
                     <p>{errors.past}</p>
                 )}
-                <button type="submit" disabled={errorsArr.length > 0}>Request Date</button>
+                <div className="request-date-submit-buttons">
+
+                    <p onClick={closeModal} className="date-request-cancel">Cancel</p>
+                    <button type="submit" disabled={errorsArr.length > 0} id={errors.past ? "disabled-request-date-button" : ""}>Request Date</button>
+                </div>
             </form>
         </div>
     )
