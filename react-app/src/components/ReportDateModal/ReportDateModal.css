@@ -16,6 +16,8 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    background-color: rgb(240, 224, 255);
+    border-radius: 23px;
 }
 
 .report-date-modal-container h3 {
@@ -33,15 +35,24 @@
     display: flex;
     gap: 20px;
     align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 .report-date-modal-container form button {
-
+    background-color: #80f;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
 }
 
 .date-report-bottom-buttons {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 80%;
 }
 
 .date-report-button {
@@ -63,4 +74,23 @@
 .active-date-report-button {
     background-color: #80f;
     color: white;
+}
+
+#report-date-cancel {
+    display: flex;
+    align-items: center;
+    width: 50px;
+    margin-left:100px;
+    padding-top: 15px;
+    color: #80f;
+    font-weight: 600;
+}
+
+#disabled-date-report-submit {
+    background-color: grey;
+}
+
+
+.date-report-bottom-buttons *:hover {
+    cursor: pointer;
 }
