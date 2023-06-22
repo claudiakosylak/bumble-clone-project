@@ -23,9 +23,12 @@ function ReportGhostModal({match}) {
     return (
         <div className="report-ghost-modal">
             <h3>Report {match.first_name} as a ghoster</h3>
-            <p>Are you sure you'd like to report {match.first_name} as a ghoster? This can't be undone and you will not be able to submit another report about this match if they do come back around. </p>
-            <button onClick={closeModal}>Cancel</button>
+            <p>Are you sure you'd like to report {match.first_name} as a ghoster? </p><p>This can't be undone and you will not be able to submit another report about this match if they do come back around. </p>
+            <div className="ghosting-report-buttons">
+
+            <p onClick={closeModal} id="ghost-cancel">Cancel</p>
             <button onClick={handleSubmit}>Yes, report ghosting - Boo!</button>
+            </div>
         </div>
     )
 }
