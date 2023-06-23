@@ -151,7 +151,7 @@ function SignupFormPage() {
               <p>{errors.firstName}</p>
             )}
             <label>
-              Date of Birth
+              <p className="dob-label">Enter date of birth</p>
               <input
                 type="date"
                 value={dateOfBirth}
