@@ -10,6 +10,7 @@ import MainIndex from "./components/MainIndex";
 import ConversationViewIndex from "./components/ConversationViewIndex";
 import ScheduleViewIndex from "./components/ScheduleViewIndex";
 import EditProfileIndex from "./components/EditProfileIndex";
+import MatchesCarousel from "./components/MatchesCarousel";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/carousel">
+            <MatchesCarousel />
           </Route>
         </Switch>
       )}
