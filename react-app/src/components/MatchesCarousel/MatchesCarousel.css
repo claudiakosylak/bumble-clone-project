@@ -4,10 +4,12 @@
     height: 90px;
     display: flex;
     align-items: center;
+    z-index: 0;
 }
 
 .inner-wrapper {
     position: relative;
+    /* z-index: 1; */
 }
 
 .carousel-buttons {
@@ -33,7 +35,6 @@
     font-size: 12px;
     margin: none;
     padding: none;
-    position: relative;
 }
 
 .inner-wrapper-left-carousel {

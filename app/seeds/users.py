@@ -377,7 +377,7 @@ for male_name in male_names:
     random_phone += 1
     phone_man = str(random_phone)
     man = {
-        "flake_score": random.randint(1, 100),
+        "flake_score": random.randint(30, 100),
         "first_name": male_name,
         "email": f"{male_name.lower()}@email.com",
         "password": "password",
@@ -399,7 +399,7 @@ for neutral_name in gender_neutral_names:
     random_phone += 1
     phone_neutral = str(random_phone)
     person = {
-        "flake_score": random.randint(1, 100),
+        "flake_score": random.randint(20, 100),
         "first_name": neutral_name,
         "email": f"{neutral_name.lower()}@aa.io",
         "password": "password",

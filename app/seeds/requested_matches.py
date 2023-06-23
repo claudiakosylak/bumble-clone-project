@@ -1,16 +1,15 @@
 from app.models import db, RequestedMatch, environment, SCHEMA
 from sqlalchemy.sql import text
+import random
 
 def seed_requested_matches():
     requested_matches = []
-    request1 = RequestedMatch(
-        requesting_user_id = 3, requested_user_id = 1
-    )
-    requested_matches.append(request1)
-    request2 = RequestedMatch(
-        requesting_user_id = 5, requested_user_id = 1
-    )
-    requested_matches.append(request2)
+    for x in range(22, 152, 3):
+        request = RequestedMatch(
+            requesting_user_id = x, requested_user_id = 1
+        )
+        db.session.add(request)
+    db.session.commit()
 
     for request in requested_matches:
         db.session.add(request)
