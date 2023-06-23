@@ -213,7 +213,14 @@ function SignupFormPage() {
             )}
           </div>
           <div className="signup-form-right">
-            <button onClick={openGenderMenu}>{gender || "Gender"}</button>
+            <div className="gender-dropdown-button" onClick={openGenderMenu}>
+            <p >{gender || "Gender"}</p>
+              {!showGenderMenu ? (
+                <i class="fa-solid fa-caret-down"></i>
+              ) : (
+                <i class="fa-solid fa-caret-up"></i>
+              )}
+            </div>
             {/* <p>{gender}</p> */}
               <ul className={genderClassName} ref={genderRef} onClick={closeGenderMenu}>
                 <li onClick={() => setGender("Woman")}>Woman</li>
@@ -225,6 +232,7 @@ function SignupFormPage() {
               value={gender}
               onChange={(e) => setGender(e.target.value)}
               required
+              className="hidden"
             >
               <option value="" disabled>Gender</option>
               <option value="Woman">Woman</option>

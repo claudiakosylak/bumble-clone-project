@@ -78,6 +78,7 @@
     gap: 15px;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .signup-form-bottom {
@@ -120,4 +121,51 @@ h1 {
     font-size: 14px;
 }
 
+.gender-dropdown-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    font-size: 14px;
+    color: grey;
+    padding: 10px;
+    border-radius: 30px;
+    border: 1px solid lightgrey;
+}
 
+.gender-dropdown-button:hover {
+    cursor: pointer;
+}
+
+.gender-settings-dropdown {
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    right: 0px;
+    top: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    z-index: 1;
+    border: 1px solid lightgrey;
+    border-radius: 23px;
+}
+
+.gender-settings-dropdown li {
+    list-style-type: none;
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.gender-settings-dropdown li:hover {
+    background-color: rgba(211, 211, 211, 0.244);
+    cursor: pointer;
+}
+
+.fa-caret-down, .fa-caret-up {
+    font-size: 12px;
+    color: lightgrey;
+}
