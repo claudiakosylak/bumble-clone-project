@@ -79,6 +79,7 @@
   align-items: center;
   border-right: 1px solid lightgrey;
   height: 100%;
+  z-index: 1;
 }
 
 .left-menu-itemss li {
