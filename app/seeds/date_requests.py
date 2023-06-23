@@ -2,7 +2,7 @@ from app.models import db, DateRequest, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import datetime
 
-day1 = datetime.strptime('2023-07-09 17:30', '%Y-%m-%d %H:%M')
+day1 = datetime.strptime('2023-07-09 10:30', '%Y-%m-%d %H:%M')
 day2 = datetime.strptime('2023-07-20 19:30', '%Y-%m-%d %H:%M')
 
 def seed_date_requests():
