@@ -131,8 +131,8 @@ function SignupFormPage() {
     if (!state) newErrors.state = "Please enter your state."
     if (!city) newErrors.city = "Please enter your city."
     if (city.length > 30) newErrors.city = "Please enter a city name under 30 characters."
-    if (enteredDateConverted > compareDate && todayCompare < currentDate) newErrors.dateOfBirth = "Sorry, only users over the age of 18 are allowed to use this website."
-    if (todayCompare > currentDate) newErrors.dateOfBirth = "Please enter a valid birth date in the past."
+    if (enteredDateConverted > compareDate) newErrors.dateOfBirth = "Sorry, only users over the age of 18 are allowed to use this website."
+    // if (todayCompare > currentDate) newErrors.dateOfBirth = "Please enter a valid birth date in the past."
     if (imageUrl.length > 255) newErrors.imageLength = "Please enter an image url under 255 characters."
     if ((imageUrl.slice(imageUrl.length - 4) !== ".jpg" && imageUrl.slice(imageUrl.length - 4) !== ".png" && imageUrl.slice(imageUrl.length - 5) !== ".jpeg")) newErrors.imageEnding = "Please enter an image url ending in .jpg, .png or .jpeg"
     if ((imageUrl.slice(0, 7) !== "http://" && imageUrl.slice(0, 8) !== "https://")) newErrors.imageBeginning = "Please enter an image url beginning with 'http://' or 'https://' "
@@ -141,6 +141,8 @@ function SignupFormPage() {
   }, [firstName, phone, email, dateOfBirth, password, confirmPassword, lookingForGender, gender, state, city, imageUrl])
 
   if (sessionUser) return <Redirect to="/app" />;
+
+  console.log("ERRORS: ", errors)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -261,26 +263,26 @@ function SignupFormPage() {
             )}
           </div>
           <div className="signup-form-right">
-            <div className="gender-dropdown-button" onClick={openGenderMenu}>
+            {/* <div className="gender-dropdown-button" onClick={openGenderMenu}>
               <p >{gender || "Gender"}</p>
               {!showGenderMenu ? (
                 <i class="fa-solid fa-caret-down"></i>
               ) : (
                 <i class="fa-solid fa-caret-up"></i>
               )}
-            </div>
-            {/* <p>{gender}</p> */}
-            <ul className={genderClassName} ref={genderRef} onClick={closeGenderMenu}>
+            </div> */}
+
+            {/* <ul className={genderClassName} ref={genderRef} onClick={closeGenderMenu}>
               <li onClick={() => setGender("Woman")}>Woman</li>
               <li onClick={() => setGender("Man")}>Man</li>
               <li onClick={() => setGender("Nonbinary")}>Nonbinary</li>
               <li onClick={() => setGender("Other")}>Other</li>
-            </ul>
+            </ul> */}
             <select
               value={gender}
               onChange={(e) => setGender(e.target.value)}
               required
-              className="hidden"
+              // className="hidden"
             >
               <option value="" disabled>Gender</option>
               <option value="Woman">Woman</option>
@@ -291,25 +293,25 @@ function SignupFormPage() {
             {(hasSubmitted && errors.gender) && (
               <p>{errors.gender}</p>
             )}
-            <div className="gender-dropdown-button" onClick={openLookingMenu}>
+            {/* <div className="gender-dropdown-button" onClick={openLookingMenu}>
               <p >{lookingForGender || "Looking for"}</p>
               {!showLookingMenu ? (
                 <i class="fa-solid fa-caret-down"></i>
               ) : (
                 <i class="fa-solid fa-caret-up"></i>
               )}
-            </div>
+            </div> */}
             {/* <p>{gender}</p> */}
-            <ul className={lookingClassName} ref={lookingRef} onClick={closeLookingMenu}>
+            {/* <ul className={lookingClassName} ref={lookingRef} onClick={closeLookingMenu}>
               <li onClick={() => setLookingForGender("Women")}>Women</li>
               <li onClick={() => setLookingForGender("Men")}>Men</li>
               <li onClick={() => setLookingForGender("Both")}>Both</li>
               <li onClick={() => setLookingForGender("Nonbinary")}>Nonbinary</li>
               <li onClick={() => setLookingForGender("Open")}>Open</li>
-            </ul>
+            </ul> */}
             <select
               value={lookingForGender}
-              className="hidden"
+              // className="hidden"
               onChange={(e) => setLookingForGender(e.target.value)}
               required
             >
@@ -336,21 +338,21 @@ function SignupFormPage() {
             {(hasSubmitted && errors.city) && (
               <p>{errors.city}</p>
             )}
-            <div className="gender-dropdown-button" onClick={openStateMenu}>
+            {/* <div className="gender-dropdown-button" onClick={openStateMenu}>
               <p >{state || "State"}</p>
               {!showStateMenu ? (
                 <i class="fa-solid fa-caret-down"></i>
               ) : (
                 <i class="fa-solid fa-caret-up"></i>
               )}
-            </div>
+            </div> */}
             {/* <p>{gender}</p> */}
-            <ul className={stateClassName} ref={stateRef} onClick={closeStateMenu}>
+            {/* <ul className={stateClassName} ref={stateRef} onClick={closeStateMenu}>
               {states.map(state => (
                 <li key={state} onClick={() => setState(state)}>{state}</li>
               ))}
-            </ul>
-            <select className="hidden" value={state} onChange={(e) => setState(e.target.value)} required>
+            </ul> */}
+            <select value={state} onChange={(e) => setState(e.target.value)} required>
               {/* State */}
               <option value="" disabled>State</option>
               {states.map(state => (
@@ -384,7 +386,7 @@ function SignupFormPage() {
         </div>
         <div className="signup-form-bottom">
 
-          <button type="submit">Sign Up</button>
+          <button type="submit" >Sign Up</button>
           <p>Already have an account? <NavLink to="/login" className="login-switch">Log in here</NavLink></p>
         </div>
       </form>
