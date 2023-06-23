@@ -5,6 +5,7 @@ import Navigation from "../Navigation";
 import "./LeftMatchesBar.css";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import ConversationList from "../ConversationList";
+import MatchesCarousel from "../MatchesCarousel";
 
 function LeftMatchesBar({ isLoaded }) {
     const matchesObj = useSelector(state => state.match.currentMatches)
@@ -40,7 +41,7 @@ function LeftMatchesBar({ isLoaded }) {
                         <NavLink to="/app" className="back-to-browse">Back to meeting new people<i class="fa-solid fa-angle-right"></i></NavLink>
                     )}
             <p className="left-headers">Unmessaged Matches ({unMessagedMatches.length})</p>
-            <ul className="unmessaged-matches-wrapper">
+            {/* <ul className="unmessaged-matches-wrapper">
                 <div className="inner-wrapper">
                     {unMessagedMatches.length > 0 ? unMessagedMatches.map(match => (
                         <li key={match.id} className="scroll-match-item"><img onClick={() => handlePicClick(match)} className="mini-match-icons" src={match.picture_1}></img></li>
@@ -49,7 +50,8 @@ function LeftMatchesBar({ isLoaded }) {
                     )}
 
                 </div>
-            </ul>
+            </ul> */}
+            <MatchesCarousel unMessagedMatches={unMessagedMatches}/>
 
 
             <p className="left-headers">Conversations</p>

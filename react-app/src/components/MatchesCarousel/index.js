@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./MatchesCarousel.css";
-import { getMatchesThunk } from "../../store/match";
+import { getMatchesThunk, getMatch } from "../../store/match";
+import { useHistory } from "react-router-dom";
 
-function MatchesCarousel() {
+function MatchesCarousel({unMessagedMatches}) {
     const matchesObj = useSelector(state => state.match.currentMatches)
-    const matchesArr = Object.values(matchesObj)
+    const matchesArr = [...unMessagedMatches]
     const matchChunks = [];
     const dispatch = useDispatch()
+    const history = useHistory();
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32];
     const [carouselIndex, setCarouselIndex] = useState(0);
     const matches = [...matchesArr]
@@ -39,9 +41,14 @@ function MatchesCarousel() {
         dispatch(getMatchesThunk())
     }, [dispatch])
 
+    const handlePicClick = async (match) => {
+        await dispatch(getMatch(match))
+        history.push("/app/connections")
+    }
+
     return (
         <ul className="unmessaged-matches-carousel">
-            {matchesArr.length > 0 && (
+            {matchesArr.length > 0 ? (
 
                 <div className={carouselGroup.length === 5 ? "inner-wrapper-left-carousel" : "last-group-carousel-wrapper"}>
 
@@ -49,12 +56,16 @@ function MatchesCarousel() {
                 <button className="left-carousel-button carousel-buttons" onClick={handleLeft}><i class="fa-solid fa-caret-left" id="left-carousel-caret"></i></button>
                 )}
             {matchesArr.length > 0 && carouselGroup.map(match => (
-                <li key={match.id} className="scroll-match-item" id={carouselGroup.length < 5 ? "last-match-group" : ""}><img src={match.picture_1} className="mini-match-icons"></img></li>
+                <li key={match.id} className="scroll-match-item" id={carouselGroup.length < 5 ? "last-match-group" : ""}><img src={match.picture_1} className="mini-match-icons" onClick={() => handlePicClick(match)}></img></li>
                 ))}
             {carouselIndex < matchChunks.length - 1 && (
                 <button className="right-carousel-button carousel-buttons" onClick={() => handleRight()}><i class="fa-solid fa-caret-right" id="left-carousel-caret"></i></button>
                 )}
                 </div>
+                ) : (
+                    <div className="inner-wrapper-left-carousel">
+                        <p>You don't have any matches yet!</p>
+                    </div>
                 )}
         </ul>
     )

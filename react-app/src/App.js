@@ -36,16 +36,13 @@ function App() {
             <ScheduleViewIndex isLoaded={isLoaded} />
           </Route>
           <Route path="/app">
-            <MainIndex isLoaded={isLoaded}/>
+            <MainIndex isLoaded={isLoaded} />
           </Route>
           <Route path="/login" >
             <LoginFormPage />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
-          </Route>
-          <Route path="/carousel">
-            <MatchesCarousel />
           </Route>
         </Switch>
       )}
