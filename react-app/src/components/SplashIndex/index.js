@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import "./SplashIndex.css";
 import { NavLink } from "react-router-dom";
 import splashPic from "../../images/couple-on-date.jpg";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { CircleSpinner } from "react-spinners-kit";
 
 function SplashIndex() {
     const user = useSelector(state => state.session.user)
@@ -24,6 +24,7 @@ function SplashIndex() {
                     {/* <p>About</p> */}
                 </nav>
             </div>
+                {splashPic ? (
             <div className="splash-main-image">
                 <img src={splashPic} className="splash-background-pic"></img>
                 <div className="splash-main-textarea">
@@ -35,6 +36,12 @@ function SplashIndex() {
                     </div>
                 </div>
             </div>
+
+                ) : (
+                    <div className="splash-spinner-wrapper">
+                        <CircleSpinner size={30} color="#80F" loading={!splashPic} />
+                        </div>
+                )}
             <footer>
                 <div className="footer-icons">
                 <a href="https://www.linkedin.com/in/claudiakosylak/"><i class="fa-brands fa-linkedin"></i></a>
