@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
+  const genderRef = useRef();
   const sessionUser = useSelector((state) => state.session.user);
   const [firstName, setFirstName] = useState("");
   const [phone, setPhone] = useState("");
@@ -22,6 +23,8 @@ function SignupFormPage() {
   const [errors, setErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [backendErrors, setBackendErrors] = useState([])
+  const [showGenderMenu, setShowGenderMenu] = useState(false);
+  const [showLookingMenu, setShowLookingMenu] = useState(false);
   const currentDate = new Date();
   let compareDate = currentDate
   compareDate.setFullYear(compareDate.getFullYear() - 18)
@@ -30,6 +33,29 @@ function SignupFormPage() {
 
   const states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
 
+
+
+  const openGenderMenu = () => {
+    if (showGenderMenu) return;
+    setShowGenderMenu(true);
+  }
+
+  useEffect(() => {
+    if (!showGenderMenu) return;
+
+    const closeGenderMenu = (e) => {
+      if (genderRef.current && !genderRef.current.contains(e.target)) {
+        setShowGenderMenu(false);
+      }
+    };
+
+    document.addEventListener("click", closeGenderMenu);
+
+    return () => document.removeEventListener("click", closeGenderMenu);
+  }, [showGenderMenu]);
+
+  const genderClassName = "gender-settings-dropdown" + (showGenderMenu ? "" : " hidden");
+  const closeGenderMenu = () => setShowGenderMenu(false);
 
   useEffect(() => {
     const newErrors = {};
@@ -40,20 +66,19 @@ function SignupFormPage() {
         phoneVal = true;
       }
     }
-
-    let atCounter = 0;
-    for (let char of email) {
-      if (char === "@") {
-        atCounter++;
-      }
+  let atCounter = 0;
+  for (let char of email) {
+    if (char === "@") {
+      atCounter++;
     }
-    if (phone.length < 10 || phoneVal) newErrors.phone = "Please enter a valid 10 digit phone number with no special characters, starting with the area code."
-    if (password !== confirmPassword) newErrors.password = "Confirm Password field must be the same as the Password field."
-    if (password.length > 20) newErrors.password = "Please enter a password that is less than 20 characters long."
-    if (!email.includes("@") || !email.includes(".") || atCounter > 1 || email.length === 0 || email.length > 50) newErrors.email = "Please enter a valid email address under 50 characters containing only one '@' and at least one '.'."
-    if (!firstName) newErrors.firstName = "Please enter your first name."
-    if (firstName.length > 20) newErrors.firstName = "Please enter a first name under 20 characters."
-    if (!gender) newErrors.gender = "Please select a gender option."
+  }
+  if (phone.length < 10 || phoneVal) newErrors.phone = "Please enter a valid 10 digit phone number with no special characters, starting with the area code."
+  if (password !== confirmPassword) newErrors.password = "Confirm Password field must be the same as the Password field."
+  if (password.length > 20) newErrors.password = "Please enter a password that is less than 20 characters long."
+  if (!email.includes("@") || !email.includes(".") || atCounter > 1 || email.length === 0 || email.length > 50) newErrors.email = "Please enter a valid email address under 50 characters containing only one '@' and at least one '.'."
+  if (!firstName) newErrors.firstName = "Please enter your first name."
+  if (firstName.length > 20) newErrors.firstName = "Please enter a first name under 20 characters."
+  if (!gender) newErrors.gender = "Please select a gender option."
     if (!lookingForGender) newErrors.lookingForGender = "Please select what gender(s) you are interested in."
     if (!state) newErrors.state = "Please enter your state."
     if (!city) newErrors.city = "Please enter your city."
@@ -188,7 +213,14 @@ function SignupFormPage() {
             )}
           </div>
           <div className="signup-form-right">
-
+            <button onClick={openGenderMenu}>{gender || "Gender"}</button>
+            {/* <p>{gender}</p> */}
+              <ul className={genderClassName} ref={genderRef} onClick={closeGenderMenu}>
+                <li onClick={() => setGender("Woman")}>Woman</li>
+                <li onClick={() => setGender("Man")}>Man</li>
+                <li onClick={() => setGender("Nonbinary")}>Nonbinary</li>
+                <li onClick={() => setGender("Other")}>Other</li>
+              </ul>
             <select
               value={gender}
               onChange={(e) => setGender(e.target.value)}
