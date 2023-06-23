@@ -227,3 +227,7 @@ h1 {
     background-color: rgba(211, 211, 211, 0.244);
     cursor: pointer;
 }
+
+#disabled-signup-button {
+    background-color: grey;
+}

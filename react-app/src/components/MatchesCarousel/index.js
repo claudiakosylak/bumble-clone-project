@@ -56,7 +56,9 @@ function MatchesCarousel({unMessagedMatches}) {
                 <button className="left-carousel-button carousel-buttons" onClick={handleLeft}><i class="fa-solid fa-caret-left" id="left-carousel-caret"></i></button>
                 )}
             {matchesArr.length > 0 && carouselGroup.map(match => (
-                <li key={match.id} className="scroll-match-item" id={carouselGroup.length < 5 ? "last-match-group" : ""}><img src={match.picture_1} className="mini-match-icons" onClick={() => handlePicClick(match)}></img></li>
+                <li key={match.id} className="scroll-match-item" id={carouselGroup.length < 5 ? "last-match-group" : ""}><img src={match.picture_1} className="mini-match-icons" onClick={() => handlePicClick(match)}
+                onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }}
+                ></img></li>
                 ))}
             {carouselIndex < matchChunks.length - 1 && (
                 <button className="right-carousel-button carousel-buttons" onClick={() => handleRight()}><i class="fa-solid fa-caret-right" id="left-carousel-caret"></i></button>
