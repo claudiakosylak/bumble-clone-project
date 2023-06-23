@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signUp } from "../../store/session";
@@ -7,6 +7,9 @@ import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
+  const genderRef = useRef();
+  const lookingRef = useRef();
+  const stateRef = useRef();
   const sessionUser = useSelector((state) => state.session.user);
   const [firstName, setFirstName] = useState("");
   const [phone, setPhone] = useState("");
@@ -22,6 +25,9 @@ function SignupFormPage() {
   const [errors, setErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [backendErrors, setBackendErrors] = useState([])
+  const [showGenderMenu, setShowGenderMenu] = useState(false);
+  const [showLookingMenu, setShowLookingMenu] = useState(false);
+  const [showStateMenu, setShowStateMenu] = useState(false);
   const currentDate = new Date();
   let compareDate = currentDate
   compareDate.setFullYear(compareDate.getFullYear() - 18)
@@ -30,6 +36,74 @@ function SignupFormPage() {
 
   const states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
 
+  // helper functions to open custom dropdown menus
+  const openGenderMenu = () => {
+    if (showGenderMenu) return;
+    setShowGenderMenu(true);
+  }
+
+  const openLookingMenu = () => {
+    if (showLookingMenu) return;
+    setShowLookingMenu(true);
+  }
+
+  const openStateMenu = () => {
+    if (showStateMenu) return;
+    setShowStateMenu(true);
+  }
+
+  // use effects to control click on dropdown refs
+
+  useEffect(() => {
+    if (!showStateMenu) return;
+
+    const closeStateMenu = (e) => {
+      if (stateRef.current && !stateRef.current.contains(e.target)) {
+        setShowStateMenu(false);
+      }
+    };
+
+    document.addEventListener("click", closeStateMenu);
+
+    return () => document.removeEventListener("click", closeStateMenu);
+  }, [showStateMenu]);
+
+  const stateClassName = "state-settings-dropdown" + (showStateMenu ? "" : " hidden");
+  const closeStateMenu = () => setShowStateMenu(false);
+
+  useEffect(() => {
+    if (!showLookingMenu) return;
+
+    const closeLookingMenu = (e) => {
+      if (lookingRef.current && !lookingRef.current.contains(e.target)) {
+        setShowLookingMenu(false);
+      }
+    };
+
+    document.addEventListener("click", closeLookingMenu);
+
+    return () => document.removeEventListener("click", closeLookingMenu);
+  }, [showLookingMenu]);
+
+  const lookingClassName = "looking-settings-dropdown" + (showLookingMenu ? "" : " hidden");
+  const closeLookingMenu = () => setShowLookingMenu(false);
+
+  useEffect(() => {
+    if (!showGenderMenu) return;
+
+    const closeGenderMenu = (e) => {
+      if (genderRef.current && !genderRef.current.contains(e.target)) {
+        setShowGenderMenu(false);
+      }
+    };
+
+    document.addEventListener("click", closeGenderMenu);
+
+    return () => document.removeEventListener("click", closeGenderMenu);
+  }, [showGenderMenu]);
+
+  const genderClassName = "gender-settings-dropdown" + (showGenderMenu ? "" : " hidden");
+  const closeGenderMenu = () => setShowGenderMenu(false);
 
   useEffect(() => {
     const newErrors = {};
@@ -40,7 +114,6 @@ function SignupFormPage() {
         phoneVal = true;
       }
     }
-
     let atCounter = 0;
     for (let char of email) {
       if (char === "@") {
@@ -151,7 +224,7 @@ function SignupFormPage() {
               <p>{errors.firstName}</p>
             )}
             <label>
-              Date of Birth
+              <p className="dob-label">Enter date of birth</p>
               <input
                 type="date"
                 value={dateOfBirth}
@@ -188,11 +261,26 @@ function SignupFormPage() {
             )}
           </div>
           <div className="signup-form-right">
-
+            <div className="gender-dropdown-button" onClick={openGenderMenu}>
+              <p >{gender || "Gender"}</p>
+              {!showGenderMenu ? (
+                <i class="fa-solid fa-caret-down"></i>
+              ) : (
+                <i class="fa-solid fa-caret-up"></i>
+              )}
+            </div>
+            {/* <p>{gender}</p> */}
+            <ul className={genderClassName} ref={genderRef} onClick={closeGenderMenu}>
+              <li onClick={() => setGender("Woman")}>Woman</li>
+              <li onClick={() => setGender("Man")}>Man</li>
+              <li onClick={() => setGender("Nonbinary")}>Nonbinary</li>
+              <li onClick={() => setGender("Other")}>Other</li>
+            </ul>
             <select
               value={gender}
               onChange={(e) => setGender(e.target.value)}
               required
+              className="hidden"
             >
               <option value="" disabled>Gender</option>
               <option value="Woman">Woman</option>
@@ -203,8 +291,25 @@ function SignupFormPage() {
             {(hasSubmitted && errors.gender) && (
               <p>{errors.gender}</p>
             )}
+            <div className="gender-dropdown-button" onClick={openLookingMenu}>
+              <p >{lookingForGender || "Looking for"}</p>
+              {!showLookingMenu ? (
+                <i class="fa-solid fa-caret-down"></i>
+              ) : (
+                <i class="fa-solid fa-caret-up"></i>
+              )}
+            </div>
+            {/* <p>{gender}</p> */}
+            <ul className={lookingClassName} ref={lookingRef} onClick={closeLookingMenu}>
+              <li onClick={() => setLookingForGender("Women")}>Women</li>
+              <li onClick={() => setLookingForGender("Men")}>Men</li>
+              <li onClick={() => setLookingForGender("Both")}>Both</li>
+              <li onClick={() => setLookingForGender("Nonbinary")}>Nonbinary</li>
+              <li onClick={() => setLookingForGender("Open")}>Open</li>
+            </ul>
             <select
               value={lookingForGender}
+              className="hidden"
               onChange={(e) => setLookingForGender(e.target.value)}
               required
             >
@@ -231,7 +336,21 @@ function SignupFormPage() {
             {(hasSubmitted && errors.city) && (
               <p>{errors.city}</p>
             )}
-            <select value={state} onChange={(e) => setState(e.target.value)} required>
+            <div className="gender-dropdown-button" onClick={openStateMenu}>
+              <p >{state || "State"}</p>
+              {!showStateMenu ? (
+                <i class="fa-solid fa-caret-down"></i>
+              ) : (
+                <i class="fa-solid fa-caret-up"></i>
+              )}
+            </div>
+            {/* <p>{gender}</p> */}
+            <ul className={stateClassName} ref={stateRef} onClick={closeStateMenu}>
+              {states.map(state => (
+                <li key={state} onClick={() => setState(state)}>{state}</li>
+              ))}
+            </ul>
+            <select className="hidden" value={state} onChange={(e) => setState(e.target.value)} required>
               {/* State */}
               <option value="" disabled>State</option>
               {states.map(state => (
