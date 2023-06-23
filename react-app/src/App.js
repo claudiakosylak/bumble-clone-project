@@ -10,6 +10,7 @@ import MainIndex from "./components/MainIndex";
 import ConversationViewIndex from "./components/ConversationViewIndex";
 import ScheduleViewIndex from "./components/ScheduleViewIndex";
 import EditProfileIndex from "./components/EditProfileIndex";
+import MatchesCarousel from "./components/MatchesCarousel";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ function App() {
             <ScheduleViewIndex isLoaded={isLoaded} />
           </Route>
           <Route path="/app">
-            <MainIndex isLoaded={isLoaded}/>
+            <MainIndex isLoaded={isLoaded} />
           </Route>
           <Route path="/login" >
             <LoginFormPage />

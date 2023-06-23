@@ -1,0 +1,71 @@
+.unmessaged-matches-carousel {
+    width: 350px;
+    position: relative;
+    height: 90px;
+    display: flex;
+    align-items: center;
+}
+
+.inner-wrapper {
+    position: relative;
+}
+
+.carousel-buttons {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    border: none;
+    position: absolute;
+    background-color: white;
+    filter: drop-shadow(1px 3px 5px lightgrey);
+    color: grey;
+}
+
+.carousel-buttons:hover {
+    cursor: pointer;
+}
+
+#left-carousel-caret {
+    font-size: 12px;
+    margin: none;
+    padding: none;
+    position: relative;
+}
+
+.inner-wrapper-left-carousel {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.last-group-carousel-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-left: 10px;
+}
+
+.left-carousel-button {
+    left: 10px;
+}
+
+.right-carousel-button {
+    right: 10px;
+}
+
+/* .scroll-match-item {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 100%;
+} */
+
+#last-match-group {
+    justify-self: flex-start;
+}
