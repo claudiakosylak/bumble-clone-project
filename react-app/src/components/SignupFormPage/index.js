@@ -133,9 +133,9 @@ function SignupFormPage() {
     if (city.length > 30) newErrors.city = "Please enter a city name under 30 characters."
     if (enteredDateConverted > compareDate) newErrors.dateOfBirth = "Sorry, only users over the age of 18 are allowed to use this website."
     // if (todayCompare > currentDate) newErrors.dateOfBirth = "Please enter a valid birth date in the past."
-    if (imageUrl.length > 255) newErrors.imageLength = "Please enter an image url under 255 characters."
-    if ((imageUrl.slice(imageUrl.length - 4) !== ".jpg" && imageUrl.slice(imageUrl.length - 4) !== ".png" && imageUrl.slice(imageUrl.length - 5) !== ".jpeg")) newErrors.imageEnding = "Please enter an image url ending in .jpg, .png or .jpeg"
-    if ((imageUrl.slice(0, 7) !== "http://" && imageUrl.slice(0, 8) !== "https://")) newErrors.imageBeginning = "Please enter an image url beginning with 'http://' or 'https://' "
+    // if (imageUrl.length > 255) newErrors.imageLength = "Please enter an image url under 255 characters."
+    // if ((imageUrl.slice(imageUrl.length - 4) !== ".jpg" && imageUrl.slice(imageUrl.length - 4) !== ".png" && imageUrl.slice(imageUrl.length - 5) !== ".jpeg")) newErrors.imageEnding = "Please enter an image url ending in .jpg, .png or .jpeg"
+    // if ((imageUrl.slice(0, 7) !== "http://" && imageUrl.slice(0, 8) !== "https://")) newErrors.imageBeginning = "Please enter an image url beginning with 'http://' or 'https://' "
 
     setErrors(newErrors)
   }, [firstName, phone, email, dateOfBirth, password, confirmPassword, lookingForGender, gender, state, city, imageUrl])
@@ -144,24 +144,41 @@ function SignupFormPage() {
 
   console.log("ERRORS: ", errors)
 
+  console.log("date of birth: ", dateOfBirth)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setHasSubmitted(true)
     const errorsArr = Object.values(errors)
     if (errorsArr.length === 0) {
-      const newUser = {
-        first_name: firstName,
-        phone,
-        email,
-        date_of_birth: dateOfBirth,
-        password,
-        looking_for_gender: lookingForGender,
-        gender,
-        state,
-        city,
-        picture_1: imageUrl
-      }
-      const data = await dispatch(signUp(newUser));
+
+      const formData = new FormData();
+      formData.append("picture_1", imageUrl)
+      formData.append("first_name", firstName)
+      formData.append("phone", phone)
+      formData.append("email", email)
+      formData.append("date_of_birth", dateOfBirth)
+      formData.append("password", password)
+      formData.append("looking_for_gender", lookingForGender)
+      formData.append("gender", gender)
+      formData.append("state", state)
+      formData.append("city", city)
+
+      console.log("FORM DATA: ", formData.get("looking_for_gender"))
+
+      // const newUser = {
+      //   first_name: firstName,
+      //   phone,
+      //   email,
+      //   date_of_birth: dateOfBirth,
+      //   password,
+      //   looking_for_gender: lookingForGender,
+      //   gender,
+      //   state,
+      //   city,
+      //   picture_1: imageUrl
+      // }
+      const data = await dispatch(signUp(formData));
       if (data) {
         setBackendErrors(data)
       }
@@ -178,7 +195,7 @@ function SignupFormPage() {
       </NavLink>
       <p className="enter-info-text">Enter your information to get started!</p><br></br>
       <p>All fields are required</p>
-      <form onSubmit={handleSubmit} className="signup-form-container">
+      <form onSubmit={handleSubmit} className="signup-form-container" enctype="multipart/form-data">
         {/* <ul>
           {backendErrors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul> */}
@@ -365,9 +382,10 @@ function SignupFormPage() {
 
             <label>
               <input
-                type="text"
-                value={imageUrl}
-                onChange={(e) => setImageUrl(e.target.value)}
+                type="file"
+                accept="image/*"
+                // value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.files[0])}
                 placeholder="Provide a profile picture url"
                 required
               />
