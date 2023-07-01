@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, SelectField
-from wtforms.validators import DataRequired, Email, ValidationError
+from wtforms.validators import DataRequired, Email, ValidationError, URL
 from app.models import User
-
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from app.api.AWS_helpers import ALLOWED_EXTENSIONS
 
 def user_exists(form, field):
     # Checking if user exists
@@ -33,4 +34,5 @@ class SignUpForm(FlaskForm):
     gender = SelectField('gender', default="Gender", choices=["Woman", "Man", "Nonbinary", "Other"], validators=[DataRequired()])
     state = SelectField('state', default="State", choices=states, validators=[DataRequired()])
     city = StringField('city', validators=[DataRequired()])
-    picture_1 = StringField('picture_1', validators=[DataRequired()])
+    picture_1 = FileField("picture_1", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+    # picture_1 = StringField('picture_1', validators=[DataRequired()])
