@@ -50,11 +50,11 @@ export const updateFiltersThunk = (gender, ageMin, ageMax) => async dispatch => 
 
 // thunk to update a photo for the current user
 
-export const updatePhotoThunk = (photoNum, picture_url) => async dispatch => {
+export const updatePhotoThunk = (photoNum, picture) => async dispatch => {
 	const res = await fetch(`/api/users/update-photo/${photoNum}`, {
 		method: "PUT",
-		headers: { "Content-Type" : "application/json"},
-		body: JSON.stringify({picture_url})
+		// headers: { "Content-Type" : "application/json"},
+		body: picture
 	})
 	if (res.ok) {
 		const newUser = await res.json();
