@@ -99,7 +99,7 @@
 }
 
 .gender-button {
-    border: 1px solid lightgrey;
+    border: none;
     background: none;
     left: 0;
     position: relative;
@@ -111,6 +111,7 @@
 #active-gender {
     background-color: white;
     color: #80F;
+    border: 1px solid #80f;
 }
 
 .gender-button:hover {
@@ -118,7 +119,7 @@
 }
 
 .gender-button-holder {
-    background-color: lightgrey;
+    background-color: rgba(211, 211, 211, 0.419);
     border-radius: 23px;
     position: relative;
     display: flex;
@@ -130,6 +131,7 @@
     width: 40px;
     background-color: white;
     position: absolute;
+    /* border: 1px solid lightgrey; */
 }
 
 .browse-view-logo {
