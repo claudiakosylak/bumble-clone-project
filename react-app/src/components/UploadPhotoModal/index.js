@@ -40,8 +40,10 @@ function UploadPhotoModal({ photoNumber }) {
             <h3>Upload photo</h3>
             <p>Adding photos is a great way to show off more about yourself! Please enter an image url.</p>
             <form onSubmit={handleSubmit}>
-                <input type="file" accept="image/*" onChange={(e) => setImageUrl(e.target.files[0])} required></input>
-                {(hasSubmitted && errors.imageLength) && (
+                <div id="upload-file-field-wrapper">
+                    <input type="file" accept="image/*" onChange={(e) => setImageUrl(e.target.files[0])} required></input>
+                </div>
+                {/* {(hasSubmitted && errors.imageLength) && (
                     <p>{errors.imageLength}</p>
                 )}
                 {(hasSubmitted && errors.imageEnding) && (
@@ -49,8 +51,8 @@ function UploadPhotoModal({ photoNumber }) {
                 )}
                 {(hasSubmitted && errors.imageBeginning) && (
                     <p>{errors.imageBeginning}</p>
-                )}
-                <button type="submit" disabled={imageUrl.length === 0} id={(imageUrl.length === 0)? "disabled-upload-photo-submit" : ""}>Upload</button>
+                )} */}
+                <button type="submit" disabled={imageUrl.length === 0} id={(imageUrl.length === 0) ? "disabled-upload-photo-submit" : ""}>Upload</button>
             </form>
         </div>
     )

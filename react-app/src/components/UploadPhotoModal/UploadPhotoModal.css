@@ -22,14 +22,13 @@
 
 
 .upload-photo-modal-container > form  input {
-    height: 30px;
-    border-radius: 30px;
-    border: 1px solid lightgrey;
-    padding: 10px;
+    height: 25px;
+    border: none;
+    width: 100%;
 }
 
 .upload-photo-modal-container > form  input:focus {
-    outline: 1px solid #80f;
+    outline: none;
 }
 
 .upload-photo-modal-container > form button {
@@ -53,4 +52,14 @@
 
 .upload-photo-modal-container > form p {
     font-size: 12px;
+}
+
+#upload-file-field-wrapper {
+    height: 40px;
+    background-color: white;
+    border-radius: 30px;
+    border: 1px solid #80f;
+    display: flex;
+    align-items: center;
+    padding: 10px;
 }

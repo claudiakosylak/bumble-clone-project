@@ -381,16 +381,20 @@ function SignupFormPage() {
             )}
 
             <label>
+              Please upload a profile picture:
+              <div id="picture-upload-wrapper">
               <input
                 type="file"
+                id="picture-upload-field"
                 accept="image/*"
                 // value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.files[0])}
-                placeholder="Provide a profile picture url"
                 required
               />
+
+              </div>
             </label>
-            {(hasSubmitted && errors.imageLength) && (
+            {/* {(hasSubmitted && errors.imageLength) && (
               <p>{errors.imageLength}</p>
             )}
             {(hasSubmitted && errors.imageEnding) && (
@@ -398,7 +402,7 @@ function SignupFormPage() {
             )}
             {(hasSubmitted && errors.imageBeginning) && (
               <p>{errors.imageBeginning}</p>
-            )}
+            )} */}
 
           </div>
         </div>
