@@ -47,5 +47,13 @@
 }
 
 .schedule-main-inner {
-    width: 400px;
+    width: 60%;
+}
+
+.date-item-wrapper {
+    padding-left: 40px;
+}
+
+.date-item-wrapper:hover {
+    border: 1px solid #80f;
 }

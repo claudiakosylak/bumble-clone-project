@@ -128,7 +128,7 @@ function ScheduleViewIndex({ isLoaded }) {
                     <div className="upcoming-dates-wrapper dates-items-wrapper">
                         <h3>Upcoming Dates</h3>
                         {upcomingDates.length > 0 ? (sortedUpcomingDates.map(date => (
-                            <div>
+                            <div className="date-item-wrapper">
                                 <p>Date with {date.other_user.first_name}</p>
                                 <p>{niceDateString(dateTransformer(date.scheduled_date))}</p>
                             </div>
@@ -140,7 +140,7 @@ function ScheduleViewIndex({ isLoaded }) {
                         <h3>Past Dates</h3>
                         {pastDates.length > 0 ? (sortedPastDates.map(date => (
 
-                            <div>
+                            <div className="date-item-wrapper">
                                 <p>Date with {date.other_user.first_name}</p>
                                 <p>{niceDateString(dateTransformer(date.scheduled_date))}</p>
                             </div>
@@ -151,7 +151,7 @@ function ScheduleViewIndex({ isLoaded }) {
                     <div className="requesting-dates-wrapper dates-items-wrapper">
                         <h3>Pending Date Requests Made by You</h3>
                         {sortedRequestingDates[0].length > 0 ? (sortedRequestingDates[0].map(request => (
-                            <div>
+                            <div className="date-item-wrapper">
                                 <p>Date Request with {request.other_user.first_name}</p>
                                 <p>{niceDateString(dateTransformer(request.suggested_date))}</p>
                             </div>
@@ -162,7 +162,7 @@ function ScheduleViewIndex({ isLoaded }) {
                             <h4>Expired requests:</h4>
                             )}
                         {sortedRequestingDates[1].length > 0 && (sortedRequestingDates[1].map(request => (
-                            <div>
+                            <div className="date-item-wrapper">
                                 <p>Date Request with {request.other_user.first_name}</p>
                                 <p>{niceDateString(dateTransformer(request.suggested_date))}</p>
                             </div>
@@ -171,7 +171,7 @@ function ScheduleViewIndex({ isLoaded }) {
                     <div className="requested-dates-wrapper dates-items-wrapper">
                         <h3>Pending Dates Requested by Your Matches</h3>
                         {sortedRequestedDates[0].length > 0 ? (sortedRequestedDates[0].map(request => (
-                            <div>
+                            <div className="date-item-wrapper">
                                 <p>Date Request with {request.other_user.first_name}</p>
                                 <p>{niceDateString(dateTransformer(request.suggested_date))}</p>
                             </div>
@@ -182,7 +182,7 @@ function ScheduleViewIndex({ isLoaded }) {
                             <h4>Expired requests:</h4>
                             )}
                         {sortedRequestedDates[1].length > 0 && (sortedRequestedDates[1].map(request => (
-                            <div>
+                            <div className="date-item-wrapper">
                                 <p>Date Request with {request.other_user.first_name}</p>
                                 <p>{niceDateString(dateTransformer(request.suggested_date))}</p>
                             </div>
