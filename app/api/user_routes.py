@@ -2,8 +2,20 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import User, db
 from app.forms import UpdateAboutForm, UploadPhotoForm
+from app.api.AWS_helpers import (
+    upload_file_to_s3, get_unique_filename)
 
 user_routes = Blueprint('users', __name__)
+
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
 
 
 @user_routes.route('/')
@@ -43,21 +55,31 @@ def update_filters():
 def update_photo(num):
     """ Updates one of a user's photos """
     form = UploadPhotoForm()
-    user = User.query.get(current_user.id)
-    if num == 1:
-        user.picture_1 = form.data["picture_url"]
-    elif num == 2:
-        user.picture_2 = form.data["picture_url"]
-    elif num == 3:
-        user.picture_3 = form.data["picture_url"]
-    elif num == 4:
-        user.picture_4 = form.data["picture_url"]
-    elif num == 5:
-        user.picture_5 = form.data["picture_url"]
-    else:
-        user.picture_6 = form.data["picture_url"]
-    db.session.commit()
-    return user.to_dict()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        image = form.data["picture_url"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+
+        if "url" not in upload:
+            return {"message": "image error"}
+
+        user = User.query.get(current_user.id)
+        if num == 1:
+            user.picture_1 = upload["url"]
+        elif num == 2:
+            user.picture_2 = upload["url"]
+        elif num == 3:
+            user.picture_3 = upload["url"]
+        elif num == 4:
+            user.picture_4 = upload["url"]
+        elif num == 5:
+            user.picture_5 = upload["url"]
+        else:
+            user.picture_6 = upload["url"]
+        db.session.commit()
+        return user.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 # @user_routes.route("/delete-photo/<int:num>", methods=["DELETE"])
 # @login_required
