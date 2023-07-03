@@ -4,13 +4,12 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
-import Navigation from "./components/Navigation";
 import SplashIndex from "./components/SplashIndex";
 import MainIndex from "./components/MainIndex";
 import ConversationViewIndex from "./components/ConversationViewIndex";
 import ScheduleViewIndex from "./components/ScheduleViewIndex";
 import EditProfileIndex from "./components/EditProfileIndex";
-import MatchesCarousel from "./components/MatchesCarousel";
+import MultiRangeSlider from "./components/MultiRangeSlider";
 
 function App() {
   const dispatch = useDispatch();
