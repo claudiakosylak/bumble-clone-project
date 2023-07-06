@@ -10,8 +10,6 @@ function ProfileButton({ user }) {
   const history = useHistory();
   const location = useLocation();
 
-  console.log("LOCATION: ", location)
-
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);

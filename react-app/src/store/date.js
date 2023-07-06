@@ -44,7 +44,6 @@ export const getDateRequestsThunk = () => async dispatch => {
 
 export const getDatesThunk = () => async dispatch => {
     const res = await fetch("/api/dates")
-    console.log("HIT THE THUNK: ")
     if (res.ok) {
         const dates = await res.json()
         dispatch(getDates(dates))

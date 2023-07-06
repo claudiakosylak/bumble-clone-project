@@ -23,7 +23,6 @@ function LoginFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
-    console.log("DATA: ", data)
     if (data) {
       // const newErrors = {}
       // if (data.email[0]) {

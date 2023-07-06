@@ -138,13 +138,9 @@ function SignupFormPage() {
     // if ((imageUrl.slice(0, 7) !== "http://" && imageUrl.slice(0, 8) !== "https://")) newErrors.imageBeginning = "Please enter an image url beginning with 'http://' or 'https://' "
 
     setErrors(newErrors)
-  }, [firstName, phone, email, dateOfBirth, password, confirmPassword, lookingForGender, gender, state, city, imageUrl])
+  }, [firstName, phone, email, dateOfBirth, password, confirmPassword, lookingForGender, gender, state, city])
 
   if (sessionUser) return <Redirect to="/app" />;
-
-  console.log("ERRORS: ", errors)
-
-  console.log("date of birth: ", dateOfBirth)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -164,20 +160,6 @@ function SignupFormPage() {
       formData.append("state", state)
       formData.append("city", city)
 
-      console.log("FORM DATA: ", formData.get("looking_for_gender"))
-
-      // const newUser = {
-      //   first_name: firstName,
-      //   phone,
-      //   email,
-      //   date_of_birth: dateOfBirth,
-      //   password,
-      //   looking_for_gender: lookingForGender,
-      //   gender,
-      //   state,
-      //   city,
-      //   picture_1: imageUrl
-      // }
       const data = await dispatch(signUp(formData));
       if (data) {
         setBackendErrors(data)
@@ -280,26 +262,25 @@ function SignupFormPage() {
             )}
           </div>
           <div className="signup-form-right">
-            {/* <div className="gender-dropdown-button" onClick={openGenderMenu}>
+            <div className="gender-dropdown-button" onClick={openGenderMenu}>
               <p >{gender || "Gender"}</p>
               {!showGenderMenu ? (
                 <i class="fa-solid fa-caret-down"></i>
               ) : (
                 <i class="fa-solid fa-caret-up"></i>
               )}
-            </div> */}
+            </div>
 
-            {/* <ul className={genderClassName} ref={genderRef} onClick={closeGenderMenu}>
+            <ul className={genderClassName} ref={genderRef} onClick={closeGenderMenu}>
               <li onClick={() => setGender("Woman")}>Woman</li>
               <li onClick={() => setGender("Man")}>Man</li>
               <li onClick={() => setGender("Nonbinary")}>Nonbinary</li>
               <li onClick={() => setGender("Other")}>Other</li>
-            </ul> */}
+            </ul>
             <select
               value={gender}
               onChange={(e) => setGender(e.target.value)}
-              required
-              // className="hidden"
+              className="hidden"
             >
               <option value="" disabled>Gender</option>
               <option value="Woman">Woman</option>
@@ -310,27 +291,26 @@ function SignupFormPage() {
             {(hasSubmitted && errors.gender) && (
               <p>{errors.gender}</p>
             )}
-            {/* <div className="gender-dropdown-button" onClick={openLookingMenu}>
+            <div className="gender-dropdown-button" onClick={openLookingMenu}>
               <p >{lookingForGender || "Looking for"}</p>
               {!showLookingMenu ? (
                 <i class="fa-solid fa-caret-down"></i>
               ) : (
                 <i class="fa-solid fa-caret-up"></i>
               )}
-            </div> */}
+            </div>
             {/* <p>{gender}</p> */}
-            {/* <ul className={lookingClassName} ref={lookingRef} onClick={closeLookingMenu}>
+            <ul className={lookingClassName} ref={lookingRef} onClick={closeLookingMenu}>
               <li onClick={() => setLookingForGender("Women")}>Women</li>
               <li onClick={() => setLookingForGender("Men")}>Men</li>
               <li onClick={() => setLookingForGender("Both")}>Both</li>
               <li onClick={() => setLookingForGender("Nonbinary")}>Nonbinary</li>
               <li onClick={() => setLookingForGender("Open")}>Open</li>
-            </ul> */}
+            </ul>
             <select
               value={lookingForGender}
-              // className="hidden"
+              className="hidden"
               onChange={(e) => setLookingForGender(e.target.value)}
-              required
             >
               <option value="" disabled>Looking for:</option>
               <option value="Women">Women</option>
@@ -355,21 +335,21 @@ function SignupFormPage() {
             {(hasSubmitted && errors.city) && (
               <p>{errors.city}</p>
             )}
-            {/* <div className="gender-dropdown-button" onClick={openStateMenu}>
+            <div className="gender-dropdown-button" onClick={openStateMenu}>
               <p >{state || "State"}</p>
               {!showStateMenu ? (
                 <i class="fa-solid fa-caret-down"></i>
               ) : (
                 <i class="fa-solid fa-caret-up"></i>
               )}
-            </div> */}
+            </div>
             {/* <p>{gender}</p> */}
-            {/* <ul className={stateClassName} ref={stateRef} onClick={closeStateMenu}>
+            <ul className={stateClassName} ref={stateRef} onClick={closeStateMenu}>
               {states.map(state => (
                 <li key={state} onClick={() => setState(state)}>{state}</li>
               ))}
-            </ul> */}
-            <select value={state} onChange={(e) => setState(e.target.value)} required>
+            </ul>
+            <select value={state} onChange={(e) => setState(e.target.value)} className="hidden">
               {/* State */}
               <option value="" disabled>State</option>
               {states.map(state => (

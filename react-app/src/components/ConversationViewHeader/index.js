@@ -10,7 +10,6 @@ import ReportDateModal from "../ReportDateModal";
 import { deleteMatchThunk, getMatch, getMatchesThunk, potentialMatchesThunk } from "../../store/match";
 
 export const dateTransformer = (date) => {
-    console.log("RAW DATE: ", date)
     const dateObj = new Date(date);
     const year = dateObj.getUTCFullYear()
     const dayOfWeek = dateObj.getUTCDay()
@@ -114,8 +113,6 @@ function ConversationViewHeader({ dateRequests }) {
         dateDate = new Date(currentDate.scheduled_date)
     }
     const dispatch = useDispatch();
-
-    console.log("ALL DATES :", allDates)
 
     // update store with freshest list of all user's dates on mount, as well as all the user's created date reports
     useEffect(() => {

@@ -25,10 +25,6 @@ function MatchesCarousel({unMessagedMatches}) {
 
     let carouselGroup = matchChunks[carouselIndex]
 
-    console.log("MATCH CHUNKS: ", matchChunks)
-    console.log("CAROUSEL INDEX: ", carouselIndex)
-    console.log("CAROUSEL GROUP: ", carouselGroup)
-
     const handleRight = () => {
         setCarouselIndex(carouselIndex + 1)
     }

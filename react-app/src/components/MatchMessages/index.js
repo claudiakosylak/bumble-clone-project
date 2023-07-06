@@ -20,8 +20,6 @@ function MatchMessages() {
     const bottomRef = useRef()
     const history = useHistory()
 
-    console.log("MATCH MESSAGES ", matchMessages)
-
     useEffect(() => {
         // open socket connection
         // create websocket
@@ -60,7 +58,6 @@ function MatchMessages() {
         dispatch(getMatchMessagesThunk(currentMatch.matchId))
         dispatch(getMatchesThunk())
         bottomRef.current?.scrollIntoView({behavior: 'smooth'});
-        console.log("BOTTOM REF CURRENT: ", bottomRef.current)
     }, [messages])
 
 
