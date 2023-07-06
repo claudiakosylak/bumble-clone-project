@@ -15,8 +15,6 @@ function ConversationViewIndex({ isLoaded }) {
     const dateRequests = Object.values(dateRequestsObj)
     const dispatch = useDispatch()
 
-    console.log("DATE REQUESTS: ", dateRequestsObj)
-
     useEffect(() => {
         dispatch(getDateRequestsThunk())
     }, [dispatch])

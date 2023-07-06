@@ -216,6 +216,10 @@ h1 {
     height: 200px;
 }
 
+.state-settings-dropdown::-webkit-scrollbar {
+    display: none;
+}
+
 .state-settings-dropdown li {
     list-style-type: none;
     width: 100%;

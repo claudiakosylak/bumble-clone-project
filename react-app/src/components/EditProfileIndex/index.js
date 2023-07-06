@@ -16,8 +16,6 @@ function EditProfileIndex({ isLoaded }) {
     const [errors, setErrors] = useState({})
     const dispatch = useDispatch();
 
-    console.log("ACTIVE EDIT: ", activeEdit)
-
     useEffect(() => {
         const newErrors = {}
         if (aboutMe && aboutMe.length > 300) newErrors.about = "About me can be 300 characters long maximum. "

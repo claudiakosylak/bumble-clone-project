@@ -61,7 +61,6 @@ function BrowseItem({ browseUsers }) {
 
     const sendMatchMessage = async (e) => {
         e.preventDefault()
-        console.log("ALL MATCHES LAST", allMatches[allMatches.length - 1])
         await dispatch(createFirstMessageThunk(allMatches[allMatches.length - 1].matchId, message))
         setMatched(false)
         setMatchedUser("")
@@ -78,7 +77,6 @@ function BrowseItem({ browseUsers }) {
             } else {
                 newUserMessage = false;
             }
-            console.log("NEW USER MESSAGE? ", newUserMessage)
             setMatched(true)
             setMatchedUser(browseUsers[0])
             dispatch(createMatchThunk(id1, id2))

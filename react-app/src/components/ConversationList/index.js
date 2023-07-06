@@ -29,7 +29,6 @@ function ConversationList({ messagedMatches }) {
         dispatch(getDateRequestsThunk())
     }, [dispatch])
 
-    console.log("DATE REQUESTS: ", dateRequests)
 
     const handlePicClick = async (match) => {
         await dispatch(getMatch(match))
@@ -45,7 +44,6 @@ function ConversationList({ messagedMatches }) {
         return 0;
     })
 
-    console.log("SORTED MATCHES: ", sortedMatches)
     return (
         <div className="conversations-list-wrapper" >
             <div className="inner-convo-list-wrapper">
