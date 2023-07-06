@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./PotentialMatchBrowse.css";
 import { potentialMatchesThunk } from "../../store/match";
@@ -6,6 +6,7 @@ import { updateFiltersThunk } from "../../store/session";
 import BrowseItem from "../BrowseItem";
 import { ageChanger } from "../BrowseItem";
 import { CircleSpinner } from "react-spinners-kit";
+import classnames from 'classnames';
 
 
 function PotentialMatchBrowse() {
@@ -20,8 +21,42 @@ function PotentialMatchBrowse() {
     const [ageMaxApplied, setAgeMaxApplied] = useState(user ? user.age_max : 99)
     const [ageMax, setAgeMax] = useState(user ? user.age_max : 99)
     const [errors, setErrors] = useState({})
+    const minValRef = useRef(null);
+    const maxValRef = useRef(null);
+    const range = useRef(null);
     const dispatch = useDispatch();
     const filterRef = useRef();
+    const min = 18;
+    const max = 99;
+
+    const getPercent = useCallback(
+        (value) => Math.round(((value - min) / (max - min)) * 100), [min, max]
+    );
+
+    // Set width of the range to decrease from the left side
+    useEffect(() => {
+        if (maxValRef.current) {
+            const minPercent = getPercent(ageMin);
+            const maxPercent = getPercent(+maxValRef.current.value);
+
+            if (range.current) {
+                range.current.style.left = `${minPercent}%`;
+                range.current.style.width = `${maxPercent - minPercent}%`;
+            }
+        }
+    }, [ageMin, getPercent]);
+
+    // Set width of the range to decrease from the right side
+    useEffect(() => {
+        if (minValRef.current) {
+            const minPercent = getPercent(+minValRef.current.value);
+            const maxPercent = getPercent(ageMax);
+
+            if (range.current) {
+                range.current.style.width = `${maxPercent - minPercent}%`;
+            }
+        }
+    }, [ageMax, getPercent]);
 
 
     let filteredMatches = potentialMatchesArr.filter(match => {
@@ -102,7 +137,7 @@ function PotentialMatchBrowse() {
                     <button className="gender-button" id={gender === "Open" ? "active-gender" : ""} onClick={() => setGender("Open")}>Open</button>
                 </div>
                 <p>Age</p>
-                <div className="age-inputs">
+                {/* <div className="age-inputs">
                     <label>
                         Min
                         <input value={ageMin} type="number" min="18" max="98" onChange={(e) => setAgeMin(e.target.value)} />
@@ -111,6 +146,42 @@ function PotentialMatchBrowse() {
                         Max
                         <input value={ageMax} type="number" min="19" max="99" onChange={(e) => setAgeMax(e.target.value)} />
                     </label>
+                </div> */}
+                <div className="multi-range-slider-container">
+                    <input
+                        type="range"
+                        min={min}
+                        max={max}
+                        value={ageMin}
+                        ref={minValRef}
+                        onChange={(event) => {
+                            const value = Math.min(+event.target.value, ageMax - 1);
+                            setAgeMin(value);
+                            event.target.value = value.toString();
+                        }}
+                        className={classnames("thumb thumb--zindex-3", {
+                            "thumb--zindex-5": ageMin > max - 100
+                        })}
+                    />
+                    <input
+                        type="range"
+                        min={min}
+                        max={max}
+                        value={ageMax}
+                        ref={maxValRef}
+                        onChange={(event) => {
+                            const value = Math.max(+event.target.value, ageMin + 1);
+                            setAgeMax(value);
+                            event.target.value = value.toString();
+                        }}
+                        className="thumb thumb--zindex-4"
+                    />
+                    <div className="slider">
+                        <div className="slider__track" />
+                        <div ref={range} className="slider__range" />
+                        <div className="slider__left-value">{ageMin}</div>
+                        <div className="slider__right-value">{ageMax}</div>
+                    </div>
                 </div>
                 {errors.ageMin && (
                     <p>{errors.ageMin}</p>
@@ -125,7 +196,6 @@ function PotentialMatchBrowse() {
             </div>
             {potentialMatchesArr.length === 0 ? (
                 <div className="main-spinner-holder">
-
                     <CircleSpinner size={30} color="#80F" loading={potentialMatchesArr.length === 0} />
                 </div>
             ) : (

@@ -1,6 +1,6 @@
 .slider {
     position: relative;
-    width: 200px;
+    width: 300px;
   }
 
   .slider__track,
@@ -17,7 +17,7 @@
   }
 
   .slider__range {
-    background-color: #9fe5e1;
+    background-color: #80f;
     z-index: 2;
   }
 
@@ -32,7 +32,7 @@
     pointer-events: none;
     position: absolute;
     height: 0;
-    width: 200px;
+    width: 300px;
     outline: none;
   }
 
@@ -78,7 +78,7 @@
 
   .slider__left-value,
 .slider__right-value {
-  color: #dee2e6;
+  color: black;
   font-size: 12px;
   margin-top: 20px;
   position: absolute;
@@ -90,4 +90,11 @@
 
 .slider__right-value {
   right: -4px;
+}
+
+.multi-range-slider-container {
+  margin-bottom: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
