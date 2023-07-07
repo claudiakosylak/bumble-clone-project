@@ -22,7 +22,6 @@ function MatchMessages() {
     const [chatInput, setChatInput] = useState("");
     const bottomRef = useRef()
 
-    console.log("MESSAGE LIST: ", messageList)
 
     useEffect(() => {
         // open socket connection
@@ -91,12 +90,12 @@ function MatchMessages() {
     return (
         <>
             <div className="bigger-messages-wrapper">
-                {(messageMatch && (messageList.length === 0 || messageList[messageList.length - 1].content !== messageMatch.last_message.content)) && (
+                {(messageMatch && (messageList.length === 0)) && (
                     <div className="message-spinner-container">
-                        <CircleSpinner size={40} color="#80F" loading={messageList.length === 0 || messageList[messageList.length - 1].content !== messageMatch.last_message.content} />
+                        <CircleSpinner size={40} color="#80F" loading={messageList.length === 0} />
                     </div>
                 )}
-                {(currentMatch && messageList.length > 0 && messageList[messageList.length - 1].content === messageMatch.last_message.content) && (
+                {(currentMatch && messageList.length > 0) && (
                     <>
                         <div className="match-messages-container">
                             {messageList.map(message => (
