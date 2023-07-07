@@ -5,6 +5,7 @@ import "./MatchMessages.css";
 import { getMatchMessagesThunk } from '../../store/message';
 import { getMatchesThunk } from '../../store/match';
 import { useHistory } from 'react-router-dom';
+import { CircleSpinner } from "react-spinners-kit";
 
 let socket;
 
@@ -13,6 +14,10 @@ function MatchMessages() {
     const currentMatch = useSelector(state => state.match.currentMatch)
     const user = useSelector(state => state.session.user)
     const matchMessages = useSelector(state => state.message.allMatchMessages)
+    const matchesObj = useSelector(state => state.match.currentMatches)
+    const matches = Object.values(matchesObj)
+    const messageMatch = matches.find(match => (match.id === currentMatch.id && match.last_message))
+    console.log("MESSAGE MATCH? ", messageMatch)
     const matchMessageLength = matchMessages.length
     const messageList = Object.values(matchMessages)
     const [messages, setMessages] = useState([]);
@@ -38,7 +43,7 @@ function MatchMessages() {
             setMessages(messages => messages.filter(message => message.id !== delete_message.id))
         })
 
-        bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
 
         // when component unmounts, disconnect
         return (() => {
@@ -51,13 +56,13 @@ function MatchMessages() {
     }, [currentMatch])
 
     useEffect(() => {
-        bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [matchMessageLength])
 
     useEffect(() => {
         dispatch(getMatchMessagesThunk(currentMatch.matchId))
         dispatch(getMatchesThunk())
-        bottomRef.current?.scrollIntoView({behavior: 'smooth'});
+        bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages])
 
 
@@ -87,15 +92,20 @@ function MatchMessages() {
     return (
         <>
             <div className="bigger-messages-wrapper">
+                {(messageMatch && messageList.length === 0) && (
+                    <div className="message-spinner-container">
+                        <CircleSpinner size={40} color="#80F" loading={messageList.length === 0} />
+                    </div>
+                )}
                 {(currentMatch && messageList.length > 0) && (
                     <>
                         <div className="match-messages-container">
                             {messageList.map(message => (
                                 <>
-                                <div className={message.user_id === user.id ? "user-messages message-item-container" : "other-messages message-item-container"}>
+                                    <div className={message.user_id === user.id ? "user-messages message-item-container" : "other-messages message-item-container"}>
 
-                                    <p key={message.id} className={message.user_id === user.id ? "user-message" : "other-message"}>{message.content}</p>
-                                </div>
+                                        <p key={message.id} className={message.user_id === user.id ? "user-message" : "other-message"}>{message.content}</p>
+                                    </div>
                                     {message.user_id === user.id && (
                                         <i class="fa-regular fa-trash-can" onClick={(() => deleteChat(message.id))}></i>
 
@@ -103,15 +113,15 @@ function MatchMessages() {
                                 </>
                             ))}
 
-                        <div ref={bottomRef} className="dummy-bottom"></div>
+                            <div ref={bottomRef} className="dummy-bottom"></div>
                         </div>
                     </>
 
                 )}
-                {(currentMatch && messageList.length === 0) && (
+                {(!messageMatch && messageList.length === 0) && (
                     <div className="match-messages-container">
                         <p className="make-first-move">Make the first move! Send a message to get sparks flying. </p>
-                        </div>
+                    </div>
                 )}
                 <form id='chat-input-form' onSubmit={sendChat}>
                     <div className="chat-input-form-field">
