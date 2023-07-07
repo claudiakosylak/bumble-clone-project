@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import "./MatchMessages.css";
 import { getMatchMessagesThunk } from '../../store/message';
 import { getMatchesThunk } from '../../store/match';
-import { useHistory } from 'react-router-dom';
 import { CircleSpinner } from "react-spinners-kit";
 
 let socket;
@@ -17,13 +16,13 @@ function MatchMessages() {
     const matchesObj = useSelector(state => state.match.currentMatches)
     const matches = Object.values(matchesObj)
     const messageMatch = matches.find(match => (match.id === currentMatch.id && match.last_message))
-    console.log("MESSAGE MATCH? ", messageMatch)
     const matchMessageLength = matchMessages.length
     const messageList = Object.values(matchMessages)
     const [messages, setMessages] = useState([]);
     const [chatInput, setChatInput] = useState("");
     const bottomRef = useRef()
-    const history = useHistory()
+
+    console.log("MESSAGE LIST: ", messageList)
 
     useEffect(() => {
         // open socket connection
@@ -92,9 +91,9 @@ function MatchMessages() {
     return (
         <>
             <div className="bigger-messages-wrapper">
-                {(messageMatch && messageList.length === 0) && (
+                {(messageMatch && (messageList.length === 0 || messageList[messageList.length - 1].content !== messageMatch.last_message.content)) && (
                     <div className="message-spinner-container">
-                        <CircleSpinner size={40} color="#80F" loading={messageList.length === 0} />
+                        <CircleSpinner size={40} color="#80F" loading={messageList.length === 0 || messageList[messageList.length - 1].content !== messageMatch.last_message.content} />
                     </div>
                 )}
                 {(currentMatch && messageList.length > 0) && (
