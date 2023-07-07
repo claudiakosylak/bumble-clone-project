@@ -96,7 +96,7 @@ function MatchMessages() {
                         <CircleSpinner size={40} color="#80F" loading={messageList.length === 0 || messageList[messageList.length - 1].content !== messageMatch.last_message.content} />
                     </div>
                 )}
-                {(currentMatch && messageList.length > 0) && (
+                {(currentMatch && messageList.length > 0 && messageList[messageList.length - 1].content === messageMatch.last_message.content) && (
                     <>
                         <div className="match-messages-container">
                             {messageList.map(message => (
