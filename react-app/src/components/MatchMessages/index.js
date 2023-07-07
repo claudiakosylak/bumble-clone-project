@@ -22,7 +22,6 @@ function MatchMessages() {
     const [chatInput, setChatInput] = useState("");
     const bottomRef = useRef()
 
-    console.log("MESSAGE LIST: ", messageList)
 
     useEffect(() => {
         // open socket connection

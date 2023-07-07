@@ -52,6 +52,12 @@
     align-items: center;
 }
 
+.request-date-submit-buttons button:hover {
+    background-color: white;
+    color: #80f;
+    border: 1px solid #80f;
+}
+
 .request-date-form input:focus {
     outline: 1px solid #80f;
 }
