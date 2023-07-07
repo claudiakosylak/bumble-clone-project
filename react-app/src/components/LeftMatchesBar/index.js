@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteMatchThunk, getMatch, getMatchesThunk, potentialMatchesThunk } from "../../store/match";
+import { getMatch, getMatchesThunk} from "../../store/match";
 import Navigation from "../Navigation";
 import "./LeftMatchesBar.css";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
@@ -9,10 +9,8 @@ import MatchesCarousel from "../MatchesCarousel";
 
 function LeftMatchesBar({ isLoaded }) {
     const matchesObj = useSelector(state => state.match.currentMatches)
-    const currentMatch = useSelector(state => state.match.currentMatch)
     const matches = Object.values(matchesObj)
     const dispatch = useDispatch();
-    const history = useHistory();
     const location = useLocation()
     const messagedMatches = []
     const unMessagedMatches = []
@@ -28,11 +26,6 @@ function LeftMatchesBar({ isLoaded }) {
         dispatch(getMatchesThunk())
     }, [dispatch])
 
-    const handlePicClick = async (match) => {
-        await dispatch(getMatch(match))
-        history.push("/app/connections")
-    }
-
 
     return (
         <div className="left-matches-wrapper">
@@ -41,16 +34,6 @@ function LeftMatchesBar({ isLoaded }) {
                         <NavLink to="/app" className="back-to-browse">Back to meeting new people<i class="fa-solid fa-angle-right"></i></NavLink>
                     )}
             <p className="left-headers">Unmessaged Matches ({unMessagedMatches.length})</p>
-            {/* <ul className="unmessaged-matches-wrapper">
-                <div className="inner-wrapper">
-                    {unMessagedMatches.length > 0 ? unMessagedMatches.map(match => (
-                        <li key={match.id} className="scroll-match-item"><img onClick={() => handlePicClick(match)} className="mini-match-icons" src={match.picture_1}></img></li>
-                    )) : (
-                        <p>You don't have any matches yet!</p>
-                    )}
-
-                </div>
-            </ul> */}
             <MatchesCarousel unMessagedMatches={unMessagedMatches}/>
 
 
