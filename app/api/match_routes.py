@@ -18,7 +18,7 @@ def validation_errors_to_error_messages(validation_errors):
 @login_required
 def match_messages(id):
 
-    """Returns all the messages for a specific match"""
+    """Returns all the messages for a specific match by match ID"""
 
     messages = Message.query.filter(Message.match_id == id).all()
 
@@ -29,29 +29,12 @@ def match_messages(id):
 
     return message_dict
 
-@match_routes.route("/<int:id>/messages", methods=["POST"])
-@login_required
-def make_first_message(id):
-    """ Creates an initial message for a match """
-    form = InitialMessageForm()
-    message = Message(
-        content = form.data["message"],
-        match_id = id,
-        user_id = current_user.id
-    )
-    db.session.add(message)
-    db.session.commit()
-    return message.to_dict()
-
-
 @match_routes.route("/<int:id>/date-requests", methods=["POST"])
 @login_required
 def create_date_request(id):
     """
     Creates a date request with a proposed time for a match.
     """
-    # form = RequestDateForm()
-    # form['csrf_token'].data = request.cookies['csrf_token']
 
     form = RequestDateForm()
     date_request = DateRequest(
@@ -115,6 +98,7 @@ def potential_matches():
 
 @match_routes.route("/<int:id>", methods=["DELETE"])
 def delete_match(id):
+    """Deletes a matcha"""
     match = Match.query.get(id)
     matchUser = match.user1_id
     if matchUser == current_user.id:
