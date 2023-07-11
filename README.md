@@ -53,7 +53,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![noFlake Screen Shot][product-screenshot]](https://noflake.onrender.com/)
+[![noFlake Screen Shot](./images/splash_screenshot.png)
 
 Have you ever been disappointed with how many people flake on dating apps? This project is inspired by Bumble in its aesthetics and core matching functionality, but incorporates the ability to schedule dates and keep them accountable using the flake score.
 
@@ -141,9 +141,24 @@ To get a local copy up and running follow these simple example steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+### Splash Page
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+Users are directed to the splash page where they can either choose to join the platform or sign in.
+
+![splash-page](./images/splash_screenshot.png)
+
+### Sign Up
+
+Users can sign in giving their details, and must upload a primary photo for their profile to proceed.
+
+![signup](./images/signup_screenshot.png)
+
+
+### Log In
+
+Users can log in with their credentials. They can also choose to log in as the demo user to test functionality without making an account.
+
+![login](./images/login_screenshot.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

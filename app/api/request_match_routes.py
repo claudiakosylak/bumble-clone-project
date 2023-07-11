@@ -27,6 +27,9 @@ def create_match_request(id1, id2):
 
 @request_match_routes.route("/<int:id1>/<int:id2>", methods=["PUT"])
 def reject_match_request(id1, id2):
+    """
+    Changes an existing match request to rejected.
+    """
     request = RequestedMatch.query.filter(RequestedMatch.requesting_user_id == id1, RequestedMatch.requested_user_id == id2).first()
     if request:
         request.rejected = True
@@ -44,6 +47,7 @@ def reject_match_request(id1, id2):
 
 @request_match_routes.route("/<int:id>")
 def get_unrejected_requests(id):
+    """ Gets all matches requested of a user that have not yet been rejected"""
     requests = RequestedMatch.query.filter(RequestedMatch.requested_user_id == id, RequestedMatch.rejected == False).all()
     requests_dict = {}
     for request in requests:
