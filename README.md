@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/claudiakosylak/bumble-clone-project">
-    <img src="react-app/src/images/NoFlake_Logo.png" alt="Logo" width="100" height="80">
+    <img src="react-app/src/images/NoFlake_Logo.png" alt="Logo">
   </a>
 
 <h3 align="center">noFlake</h3>
@@ -171,6 +171,42 @@ Logged in users can browse potential matches and choose to "swipe right" or "swi
 Logged in users can view their unmessaged matches in the carousel at the top of the left side of their screen. Clicking on the photo opens conversation view. If they message that person, they get moved to their active conversations list.
 
 ![unmessaged-matches](./images/unmessaged-matches.gif)
+
+### Request a Date
+
+Logged in users can request a date with their existing matches and suggest a time for them to accept or reject.
+
+![request-date](./images/request-date.gif)
+
+### Accept or Reject a Date
+
+Once a match has requested a date of the user, the user can either accept or reject the date.
+
+![accept-date](./images/accept-date.gif)
+
+### Report on a Date
+
+After a scheduled date has passed, a user can report negative or positive date activity that will affect the other users's flake score.
+
+![date-report](./images/date-report.gif)
+
+### Report Ghosting
+
+Regardless of if there has been a scheduled date, users can always report the other user in a match as a ghoster.
+
+![report-ghosting](./images/report-ghosting.gif)
+
+### View all Scheduled and Pending Dates
+
+Logged in users can view all of their scheduled and pending dates in one place by accessing their main navigation bar and clicking "Scheduled Dates".
+
+![scheduled-dates](./images/scheduled-dates.gif)
+
+### Edit Profile
+
+Logged in users can edit their profile by uploading up to 6 pictures and editing their "about me" section.
+
+![edit-profile](./images/edit-profile.gif)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
