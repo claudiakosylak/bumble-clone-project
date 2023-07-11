@@ -42,7 +42,7 @@ function RequestDateModal({ match }) {
                     />
                 </label>
                 {errors.past && (
-                    <p>{errors.past}</p>
+                    <p className="errors">{errors.past}</p>
                 )}
                 <div className="request-date-submit-buttons">
 

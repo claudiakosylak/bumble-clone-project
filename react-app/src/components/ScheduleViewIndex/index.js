@@ -83,8 +83,6 @@ function ScheduleViewIndex({ isLoaded }) {
     const currentMatchesObj = useSelector(state => state.match.currentMatches)
     const madeReportsObj = useSelector(state => state.dateReport.madeDateReports)
     const madeReports = Object.values(madeReportsObj)
-    // console.log("MADE REPORTS: ", madeReports)
-    // const reportedUsers = madeReports.map(report => [report.id, report.reported_user_id])
     const currentMatches = Object.values(currentMatchesObj)
     const dateRequests = Object.values(dateRequestsObj)
     let userRequestingDates = [];
@@ -119,9 +117,6 @@ function ScheduleViewIndex({ isLoaded }) {
     const sortedRequestedDates = sortDateRequests(userRequestedDates)
 
     let report;
-
-    console.log("REPORT PERSON ID: ", madeReports[0]?.reported_user_id)
-
 
     useEffect(() => {
         dispatch(getDatesThunk())

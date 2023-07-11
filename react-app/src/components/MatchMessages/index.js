@@ -130,7 +130,7 @@ function MatchMessages() {
                         />
                         <button id='chat-send-button' disabled={chatInput.length === 0 || chatInput.length > 1000} type="submit"><i class="fa-solid fa-paper-plane"></i></button>
                     </div>
-                    <div id="message-warning">{chatInput.length > 1000 ? <p>Please keep your message below 1000 characters</p> : ''}</div>
+                    <div id="message-warning">{chatInput.length > 1000 ? <p className="errors">Please keep your message below 1000 characters</p> : ''}</div>
                 </form>
             </div>
         </>

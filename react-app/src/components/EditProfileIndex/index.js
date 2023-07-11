@@ -31,6 +31,12 @@ function EditProfileIndex({ isLoaded }) {
         await dispatch(updateAboutThunk(about))
         setActiveEdit(false)
     }
+
+    const handleAboutCancel = async (e) => {
+        e.preventDefault()
+        setAboutMe(user.about)
+        setActiveEdit(false)
+    }
     if (!user) return <Redirect to="/" />
     const beginningAbout = user.about
     return (
@@ -112,10 +118,10 @@ function EditProfileIndex({ isLoaded }) {
 
                                 <textarea value={aboutMe} onChange={(e) => setAboutMe(e.target.value)}></textarea>
                                 {errors.about && (
-                                    <p className="about-error">{errors.about}</p>
+                                    <p className="about-error errors">{errors.about}</p>
                                 )}
                                 <div className="about-edit-bottom">
-                                    <p className="about-edit-cancel" onClick={() => setActiveEdit(false)}>Cancel</p>
+                                    <p className="about-edit-cancel" onClick={handleAboutCancel}>Cancel</p>
                                     {aboutMe && aboutMe.length > 0 && (
                                         <p>{300 - aboutMe.length} characters left</p>
                                     )}
