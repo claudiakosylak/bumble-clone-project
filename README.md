@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/claudiakosylak/bumble-clone-project">
-    <img src="react-app/src/images/NoFlake_Logo.png" alt="Logo" width="80" height="80">
+    <img src="react-app/src/images/NoFlake_Logo.png" alt="Logo" width="100" height="80">
   </a>
 
 <h3 align="center">noFlake</h3>
@@ -157,6 +157,18 @@ Users can sign in giving their details, and must upload a primary photo for thei
 Users can log in with their credentials. They can also choose to log in as the demo user to test functionality without making an account.
 
 ![login](./images/login_screenshot.png)
+
+### Potential Match Browse
+
+Logged in users can browse potential matches and choose to "swipe right" or "swipe left". They can edit their age and gender preferences by clicking "filters" and applying those settings. When they match with someone who has also swiped right on them, they are notified and encouraged to start a conversation.
+
+![match-browse](./images/potential-match-browse.gif)
+
+### Unmessaged Matches
+
+Logged in users can view their unmessaged matches in the carousel at the top of the left side of their screen. Clicking on the photo opens conversation view. If they message that person, they get moved to their active conversations list.
+
+![unmessaged-matches](./images/unmessaged-matches.gif)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
