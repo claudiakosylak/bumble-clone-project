@@ -10,14 +10,6 @@ const MultiRangeSlider = ({ min, max}) => {
     const maxValRef = useRef(null);
     const range = useRef(null);
 
-    console.log("MIN VAL: ", minVal)
-    console.log("MAX VAL: ", maxVal)
-
-    // MultiRangeSlider.propTypes = {
-    //     min: PropTypes.number.isRequired,
-    //     max: PropTypes.number.isRequired
-    // };
-
     const getPercent = useCallback(
         (value) => Math.round(((value - min) / (max - min)) * 100), [min, max]
     );

@@ -24,7 +24,6 @@ function SignupFormPage() {
   const [imageUrl, setImageUrl] = useState("");
   const [errors, setErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [backendErrors, setBackendErrors] = useState([])
   const [showGenderMenu, setShowGenderMenu] = useState(false);
   const [showLookingMenu, setShowLookingMenu] = useState(false);
   const [showStateMenu, setShowStateMenu] = useState(false);
@@ -32,7 +31,6 @@ function SignupFormPage() {
   let compareDate = currentDate
   compareDate.setFullYear(compareDate.getFullYear() - 18)
   let enteredDateConverted = new Date(dateOfBirth)
-  const todayCompare = new Date(dateOfBirth)
 
   const states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
 
@@ -132,10 +130,6 @@ function SignupFormPage() {
     if (!city) newErrors.city = "Please enter your city."
     if (city.length > 30) newErrors.city = "Please enter a city name under 30 characters."
     if (enteredDateConverted > compareDate) newErrors.dateOfBirth = "Sorry, only users over the age of 18 are allowed to use this website."
-    // if (todayCompare > currentDate) newErrors.dateOfBirth = "Please enter a valid birth date in the past."
-    // if (imageUrl.length > 255) newErrors.imageLength = "Please enter an image url under 255 characters."
-    // if ((imageUrl.slice(imageUrl.length - 4) !== ".jpg" && imageUrl.slice(imageUrl.length - 4) !== ".png" && imageUrl.slice(imageUrl.length - 5) !== ".jpeg")) newErrors.imageEnding = "Please enter an image url ending in .jpg, .png or .jpeg"
-    // if ((imageUrl.slice(0, 7) !== "http://" && imageUrl.slice(0, 8) !== "https://")) newErrors.imageBeginning = "Please enter an image url beginning with 'http://' or 'https://' "
 
     setErrors(newErrors)
   }, [firstName, phone, email, dateOfBirth, password, confirmPassword, lookingForGender, gender, state, city])
@@ -161,9 +155,6 @@ function SignupFormPage() {
       formData.append("city", city)
 
       const data = await dispatch(signUp(formData));
-      if (data) {
-        setBackendErrors(data)
-      }
 
     }
 
@@ -178,15 +169,11 @@ function SignupFormPage() {
       <p className="enter-info-text">Enter your information to get started!</p><br></br>
       <p>All fields are required</p>
       <form onSubmit={handleSubmit} className="signup-form-container" enctype="multipart/form-data">
-        {/* <ul>
-          {backendErrors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul> */}
         <div className="signup-form-top">
 
           <div className="signup-form-left">
 
             <label>
-              {/* Phone Number */}
               <input
                 type="text"
                 value={phone}
@@ -196,10 +183,9 @@ function SignupFormPage() {
               />
             </label>
             {(hasSubmitted && errors.phone) && (
-              <p>{errors.phone}</p>
+              <p className="errors">{errors.phone}</p>
             )}
             <label>
-              {/* Email */}
               <input
                 type="text"
                 value={email}
@@ -209,10 +195,9 @@ function SignupFormPage() {
               />
             </label>
             {(hasSubmitted && errors.email) && (
-              <p>{errors.email}</p>
+              <p className="errors">{errors.email}</p>
             )}
             <label>
-              {/* First Name */}
               <input
                 type="text"
                 value={firstName}
@@ -222,7 +207,7 @@ function SignupFormPage() {
               />
             </label>
             {(hasSubmitted && errors.firstName) && (
-              <p>{errors.firstName}</p>
+              <p className="errors">{errors.firstName}</p>
             )}
             <label>
               <p className="dob-label">Enter date of birth</p>
@@ -235,10 +220,9 @@ function SignupFormPage() {
               />
             </label>
             {(hasSubmitted && errors.dateOfBirth) && (
-              <p>{errors.dateOfBirth}</p>
+              <p className="errors">{errors.dateOfBirth}</p>
             )}
             <label>
-              {/* Password */}
               <input
                 type="password"
                 value={password}
@@ -248,7 +232,6 @@ function SignupFormPage() {
               />
             </label>
             <label>
-              {/* Confirm Password */}
               <input
                 type="password"
                 value={confirmPassword}
@@ -258,7 +241,7 @@ function SignupFormPage() {
               />
             </label>
             {(hasSubmitted && errors.password) && (
-              <p>{errors.password}</p>
+              <p className="errors">{errors.password}</p>
             )}
           </div>
           <div className="signup-form-right">
@@ -289,7 +272,7 @@ function SignupFormPage() {
               <option value="Other">Other</option>
             </select>
             {(hasSubmitted && errors.gender) && (
-              <p>{errors.gender}</p>
+              <p className="errors">{errors.gender}</p>
             )}
             <div className="gender-dropdown-button" onClick={openLookingMenu}>
               <p >{lookingForGender || "Looking for"}</p>
@@ -299,7 +282,6 @@ function SignupFormPage() {
                 <i class="fa-solid fa-caret-up"></i>
               )}
             </div>
-            {/* <p>{gender}</p> */}
             <ul className={lookingClassName} ref={lookingRef} onClick={closeLookingMenu}>
               <li onClick={() => setLookingForGender("Women")}>Women</li>
               <li onClick={() => setLookingForGender("Men")}>Men</li>
@@ -320,10 +302,9 @@ function SignupFormPage() {
               <option value="Open">Open</option>
             </select>
             {(hasSubmitted && errors.lookingForGender) && (
-              <p>{errors.lookingForGender}</p>
+              <p className="errors">{errors.lookingForGender}</p>
             )}
             <label>
-              {/* City */}
               <input
                 type="text"
                 value={city}
@@ -333,7 +314,7 @@ function SignupFormPage() {
               />
             </label>
             {(hasSubmitted && errors.city) && (
-              <p>{errors.city}</p>
+              <p className="errors">{errors.city}</p>
             )}
             <div className="gender-dropdown-button" onClick={openStateMenu}>
               <p >{state || "State"}</p>
@@ -343,21 +324,19 @@ function SignupFormPage() {
                 <i class="fa-solid fa-caret-up"></i>
               )}
             </div>
-            {/* <p>{gender}</p> */}
             <ul className={stateClassName} ref={stateRef} onClick={closeStateMenu}>
               {states.map(state => (
                 <li key={state} onClick={() => setState(state)}>{state}</li>
               ))}
             </ul>
             <select value={state} onChange={(e) => setState(e.target.value)} className="hidden">
-              {/* State */}
               <option value="" disabled>State</option>
               {states.map(state => (
                 <option value={state} key={state}>{state}</option>
               ))}
             </select>
             {(hasSubmitted && errors.state) && (
-              <p>{errors.state}</p>
+              <p className="errors">{errors.state}</p>
             )}
 
             <label>
@@ -367,22 +346,12 @@ function SignupFormPage() {
                 type="file"
                 id="picture-upload-field"
                 accept="image/*"
-                // value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.files[0])}
                 required
               />
 
               </div>
             </label>
-            {/* {(hasSubmitted && errors.imageLength) && (
-              <p>{errors.imageLength}</p>
-            )}
-            {(hasSubmitted && errors.imageEnding) && (
-              <p>{errors.imageEnding}</p>
-            )}
-            {(hasSubmitted && errors.imageBeginning) && (
-              <p>{errors.imageBeginning}</p>
-            )} */}
 
           </div>
         </div>

@@ -73,7 +73,7 @@ function LoginFormPage() {
           required
         />
         {Object.values(errors).length > 0 && (
-          <p>Invalid credentials</p>
+          <p className="errors">Invalid credentials</p>
         )}
         {/* {errors.password && (
           <p>{errors.password}</p>
