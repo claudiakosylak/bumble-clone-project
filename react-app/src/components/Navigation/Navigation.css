@@ -26,6 +26,15 @@
 .current-user-image-button {
   border-radius: 100%;
   border: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 20px;
+}
+
+.fa-bars {
+  color: grey;
+  font-size: 17px !important;
 }
 
 .current-user-image-button:hover {

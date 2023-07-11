@@ -48,6 +48,7 @@ function ProfileButton({ user }) {
         <img src={user.picture_1} className="current-user-image"
 
           onError={e => { e.currentTarget.src = "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg" }} />
+          <i class="fa-solid fa-bars"></i>
       </div>
       <ul className={ulClassName}>
         <i class="fa-solid fa-angle-left" onClick={closeMenu}></i>
