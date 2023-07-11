@@ -160,6 +160,18 @@ Users can log in with their credentials. They can also choose to log in as the d
 
 ![login](./images/login_screenshot.png)
 
+### Potential Match Browse
+
+Logged in users can browse potential matches and choose to "swipe right" or "swipe left". They can edit their age and gender preferences by clicking "filters" and applying those settings. When they match with someone who has also swiped right on them, they are notified and encouraged to start a conversation.
+
+![match-browse](./images/potential-match-browse.gif)
+
+### Unmessaged Matches
+
+Logged in users can view their unmessaged matches in the carousel at the top of the left side of their screen. Clicking on the photo opens conversation view. If they message that person, they get moved to their active conversations list.
+
+![unmessaged-matches](./images/unmessaged-matches.gif)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
