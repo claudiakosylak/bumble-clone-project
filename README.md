@@ -53,7 +53,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![noFlake Screen Shot](./images/splash_screenshot.png)
+![noFlake Screen Shot](./images/splash_screenshot.png)
 
 Have you ever been disappointed with how many people flake on dating apps? This project is inspired by Bumble in its aesthetics and core matching functionality, but incorporates the ability to schedule dates and keep them accountable using the flake score.
 
