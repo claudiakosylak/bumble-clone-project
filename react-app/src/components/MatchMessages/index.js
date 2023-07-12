@@ -30,9 +30,6 @@ function MatchMessages() {
 
 
         dispatch(getMatchMessagesThunk(currentMatch.matchId))
-        console.log("ON MOUNT MATCH: ", currentMatch)
-        console.log("ON MOUNT MESSAGE LIST: ", messageList)
-        console.log("ON MOUNT MESSAGES: ", messages)
 
         // listen for chat events
         socket.on("chat", (chat) => {
@@ -54,9 +51,6 @@ function MatchMessages() {
 
     useEffect(() => {
         dispatch(getMatchMessagesThunk(currentMatch.matchId))
-        console.log("CURRENT MATCH CHANGE MATCH: ", currentMatch)
-        console.log("CURRENT MATCH CHANGE MESSAGE LIST: ", messageList)
-        console.log("CURRENT MATCH CHANGE MESSAGES: ", messages)
     }, [currentMatch])
 
     useEffect(() => {
@@ -65,9 +59,6 @@ function MatchMessages() {
 
     useEffect(() => {
         dispatch(getMatchMessagesThunk(currentMatch.matchId))
-        console.log("MESSAGE CHANGE MATCH: ", currentMatch)
-        console.log("MESSAGE CHANGE MESSAGE LIST: ", messageList)
-        console.log("MESSAGE CHANGE MESSAGES: ", messages)
         dispatch(getMatchesThunk())
         bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages])
