@@ -141,7 +141,6 @@ def all_user_matches():
             user_dict = user.to_dict()
             user_dict["matchId"] = match.id
             matched_users.append(user_dict)
-    print("😈matched users list: ", matched_users)
 
     matched_users_dict = {}
     for user in matched_users:
