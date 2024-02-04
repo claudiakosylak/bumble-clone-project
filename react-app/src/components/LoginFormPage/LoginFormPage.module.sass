@@ -13,14 +13,18 @@
     display: flex
     flex-direction: column
     margin-top: 30px
-    width: 40%
+    width: 400px
     align-items: center
+    +a
+        width: 300px
     & input
-        width: 70%
-        height: 40px
+        width: 100%
+        height: 50px
         border-radius: 30px
         border: 1px solid $lightgray
         padding: 10px
         margin: 15px
         &:focus
             outline: 1px solid $purple
+        +m
+            text-align: center
