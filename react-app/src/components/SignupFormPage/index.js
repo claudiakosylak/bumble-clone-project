@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 import { signUp } from "../../store/session";
 import './SignupForm.css';
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import globalStyles from "../../global.module.sass";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -161,9 +161,9 @@ function SignupFormPage() {
   };
 
   return (
-    <div className="signup-wrapper">
-      <NavLink className="signup-logo-wrapper" to="/">
-        <i class="fa-regular fa-snowflake"></i>
+    <div className={globalStyles.login_wrapper}>
+      <NavLink className={globalStyles.login_logo} to="/">
+        <i className="fa-regular fa-snowflake"></i>
         <h1>noFlake</h1>
       </NavLink>
       <p className="enter-info-text">Enter your information to get started!</p><br></br>

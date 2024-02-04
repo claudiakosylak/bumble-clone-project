@@ -11,6 +11,10 @@ body {
     height: 100vh;
 }
 
+button {
+    cursor: pointer;
+}
+
 #root {
     height: 100vh;
 }

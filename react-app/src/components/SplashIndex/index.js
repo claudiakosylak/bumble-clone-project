@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 import splashPic from "../../images/couple-on-date.jpg";
 import { CircleSpinner } from "react-spinners-kit";
 import styles from "./SplashIndex.module.sass";
@@ -31,7 +30,10 @@ function SplashIndex() {
               already have an account, sign up to use noFlake on the web.{" "}
             </p>
             <div className={styles.login_buttons}>
-              <NavLink to="/signup" className={`${styles.login_button} ${styles.join}`}>
+              <NavLink
+                to="/signup"
+                className={`${styles.login_button} ${styles.join}`}
+              >
                 Join
               </NavLink>
               <NavLink
@@ -51,10 +53,10 @@ function SplashIndex() {
       <footer className={styles.footer}>
         <div className={styles.footer_icons}>
           <a href="https://www.linkedin.com/in/claudiakosylak/" target="_blank">
-            <i class="fa-brands fa-linkedin"></i>
+            <i className="fa-brands fa-linkedin"></i>
           </a>
           <a href="https://github.com/claudiakosylak" target="_blank">
-            <i class="fa-brands fa-github"></i>
+            <i className="fa-brands fa-github"></i>
           </a>
         </div>
         <p>Developed by Claudia Kosylak</p>

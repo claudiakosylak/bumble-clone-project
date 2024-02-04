@@ -1,0 +1,26 @@
+@import ../../helpers
+
+.demo
+    border: 2px solid $black
+    color: $black
+    background-color: $white
+    &:hover
+        background-color: $purple
+        border: 2px solid $purple
+        color: $white
+
+.form
+    display: flex
+    flex-direction: column
+    margin-top: 30px
+    width: 40%
+    align-items: center
+    & input
+        width: 70%
+        height: 40px
+        border-radius: 30px
+        border: 1px solid $lightgray
+        padding: 10px
+        margin: 15px
+        &:focus
+            outline: 1px solid $purple
