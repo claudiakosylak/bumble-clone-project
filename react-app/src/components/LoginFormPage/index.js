@@ -33,7 +33,7 @@ function LoginFormPage() {
         <i className="fa-regular fa-snowflake"></i>
         <h1>noFlake</h1>
       </NavLink>
-      <p>Welcome back! Please enter your credentials below.</p>
+      <p className={globalStyles.login_subtext}>Welcome back! Please enter your credentials below.</p>
       <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="text"
