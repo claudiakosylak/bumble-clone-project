@@ -1,0 +1,123 @@
+@import ../../helpers
+
+.caret
+    font-size: 12px
+    color: $lightgray
+
+.dob
+    position: relative
+    display: flex
+    align-items: center
+
+.dob_label
+    position: absolute
+    z-index: 1
+    color: $gray3
+    font-size: 14px
+    background-color: $white
+    padding: 10px 0
+    margin-left: 10px
+
+.form
+    display: flex
+    flex-direction: column
+    width: 60%
+    justify-content: space-between
+    margin-top: 30px
+    align-items: space-between
+
+.form_bottom
+    align-self: center
+    display: flex
+    flex-direction: column
+    align-items: center
+    margin-top: 50px
+
+.form_left
+    width: 45%
+    display: flex
+    flex-direction: column
+    gap: 15px
+    position: relative
+
+.form_right
+    width: 45%
+    flex-direction: column
+    gap: 15px
+    display: flex
+    flex-direction: column
+    position: relative
+
+.form_top
+    display: flex
+    justify-content: space-between
+
+.dropdown_button
+    display: flex
+    justify-content: space-between
+    align-items: center
+    height: 50px
+    font-size: 14px
+    color: $gray3
+    padding: 10px
+    border-radius: 30px
+    border: 1px solid $lightgray
+    cursor: pointer
+
+.dropdown_list
+    position: absolute
+    background-color: $white
+    width: 100%
+    right: 0
+    top: 55px
+    display: flex
+    flex-direction: column
+    align-items: center
+    padding: 15px
+    z-index: 1
+    border: 1px solid $purple
+    border-radius: 23px
+    & li
+        list-style-type: none
+        width: 100%
+        text-align: center
+        padding: 5px
+        border-radius: 3px
+        cursor: pointer
+        &:hover
+            background-color: $lightergray
+
+.dropdown_wrapper
+    position: relative
+
+.input
+    border-radius: 30px
+    height: 50px
+    border: 1px solid $lightgray
+    padding: 0 10px
+    color: $gray3
+    position: relative
+    width: 100%
+    &:focus
+        outline: 1px solid $purple
+
+.picture_upload_field
+    background-color: $white
+    height: 25px
+    width: 90%
+    border: none
+    margin-left: 20px
+    &:focus
+        outline: none
+
+.picture_upload_wrapper
+    display: flex
+    align-items: center
+    height: 50px
+    border: 1px solid $lightgray
+    border-radius: 30px
+    margin-top: 10px
+
+.state_dropdown
+    overflow-y: scroll
+    height: 200px
