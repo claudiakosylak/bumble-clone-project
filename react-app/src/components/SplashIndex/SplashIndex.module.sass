@@ -27,6 +27,8 @@
     align-items: center
     width: 100%
     padding: 0 17px
+    +m
+        justify-content: center
 
 .image
     width: 100%
@@ -53,6 +55,9 @@
     gap: 15px
     width: 300px
     justify-content: center
+    +s
+        flex-direction: column
+        width: 80%
 
 .logo_container
     display: flex
@@ -84,10 +89,16 @@
     padding: 30px
     justify-content: space-between
     position: absolute
+    +d
+        width: 70%
+    +a
+        width: 80%
     & h2
         font-size: 35px
         margin-bottom: 10px
         text-align: center
+        +a
+            font-size: 30px
     & p
         text-align: center
         font-size: 14px
@@ -107,3 +118,7 @@
     flex-direction: column
     align-items: center
     margin: 0 25px
+    +a
+        margin: 0 10px
+    +s
+        margin: 0
