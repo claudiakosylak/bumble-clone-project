@@ -243,7 +243,7 @@ function SignupFormPage() {
   };
 
   return (
-    <div className={globalStyles.login_wrapper}>
+    <div className={window.innerWidth > 639 ? globalStyles.login_wrapper : styles.wrapper}>
       <NavLink className={globalStyles.login_logo} to="/">
         <i className="fa-regular fa-snowflake"></i>
         <h1>noFlake</h1>
@@ -260,7 +260,7 @@ function SignupFormPage() {
         enctype="multipart/form-data"
       >
         <div className={styles.form_top}>
-          <div className={styles.form_left}>
+          <div className={styles.form_half}>
             <input
               type="text"
               value={phone}
@@ -334,7 +334,7 @@ function SignupFormPage() {
               <p className="errors">{errors.password}</p>
             )}
           </div>
-          <div className={styles.form_right}>
+          <div className={styles.form_half}>
             <div className={styles.dropdown_wrapper}>
               <div className={styles.dropdown_button} onClick={openGenderMenu}>
                 <div>{gender || "Gender"}</div>
