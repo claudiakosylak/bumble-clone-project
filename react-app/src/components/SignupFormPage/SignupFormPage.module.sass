@@ -21,10 +21,19 @@
 .form
     display: flex
     flex-direction: column
-    width: 60%
+    width: 850px
     justify-content: space-between
     margin-top: 30px
     align-items: space-between
+    +t
+        width: 750px
+    +r(870)
+        width: 650px
+    +m
+        width: 550px
+    +a
+        width: 400px
+        align-items: center
 
 .form_bottom
     align-self: center
@@ -33,24 +42,24 @@
     align-items: center
     margin-top: 50px
 
-.form_left
+.form_half
     width: 45%
     display: flex
     flex-direction: column
     gap: 15px
     position: relative
-
-.form_right
-    width: 45%
-    flex-direction: column
-    gap: 15px
-    display: flex
-    flex-direction: column
-    position: relative
+    +t
+        width: 47%
+    +a
+        width: 100%
 
 .form_top
     display: flex
+    flex-direction: row
     justify-content: space-between
+    +a
+        flex-direction: column
+        gap: 15px
 
 .dropdown_button
     display: flex
@@ -121,3 +130,9 @@
 .state_dropdown
     overflow-y: scroll
     height: 200px
+
+.wrapper
+    display: flex
+    flex-direction: column
+    align-items: center
+    padding: 50px 20px
