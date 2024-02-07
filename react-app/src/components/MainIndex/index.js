@@ -6,24 +6,23 @@ import styles from "./MainIndex.module.sass";
 import PotentialMatchBrowse from "../PotentialMatchBrowse";
 import { clearCurrentMatch } from "../../store/match";
 
+function MainIndex({ isLoaded }) {
+  const user = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
 
-function MainIndex({isLoaded}) {
-    const user = useSelector(state => state.session.user)
-    const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(clearCurrentMatch());
+  }, [dispatch]);
+  if (!user) {
+    return <Redirect to="/" />;
+  }
 
-    useEffect(() => {
-        dispatch(clearCurrentMatch())
-    }, [dispatch])
-    if (!user) {
-        return <Redirect to="/" />
-    }
-
-    return (
-        <div className={styles.wrapper}>
-            <LeftMatchesBar isLoaded={isLoaded}/>
-            <PotentialMatchBrowse />
-        </div>
-    )
+  return (
+    <div className={styles.wrapper}>
+      <LeftMatchesBar isLoaded={isLoaded} />
+      <PotentialMatchBrowse />
+    </div>
+  );
 }
 
 export default MainIndex;

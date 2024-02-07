@@ -12,7 +12,6 @@ function LoginFormPage() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
@@ -33,7 +32,9 @@ function LoginFormPage() {
         <i className="fa-regular fa-snowflake"></i>
         <h1>noFlake</h1>
       </NavLink>
-      <p className={globalStyles.login_subtext}>Welcome back! Please enter your credentials below.</p>
+      <p className={globalStyles.login_subtext}>
+        Welcome back! Please enter your credentials below.
+      </p>
       <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="text"
@@ -54,10 +55,16 @@ function LoginFormPage() {
         {Object.values(errors).length > 0 && (
           <p className="errors">Invalid credentials</p>
         )}
-        <button type="submit" className={`${globalStyles.login_button} ${globalStyles.login_submit}`}>
+        <button
+          type="submit"
+          className={`${globalStyles.button} ${globalStyles.purple_button}`}
+        >
           Log In
         </button>
-        <button onClick={demoLogin} className={`${globalStyles.login_button} ${styles.demo}`}>
+        <button
+          onClick={demoLogin}
+          className={`${globalStyles.button} ${styles.demo}`}
+        >
           Demo User Login
         </button>
         <div className={globalStyles.login_switch}>

@@ -1,0 +1,92 @@
+@import ../../helpers
+
+.filter_button
+    display: flex
+    align-items: center
+    gap: 10px
+    font-size: 15px
+    margin-left: 30px
+    width: 80px
+    cursor: pointer
+    position: absolute
+    left: 0
+
+.filter_buttons
+    display: flex
+    align-self: flex-end
+    gap: 20px
+    align-items: center
+    & > div
+        cursor: pointer
+
+.filter_dropdown
+    position: absolute
+    border-radius: 23px
+    top: 60px
+    left: 50px
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    z-index: 1
+    width: 400px
+    height: 350px
+    background-color: white
+    padding: 40px
+    box-shadow: -7px -1px 9px $lightergray, 1px 1px 9px $lightergray
+
+.gender_active
+    background-color: $white !important
+    color: $purple
+    border: 1px solid $purple !important
+
+.gender_button
+    border: none
+    background: none
+    left: 0
+    position: relative
+    z-index: 1
+    padding: 10px
+    border-radius: 23px
+    cursor: pointer
+
+.gender_wrapper
+    background-color: $lightergray
+    border-radius: 23px
+    position: relative
+    display: flex
+    justify-content: space-around
+    z-index: -1
+
+.header
+    display: flex
+    justify-content: center
+    width: 100%
+    align-items: center
+    margin: 20px
+    position: relative
+
+.logo
+    color: $purple
+    font-size: 30px
+
+.slider
+    font-size: 15px !important
+
+.spinner
+    width: 100%
+    height: 500px
+    display: flex
+    justify-content: center
+    align-items: center
+
+.white_back
+    width: 40px
+    background-color: $white
+    position: absolute
+
+.wrapper
+    display: flex
+    flex-direction: column
+    width: 100%
+    height: 100vh
+    position: relative

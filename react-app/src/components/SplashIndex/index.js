@@ -29,16 +29,16 @@ function SplashIndex() {
               Start ACTUALLY meeting with new people in your area! If you
               already have an account, sign up to use noFlake on the web.{" "}
             </p>
-            <div className={styles.login_buttons}>
+            <div className={styles.buttons}>
               <NavLink
                 to="/signup"
-                className={`${styles.login_button} ${styles.join}`}
+                className={`${styles.button} ${styles.join}`}
               >
                 Join
               </NavLink>
               <NavLink
                 to="/login"
-                className={`${styles.login_button} ${styles.signin}`}
+                className={`${styles.button} ${styles.signin}`}
               >
                 Sign In
               </NavLink>

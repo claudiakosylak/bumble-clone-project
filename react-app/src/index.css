@@ -15,6 +15,10 @@ button {
     cursor: pointer;
 }
 
+.hidden {
+    display: none;
+}
+
 #root {
     height: 100vh;
 }
