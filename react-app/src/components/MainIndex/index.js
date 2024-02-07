@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import LeftMatchesBar from "../LeftMatchesBar";
-import "./MainIndex.css";
+import styles from "./MainIndex.module.sass";
 import PotentialMatchBrowse from "../PotentialMatchBrowse";
 import { clearCurrentMatch } from "../../store/match";
 
@@ -19,7 +19,7 @@ function MainIndex({isLoaded}) {
     }
 
     return (
-        <div className="main-index-wrapper">
+        <div className={styles.wrapper}>
             <LeftMatchesBar isLoaded={isLoaded}/>
             <PotentialMatchBrowse />
         </div>
