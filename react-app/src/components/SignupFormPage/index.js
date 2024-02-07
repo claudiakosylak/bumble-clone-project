@@ -118,7 +118,8 @@ function SignupFormPage() {
   }, [showStateMenu]);
 
   const stateClassName =
-    `${styles.dropdown_list} ${styles.state_dropdown}` + (showStateMenu ? "" : " hidden");
+    `${styles.dropdown_list} ${styles.state_dropdown}` +
+    (showStateMenu ? "" : " hidden");
   const closeStateMenu = () => setShowStateMenu(false);
 
   useEffect(() => {
@@ -243,7 +244,11 @@ function SignupFormPage() {
   };
 
   return (
-    <div className={window.innerWidth > 639 ? globalStyles.login_wrapper : styles.wrapper}>
+    <div
+      className={
+        window.innerWidth > 639 ? globalStyles.login_wrapper : styles.wrapper
+      }
+    >
       <NavLink className={globalStyles.login_logo} to="/">
         <i className="fa-regular fa-snowflake"></i>
         <h1>noFlake</h1>
@@ -480,7 +485,7 @@ function SignupFormPage() {
         <div className={styles.form_bottom}>
           <button
             type="submit"
-            className={`${globalStyles.login_button} ${globalStyles.login_submit}`}
+            className={`${globalStyles.button} ${globalStyles.purple_button}`}
           >
             Sign Up
           </button>
