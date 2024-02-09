@@ -15,6 +15,22 @@ button {
     cursor: pointer;
 }
 
+.fa-check, .fa-snowflake {
+    color: #80F;
+}
+
+.fa-snowflake {
+    font-size: 40px;
+}
+
+.fa-solid {
+    font-size: 30px;
+}
+
+.fa-xmark {
+    color: grey;
+}
+
 .hidden {
     display: none;
 }

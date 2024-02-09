@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./PotentialMatchBrowse.module.sass";
 import globalStyles from "../../global.module.sass";
@@ -7,7 +7,6 @@ import { updateFiltersThunk } from "../../store/session";
 import BrowseItem from "../BrowseItem";
 import { ageChanger } from "../BrowseItem";
 import { CircleSpinner } from "react-spinners-kit";
-import classnames from "classnames";
 import MultiRangeSlider from "../MultiRangeSlider";
 
 function PotentialMatchBrowse() {
