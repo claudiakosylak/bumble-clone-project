@@ -67,3 +67,15 @@
 #left-calendar-icon {
     font-size: 14px;
 }
+
+.mini-match-icons {
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.mini-match-icons:hover {
+    
+}
