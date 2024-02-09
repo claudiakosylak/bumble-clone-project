@@ -1,0 +1,131 @@
+@import ../../helpers
+
+.empty_browse_wrapper
+    margin: 50px
+    & h3
+        text-align: center
+
+.flake_score
+    display: flex
+    gap: 10px
+    align-items: center
+    justify-content: center
+
+.flake_text
+    font-size: 15px !important
+
+.flake_wrapper
+    display: flex
+    flex-direction: column
+    justify-content: flex-start
+    gap: 10px
+
+.inner_wrapper
+    display: flex
+    justify-content: space-between
+    margin: 20px 50px 50px 50px
+    height: 37rem
+    border-radius: 23px
+    padding-bottom: 20px
+
+.keep_browsing
+    cursor: pointer
+
+.right_side
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    width: 50%
+    height: 100%
+    background-color: $lightpurple
+    border-radius: 0 23px 23px 0
+    padding: 30px 30px 80px 30px
+    & p
+        text-align: center
+        font-weight: 600
+        vertical-align: center
+        font-size: 30px
+
+.swipe_button
+    width: 70px
+    height: 70px
+    border-radius: 100%
+    background-color: $white
+    border: 1px solid $gray3
+    &:hover
+        width: 75px
+        height: 75px
+        filter: drop-shadow(1px 3px 5px $lightgray)
+
+.swipe_buttons
+    position: absolute
+    bottom: 30px
+    display: flex
+    align-items: center
+    height: 90px
+    width: 190px
+    justify-content: space-between
+
+.main_about
+    font-size: 15px !important
+    word-break: break-word
+
+.main_image
+    width: 50%
+    border-radius: 23px 0 0 23px
+    & img
+        height: 100%
+        width: 100%
+        object-fit: cover
+        border-radius: 23px 0 0 23px
+
+.matched_wrapper
+    position: absolute
+    background-color: $purpletransparent
+    color: $white
+    height: 90%
+    right: 20px
+    left: 20px
+    top: 20px
+    right: 20px
+    border-radius: 23px
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    & h2
+        font-size: 60px
+        margin-bottom: 15px
+    & p
+        width: 50%
+        text-align: center
+
+.name_age
+    align-self: flex-start
+    color: $gray4
+
+.ov1
+    left: 20px
+
+.ov2
+    right: 20px
+
+.overlap_pic
+    position: absolute
+    border: 7px solid $white
+    width: 150px
+    height: 150px
+    object-fit: cover
+    border-radius: 100%
+
+.overlap_pics
+    position: relative
+    width: 300px
+    height: 200px
+
+.wrapper
+    position: relative
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
