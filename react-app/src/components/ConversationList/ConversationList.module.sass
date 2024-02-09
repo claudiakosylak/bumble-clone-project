@@ -1,0 +1,63 @@
+@import ../../helpers
+
+.active
+    background-color: $lightergray
+
+.calendar
+    font-size: 14px !important
+
+.conversation
+    display: flex
+    align-items: center
+    width: 100%
+    cursor: pointer
+    &:hover
+        background-color: $lightergray
+
+.header
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: 100%
+
+.image
+    width: 45px
+    height: 45px
+    border-radius: 100%
+    object-fit: cover
+    cursor: pointer
+    margin: 15px
+
+.inner_wrapper
+    list-style-type: none
+
+.name
+    font-weight: 600
+    display: flex
+    align-items: center
+    gap: 10px
+    & > span
+        display: flex
+        align-items: center
+        gap: 10px
+
+.preview
+    font-size: 14px
+    color: $gray
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
+
+.right
+    width: 75%
+
+.wrapper
+    overflow-y: scroll
+
+.your_move
+    margin: 10px
+    background-color: $purple
+    color: $white
+    border-radius: 10px
+    font-size: 10px
+    padding: 1px 5px
