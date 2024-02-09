@@ -1,0 +1,81 @@
+@import ../../helpers
+
+.active
+    color: $black !important
+    background-color: $lightergray !important
+
+.bottom
+  display: flex
+  flex-direction: column
+  align-items: center
+  width: 100%
+  & li
+    list-style-type: none
+    display: flex
+    justify-content: center
+
+.closed_wrapper
+  display: flex
+  align-items: center
+  gap: 27px
+  margin: 20px
+
+.dropdown
+  background-color: $white
+  position: absolute
+  top: 0
+  left: 0
+  width: 350px
+  display: flex
+  flex-direction: column
+  align-items: center
+  border-right: 1px solid $lightgray
+  height: 100%
+  z-index: 1
+
+.dropdown_item
+  text-decoration: none
+  text-align: center
+  color: $gray5
+  width: 80%
+  height: 40px
+  display: flex
+  align-items: center
+  border-radius: 23px
+  cursor: pointer
+  &:hover
+    color: $black
+    background-color: $lightergray
+
+.flake_score
+  display: flex
+  align-items: center
+  justify-content: center
+  gap: 10px
+  margin-bottom: 40px
+
+.image
+  width: 50px
+  height: 50px
+  border-radius: 100%
+  border: 1px solid $black
+  object-fit: cover
+
+.open_menu
+  border: none
+  display: flex
+  align-items: center
+  gap: 10px
+  margin-right: 20px
+  cursor: pointer
+
+.top
+  display: flex
+  justify-content: center
+  align-items: center
+  margin: 15px
+  width: 100%
+
+.user_name
+  font-size: 20px
+  font-weight: 600

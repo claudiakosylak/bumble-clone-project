@@ -15,8 +15,25 @@ button {
     cursor: pointer;
 }
 
+.fa-angle-left {
+    font-size: 15px;
+    color: grey;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+
+.fa-angle-left:hover {
+    cursor: pointer;
+}
+
 .fa-angle-right {
     font-size: 18px;
+}
+
+.fa-bars {
+    color: grey;
+    font-size: 17px !important;
 }
 
 .fa-check, .fa-snowflake {

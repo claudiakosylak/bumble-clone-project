@@ -1,0 +1,60 @@
+@import ../../helpers
+
+.active
+    color: $black !important
+    background-color: $lightergray !important
+
+.bottom
+  display: flex
+  flex-direction: column
+  align-items: center
+  width: 100%
+  & li
+    list-style-type: none
+    display: flex
+    justify-content: center
+
+.dropdown_item
+  text-decoration: none
+  text-align: center
+  color: $gray5
+  width: 80%
+  height: 40px
+  display: flex
+  align-items: center
+  border-radius: 23px
+  cursor: pointer
+  &:hover
+    color: $black
+    background-color: $lightergray
+
+.flake_score
+  display: flex
+  align-items: center
+  justify-content: center
+  gap: 10px
+  margin-bottom: 40px
+
+.header
+    display: flex
+    justify-content: center
+    margin-top: 15px
+    margin-bottom: 15px
+
+.image
+  width: 50px
+  height: 50px
+  border-radius: 100%
+  border: 1px solid $black
+  object-fit: cover
+
+.inside
+    width: 350px
+
+.wrapper
+    background-color: $white
+    border-right: 1px solid $lightgray
+    list-style-type: none
+    width: 350px
+    height: 100%
+    position: relative
