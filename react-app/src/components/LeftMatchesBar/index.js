@@ -60,16 +60,31 @@ function LeftMatchesBar({ isLoaded }) {
           )}
         </NavLink>
       )}
-      <p className={styles.labels}>
-        Unmessaged Matches ({unMessagedMatches.length})
-      </p>
-      <MatchesCarousel unMessagedMatches={unMessagedMatches} />
-
-      <p className={styles.labels}>Conversations</p>
+      {isSmaller && location.pathname === "/app/connections" && (
+        <div className={styles.bar}></div>
+      )}
+      {!isSmaller && (
+        <p className={styles.labels}>
+          Unmessaged Matches ({unMessagedMatches.length})
+        </p>
+      )}
+      {(!isSmaller || (isSmaller && unMessagedMatches.length > 0)) && (
+        <MatchesCarousel
+          unMessagedMatches={unMessagedMatches}
+          isSmaller={isSmaller}
+        />
+      )}
+      {!isSmaller && (
+        <p className={styles.labels}>Conversations</p>
+      )}
       {messagedMatches.length > 0 ? (
         <ConversationList messagedMatches={messagedMatches} />
+      ) : !isSmaller ? (
+        <p className={styles.no_conversations}>
+          You haven't started any conversations yet
+        </p>
       ) : (
-        <p>You haven't started any conversations yet</p>
+        <></>
       )}
     </div>
   );

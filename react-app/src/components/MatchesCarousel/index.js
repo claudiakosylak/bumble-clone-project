@@ -4,7 +4,7 @@ import { getMatchesThunk, getMatch } from "../../store/match";
 import { useHistory } from "react-router-dom";
 import styles from "./MatchesCarousel.module.sass";
 
-function MatchesCarousel({ unMessagedMatches }) {
+function MatchesCarousel({ unMessagedMatches, isSmaller }) {
   const matchChunks = [];
   const dispatch = useDispatch();
   const history = useHistory();
@@ -61,8 +61,7 @@ function MatchesCarousel({ unMessagedMatches }) {
               <i className={`fa-solid fa-caret-left ${styles.caret}`}></i>
             </button>
           )}
-          {unMessagedMatches.length > 0 &&
-            carouselGroup.map((match, index) => (
+            {carouselGroup.map((match, index) => (
               <li key={index} className={match ? styles.match : styles.empty}>
                 {match ? (
                   <img
@@ -90,7 +89,7 @@ function MatchesCarousel({ unMessagedMatches }) {
         </div>
       ) : (
         <div className={styles.full_group}>
-          <p>You don't have any matches yet!</p>
+            <p className={styles.no_matches}>You don't have any matches yet!</p>
         </div>
       )}
     </ul>
