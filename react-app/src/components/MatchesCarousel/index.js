@@ -4,7 +4,7 @@ import { getMatchesThunk, getMatch } from "../../store/match";
 import { useHistory } from "react-router-dom";
 import styles from "./MatchesCarousel.module.sass";
 
-function MatchesCarousel({ unMessagedMatches }) {
+function MatchesCarousel({ unMessagedMatches, isSmaller }) {
   const matchChunks = [];
   const dispatch = useDispatch();
   const history = useHistory();
@@ -51,7 +51,7 @@ function MatchesCarousel({ unMessagedMatches }) {
 
   return (
     <ul className={styles.wrapper}>
-      {unMessagedMatches.length > 0 ? (
+      {(unMessagedMatches.length > 0 && !isSmaller) ? (
         <div className={styles.group}>
           {carouselIndex > 0 && (
             <button
@@ -87,10 +87,22 @@ function MatchesCarousel({ unMessagedMatches }) {
             </button>
           )}
         </div>
-      ) : (
+      ) : (unMessagedMatches.length === 0 && !isSmaller) ? (
         <div className={styles.full_group}>
             <p className={styles.no_matches}>You don't have any matches yet!</p>
         </div>
+      ) : (
+        <li className={styles.match}>
+          <img
+            src={matchChunks[0][0].picture_1}
+            className={styles.image}
+            onClick={() => handlePicClick(matchChunks[0][0])}
+            onError={(e) => {
+              e.currentTarget.src =
+                "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg";
+            }}
+          ></img>
+      </li>
       )}
     </ul>
   );

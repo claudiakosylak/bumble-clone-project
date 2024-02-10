@@ -71,7 +71,11 @@ function LeftMatchesBar({ isLoaded }) {
       {(!isSmaller || (isSmaller && unMessagedMatches.length > 0)) && (
         <MatchesCarousel
           unMessagedMatches={unMessagedMatches}
+          isSmaller={isSmaller}
         />
+      )}
+      {(isSmaller && unMessagedMatches.length > 0) && (
+        <div className={styles.bar}></div>
       )}
       {!isSmaller && (
         <p className={styles.labels}>Conversations</p>
