@@ -88,6 +88,10 @@
     color: white;
 }
 
+#chat-send-button i {
+    font-size: 20px !important;
+}
+
 #chat-send-button:hover {
     cursor: pointer;
 }

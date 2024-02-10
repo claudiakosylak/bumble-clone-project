@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { getDatesThunk, getDateRequestsThunk } from "../../store/date";
 import styles from "./ConversationList.module.sass";
 
-function ConversationList({ messagedMatches }) {
+function ConversationList({ messagedMatches, isSmaller }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
@@ -64,20 +64,22 @@ function ConversationList({ messagedMatches }) {
                     "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg";
                 }}
               ></img>
-              <div className={styles.right}>
+              {!isSmaller && (
+
+                <div className={styles.right}>
                 <div className={styles.header}>
                   <p className={styles.name}>
                     {match.first_name}{" "}
                     {allDateMatchIds.includes(match.matchId) && (
                       <i
-                        className={`fa-regular fa-calendar-days ${styles.calendar}`}
+                      className={`fa-regular fa-calendar-days ${styles.calendar}`}
                       ></i>
                     )}{" "}
                     {dateRequestMatchIds.includes(match.matchId) && (
                       <span>
                         <i
                           className={`fa-regular fa-calendar-days ${styles.calendar}`}
-                        ></i>
+                          ></i>
                         <span className={styles.calendar}> ??</span>
                       </span>
                     )}
@@ -90,6 +92,7 @@ function ConversationList({ messagedMatches }) {
                   {match.last_message.content}
                 </p>
               </div>
+                )}
             </div>
           </li>
         ))}

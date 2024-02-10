@@ -4,7 +4,7 @@ import { getMatchesThunk, getMatch } from "../../store/match";
 import { useHistory } from "react-router-dom";
 import styles from "./MatchesCarousel.module.sass";
 
-function MatchesCarousel({ unMessagedMatches, isSmaller }) {
+function MatchesCarousel({ unMessagedMatches }) {
   const matchChunks = [];
   const dispatch = useDispatch();
   const history = useHistory();

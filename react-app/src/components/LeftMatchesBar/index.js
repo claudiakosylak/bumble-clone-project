@@ -71,14 +71,13 @@ function LeftMatchesBar({ isLoaded }) {
       {(!isSmaller || (isSmaller && unMessagedMatches.length > 0)) && (
         <MatchesCarousel
           unMessagedMatches={unMessagedMatches}
-          isSmaller={isSmaller}
         />
       )}
       {!isSmaller && (
         <p className={styles.labels}>Conversations</p>
       )}
       {messagedMatches.length > 0 ? (
-        <ConversationList messagedMatches={messagedMatches} />
+        <ConversationList messagedMatches={messagedMatches} isSmaller={isSmaller}/>
       ) : !isSmaller ? (
         <p className={styles.no_conversations}>
           You haven't started any conversations yet
