@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import styles from "./Navigation.module.sass";
 
-function Navigation({ isLoaded }) {
+function Navigation({ isLoaded, isSmaller }) {
   const sessionUser = useSelector((state) => state.session.user);
 
   return (
@@ -11,7 +11,9 @@ function Navigation({ isLoaded }) {
       {isLoaded && (
         <div className={styles.closed_wrapper}>
           <ProfileButton user={sessionUser} />
-          <p className={styles.user_name}>{sessionUser.first_name}</p>
+          {!isSmaller && (
+            <p className={styles.user_name}>{sessionUser.first_name}</p>
+          )}
         </div>
       )}
     </>
