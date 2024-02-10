@@ -3,18 +3,20 @@ import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import styles from "./Navigation.module.sass";
 
-function Navigation({ isLoaded }) {
+function Navigation({ isLoaded, isSmaller }) {
   const sessionUser = useSelector((state) => state.session.user);
 
   return (
-    <ul>
+    <>
       {isLoaded && (
-        <li className={styles.closed_wrapper}>
+        <div className={styles.closed_wrapper}>
           <ProfileButton user={sessionUser} />
-          <p className={styles.user_name}>{sessionUser.first_name}</p>
-        </li>
+          {!isSmaller && (
+            <p className={styles.user_name}>{sessionUser.first_name}</p>
+          )}
+        </div>
       )}
-    </ul>
+    </>
   );
 }
 

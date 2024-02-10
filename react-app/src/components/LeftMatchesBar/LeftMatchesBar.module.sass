@@ -7,11 +7,56 @@
     padding: 15px
     background-color: $lightpurple
     text-decoration: none
+    width: 100%
+    +t
+        padding: 0
     &:hover
         background-color: $lightpurple2
 
+.back_to_browse_icon
+    position: relative
+    height: 50px
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 100%
+
+.bar
+    width: 50%
+    height: 2px
+    background-color: $lightgray
+    margin: 20px 0
+
 .labels
     margin: 10px
+
+.no_conversations
+    text-align: center
+    width: 350px
+    padding: 10px
+    +d
+        width: 300px
+    +t
+        width: 75px
+
+.rectangle
+    width: 15px
+    height: 20px
+    border: 2px solid $purple
+    position: absolute
+    border-radius: 3px
+
+.rectangle1
+    margin-right: 7px
+    margin-bottom: 2px
+    background-color: $lightpurple
+    z-index: 1
+    transform: rotate(-5deg)
+
+.rectangle2
+    margin-left: 7px
+    margin-top: 2px
+    transform: rotate(5deg)
 
 .wrapper
     display: flex
@@ -19,3 +64,8 @@
     width: 350px
     height: 100vh
     border-right: 1px solid $lightgray
+    +d
+        width: 300px
+    +t
+        width: 75px
+        align-items: center

@@ -4,7 +4,7 @@ import { getMatchesThunk, getMatch } from "../../store/match";
 import { useHistory } from "react-router-dom";
 import styles from "./MatchesCarousel.module.sass";
 
-function MatchesCarousel({ unMessagedMatches }) {
+function MatchesCarousel({ unMessagedMatches, isSmaller }) {
   const matchChunks = [];
   const dispatch = useDispatch();
   const history = useHistory();
@@ -19,6 +19,15 @@ function MatchesCarousel({ unMessagedMatches }) {
       }
     }
     matchChunks.push(group);
+  }
+
+  const lastGroup = matchChunks[matchChunks.length - 1];
+
+  if (lastGroup && lastGroup.length < 5) {
+    const extra = 5 - lastGroup.length;
+    for (let i = 0; i < extra; i++) {
+      lastGroup.push("");
+    }
   }
 
   let carouselGroup = matchChunks[carouselIndex];
@@ -42,14 +51,8 @@ function MatchesCarousel({ unMessagedMatches }) {
 
   return (
     <ul className={styles.wrapper}>
-      {unMessagedMatches.length > 0 ? (
-        <div
-          className={
-            carouselGroup.length === 5
-              ? styles.full_group
-              : styles.partial_group
-          }
-        >
+      {(unMessagedMatches.length > 0 && !isSmaller) ? (
+        <div className={styles.group}>
           {carouselIndex > 0 && (
             <button
               className={`${styles.buttons} ${styles.left}`}
@@ -58,21 +61,21 @@ function MatchesCarousel({ unMessagedMatches }) {
               <i className={`fa-solid fa-caret-left ${styles.caret}`}></i>
             </button>
           )}
-          {unMessagedMatches.length > 0 &&
-            carouselGroup.map((match) => (
-              <li
-                key={match.id}
-                className={`${styles.match} ${carouselGroup.length < 5 ? styles.partial_group_match : ""}`}
-              >
-                <img
-                  src={match.picture_1}
-                  className={styles.image}
-                  onClick={() => handlePicClick(match)}
-                  onError={(e) => {
-                    e.currentTarget.src =
-                      "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg";
-                  }}
-                ></img>
+            {carouselGroup.map((match, index) => (
+              <li key={index} className={match ? styles.match : styles.empty}>
+                {match ? (
+                  <img
+                    src={match.picture_1}
+                    className={styles.image}
+                    onClick={() => handlePicClick(match)}
+                    onError={(e) => {
+                      e.currentTarget.src =
+                        "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg";
+                    }}
+                  ></img>
+                ) : (
+                  <div className={styles.image}></div>
+                )}
               </li>
             ))}
           {carouselIndex < matchChunks.length - 1 && (
@@ -84,10 +87,22 @@ function MatchesCarousel({ unMessagedMatches }) {
             </button>
           )}
         </div>
-      ) : (
+      ) : (unMessagedMatches.length === 0 && !isSmaller) ? (
         <div className={styles.full_group}>
-          <p>You don't have any matches yet!</p>
+            <p className={styles.no_matches}>You don't have any matches yet!</p>
         </div>
+      ) : (
+        <li className={styles.match}>
+          <img
+            src={matchChunks[0][0].picture_1}
+            className={styles.image}
+            onClick={() => handlePicClick(matchChunks[0][0])}
+            onError={(e) => {
+              e.currentTarget.src =
+                "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg";
+            }}
+          ></img>
+      </li>
       )}
     </ul>
   );
