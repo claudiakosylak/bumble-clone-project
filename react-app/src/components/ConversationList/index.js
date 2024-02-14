@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { getDatesThunk, getDateRequestsThunk } from "../../store/date";
 import styles from "./ConversationList.module.sass";
 
-function ConversationList({ messagedMatches, isSmaller }) {
+function ConversationList({ messagedMatches, isSmaller, isHovered }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
@@ -64,8 +64,7 @@ function ConversationList({ messagedMatches, isSmaller }) {
                     "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg";
                 }}
               ></img>
-              {!isSmaller && (
-
+              {(!isSmaller || isHovered) && (
                 <div className={styles.right}>
                 <div className={styles.header}>
                   <p className={styles.name}>
