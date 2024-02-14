@@ -4,7 +4,7 @@ import { getMatchesThunk, getMatch } from "../../store/match";
 import { useHistory } from "react-router-dom";
 import styles from "./MatchesCarousel.module.sass";
 
-function MatchesCarousel({ unMessagedMatches, isSmaller }) {
+function MatchesCarousel({ unMessagedMatches, isSmaller, isHovered }) {
   const matchChunks = [];
   const dispatch = useDispatch();
   const history = useHistory();
@@ -50,8 +50,8 @@ function MatchesCarousel({ unMessagedMatches, isSmaller }) {
   };
 
   return (
-    <ul className={styles.wrapper}>
-      {(unMessagedMatches.length > 0 && !isSmaller) ? (
+    <ul className={styles.wrapper} style={isHovered ? {justifyContent: "flex-start", height: "90px"} : {}}>
+      {(unMessagedMatches.length > 0 && (!isSmaller || isHovered)) ? (
         <div className={styles.group}>
           {carouselIndex > 0 && (
             <button
@@ -87,9 +87,9 @@ function MatchesCarousel({ unMessagedMatches, isSmaller }) {
             </button>
           )}
         </div>
-      ) : (unMessagedMatches.length === 0 && !isSmaller) ? (
+      ) : (unMessagedMatches.length === 0 && (!isSmaller || isHovered)) ? (
         <div className={styles.full_group}>
-            <p className={styles.no_matches}>You don't have any matches yet!</p>
+            <p className={styles.no_matches} style={isHovered ? {width: "300px"} : {}}>You don't have any matches yet!</p>
         </div>
       ) : (
         <li className={styles.match}>

@@ -4,7 +4,7 @@ import { logout } from "../../store/session";
 import { useHistory, useLocation } from "react-router-dom";
 import styles from "./Navigation.module.sass";
 
-function ProfileButton({ user }) {
+function ProfileButton({ user, isHovered }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const history = useHistory();
@@ -37,7 +37,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <div className={styles.open_menu} onClick={openMenu}>
+      <div className={styles.open_menu} onClick={openMenu} style={isHovered ? {flexDirection: "row", marginRight: "20px"} : {}}>
         <img
           src={user.picture_1}
           className={styles.image}
