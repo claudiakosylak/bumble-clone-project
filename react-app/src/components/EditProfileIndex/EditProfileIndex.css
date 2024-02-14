@@ -237,3 +237,19 @@
 .empty-image > button:hover {
     cursor: pointer;
 }
+
+.schedule-view-right-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.schedule-view-header {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+}
