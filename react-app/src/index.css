@@ -49,12 +49,22 @@ button {
     cursor: pointer;
 }
 
+.fa-paper-plane {
+    font-size: 20px;
+}
+
 .fa-snowflake {
     font-size: 40px;
 }
 
 .fa-solid {
     font-size: 30px;
+}
+
+.fa-trash-can {
+    align-self: flex-end;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 .fa-xmark {
