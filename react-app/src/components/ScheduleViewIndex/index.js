@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getDateRequestsThunk, getDatesThunk } from "../../store/date";
 import StaticLeftSettingsBar from "../StaticLeftSettingsBar";
-import { dateTransformer, niceDateString } from "../ConversationViewHeader";
+import { dateTransformer, niceDateString } from "../../helpers";
 import styles from "./ScheduleViewIndex.module.sass";
 
 const sortDatesRecentTop = (dates) => {

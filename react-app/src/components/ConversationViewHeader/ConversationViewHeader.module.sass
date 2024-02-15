@@ -1,0 +1,51 @@
+@import ../../helpers
+
+.dropdown
+    position: absolute
+    top: 70px
+    right: 10px
+    background-color: $white
+    border: 1px solid $lightgray
+    list-style-type: none
+    padding: 15px 0
+    border-radius: 23px
+
+.dropdown_inner
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+    gap: 5px
+    & button
+        background-color: $white
+        border: none
+        font-weight: 600
+        width: 100%
+        padding: 0 15px
+        height: 30px
+        text-align: left
+        &:hover
+            background-color: $lightergray
+
+.scheduled_status
+    display: flex
+    width: 60%
+    align-items: center
+    gap: 10px
+
+.scheduled_status_text
+    font-size: 12px
+
+.wrapper
+    width: 100%
+    height: 90px
+    border-bottom: 1px solid $lightgray
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 0 15px
+    position: relative
+    & img
+        width: 45px
+        height: 45px
+        object-fit: cover
+        border-radius: 100%

@@ -4,7 +4,7 @@ import { useModal } from "../../context/Modal";
 import "./ReportDateModal.css";
 import { createDateReportThunk, getMadeDateReportsThunk } from "../../store/date_report";
 import { getOneMatchThunk } from "../../store/match";
-import { dateTransformer, niceDateString } from "../ConversationViewHeader";
+import { dateTransformer, niceDateString } from "../../helpers";
 
 function ReportDateModal({ match, date }) {
     const { closeModal } = useModal();
