@@ -36,8 +36,17 @@ button {
     font-size: 17px !important;
 }
 
+.fa-calendar-days {
+    font-size: 20px;
+}
+
 .fa-check, .fa-snowflake {
     color: #80F;
+}
+
+.fa-ellipsis-vertical {
+    font-size: 30px;
+    cursor: pointer;
 }
 
 .fa-snowflake {
