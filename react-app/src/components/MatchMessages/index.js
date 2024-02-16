@@ -22,6 +22,7 @@ function MatchMessages() {
   const messageList = Object.values(matchMessages);
   const [messages, setMessages] = useState([]);
   const [chatInput, setChatInput] = useState("");
+  const [isHovered, setIsHovered] = useState(null);
   const bottomRef = useRef();
 
   useEffect(() => {
@@ -115,6 +116,17 @@ function MatchMessages() {
                         ? `${styles.message_wrapper} ${styles.user_message_wrapper}`
                         : `${styles.message_wrapper} ${styles.other_message_wrapper}`
                     }
+                    key={message.id}
+                    onMouseEnter={() => {
+                      if (message.user_id === user.id) {
+                        setIsHovered(message.id);
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      if (message.user_id === user.id) {
+                        setIsHovered(null);
+                      }
+                    }}
                   >
                     <p
                       key={message.id}
@@ -126,13 +138,13 @@ function MatchMessages() {
                     >
                       {message.content}
                     </p>
-                  </div>
-                  {message.user_id === user.id && (
+                  {(message.user_id === user.id && isHovered === message.id) && (
                     <i
                       className="fa-regular fa-trash-can"
                       onClick={() => deleteChat(message.id)}
                     ></i>
                   )}
+                  </div>
                 </>
               ))}
 

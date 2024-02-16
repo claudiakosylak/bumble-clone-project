@@ -62,7 +62,7 @@ button {
 }
 
 .fa-trash-can {
-    align-self: flex-end;
+    align-self: center;
     margin-right: 10px;
     cursor: pointer;
 }
