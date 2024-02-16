@@ -1,0 +1,52 @@
+@import ../../helpers
+
+.buttons
+    display: flex
+    justify-content: space-between
+    width: 80%
+    align-items: center
+    margin-top: 20px
+
+.cancel
+    color: $purple
+    cursor: pointer
+    font-weight: 600
+
+.disabled
+    background-color: $gray !important
+    &:hover
+        background-color: $gray !important
+
+.form
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+    height: 60%
+    margin-top: 20px
+    & label
+        display: flex
+        flex-direction: column
+        align-items: center
+    & input
+        height: 40px
+        border-radius: 10px
+        border: none
+        padding: 10px
+        margin-top: 15px
+        &:focus
+            outline: 1px solid $purple
+
+.wrapper
+    height: fit-content
+    width: 500px
+    border-radius: 23px
+    padding: 40px
+    background-color: $lightpurple
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    & h3
+        font-weight: 600
+        font-size: 20px
+        text-align: center
